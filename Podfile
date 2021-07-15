@@ -6,6 +6,7 @@ target 'BulletJournal' do
   use_frameworks!
 
   # Pods for BulletJournal
+  pod "Parse"
 
   target 'BulletJournalTests' do
     inherit! :search_paths

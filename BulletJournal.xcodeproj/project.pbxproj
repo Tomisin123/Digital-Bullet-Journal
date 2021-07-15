@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42DADB8B4F414A9F88394B87 /* Pods_BulletJournal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F15194C48C1C31F0C664CB /* Pods_BulletJournal.framework */; };
+		519082F5F5AAB4E5137FAC4D /* Pods_BulletJournalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */; };
+		562C166E47EFE057852FE998 /* Pods_BulletJournal_BulletJournalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D17FDA2B4C906CA86613658 /* Pods_BulletJournal_BulletJournalUITests.framework */; };
 		94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35964269DE7EB00BE6A09 /* AppDelegate.m */; };
 		94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35967269DE7EB00BE6A09 /* SceneDelegate.m */; };
 		94E3596E269DE7EB00BE6A09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E3596C269DE7EB00BE6A09 /* Main.storyboard */; };
@@ -40,6 +43,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D17FDA2B4C906CA86613658 /* Pods_BulletJournal_BulletJournalUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulletJournal_BulletJournalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EA8C8442E016FB427E404D2 /* Pods-BulletJournalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournalTests.debug.xcconfig"; path = "Target Support Files/Pods-BulletJournalTests/Pods-BulletJournalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		33F15194C48C1C31F0C664CB /* Pods_BulletJournal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulletJournal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56EA754A31D889F2AE89E394 /* Pods-BulletJournal-BulletJournalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal-BulletJournalUITests.debug.xcconfig"; path = "Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		666EB844025B964832EE89D9 /* Pods-BulletJournal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal.debug.xcconfig"; path = "Target Support Files/Pods-BulletJournal/Pods-BulletJournal.debug.xcconfig"; sourceTree = "<group>"; };
+		933FCFDEAC2A16EA32CB3628 /* Pods-BulletJournal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal.release.xcconfig"; path = "Target Support Files/Pods-BulletJournal/Pods-BulletJournal.release.xcconfig"; sourceTree = "<group>"; };
 		94E35960269DE7EB00BE6A09 /* BulletJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BulletJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E35963269DE7EB00BE6A09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94E35964269DE7EB00BE6A09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -66,6 +75,9 @@
 		94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyReviewViewController.m; sourceTree = "<group>"; };
 		94E359A5269F600600BE6A09 /* CollectionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionsViewController.h; sourceTree = "<group>"; };
 		94E359A6269F600600BE6A09 /* CollectionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionsViewController.m; sourceTree = "<group>"; };
+		966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulletJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournalTests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournalTests/Pods-BulletJournalTests.release.xcconfig"; sourceTree = "<group>"; };
+		F07026697D7A843DE6E5A55A /* Pods-BulletJournal-BulletJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42DADB8B4F414A9F88394B87 /* Pods_BulletJournal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				519082F5F5AAB4E5137FAC4D /* Pods_BulletJournalTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,12 +101,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				562C166E47EFE057852FE998 /* Pods_BulletJournal_BulletJournalUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		70A65B5056625637CBFB80F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				666EB844025B964832EE89D9 /* Pods-BulletJournal.debug.xcconfig */,
+				933FCFDEAC2A16EA32CB3628 /* Pods-BulletJournal.release.xcconfig */,
+				56EA754A31D889F2AE89E394 /* Pods-BulletJournal-BulletJournalUITests.debug.xcconfig */,
+				F07026697D7A843DE6E5A55A /* Pods-BulletJournal-BulletJournalUITests.release.xcconfig */,
+				1EA8C8442E016FB427E404D2 /* Pods-BulletJournalTests.debug.xcconfig */,
+				D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		94E35957269DE7EB00BE6A09 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +130,8 @@
 				94E3597E269DE7EC00BE6A09 /* BulletJournalTests */,
 				94E35989269DE7EC00BE6A09 /* BulletJournalUITests */,
 				94E35961269DE7EB00BE6A09 /* Products */,
+				70A65B5056625637CBFB80F4 /* Pods */,
+				C7D0AC2380388CFC3570C905 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +196,16 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		C7D0AC2380388CFC3570C905 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33F15194C48C1C31F0C664CB /* Pods_BulletJournal.framework */,
+				1D17FDA2B4C906CA86613658 /* Pods_BulletJournal_BulletJournalUITests.framework */,
+				966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -172,9 +213,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94E3598F269DE7EC00BE6A09 /* Build configuration list for PBXNativeTarget "BulletJournal" */;
 			buildPhases = (
+				F936170478FC7FF35C33FF8B /* [CP] Check Pods Manifest.lock */,
 				94E3595C269DE7EB00BE6A09 /* Sources */,
 				94E3595D269DE7EB00BE6A09 /* Frameworks */,
 				94E3595E269DE7EB00BE6A09 /* Resources */,
+				BBB06D8B3B54480336E5777B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -189,6 +232,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94E35992269DE7EC00BE6A09 /* Build configuration list for PBXNativeTarget "BulletJournalTests" */;
 			buildPhases = (
+				49129ECF55EF260D78C9AF5E /* [CP] Check Pods Manifest.lock */,
 				94E35977269DE7EC00BE6A09 /* Sources */,
 				94E35978269DE7EC00BE6A09 /* Frameworks */,
 				94E35979269DE7EC00BE6A09 /* Resources */,
@@ -207,9 +251,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94E35995269DE7EC00BE6A09 /* Build configuration list for PBXNativeTarget "BulletJournalUITests" */;
 			buildPhases = (
+				8F393E9D92D7D69FA8EC595D /* [CP] Check Pods Manifest.lock */,
 				94E35982269DE7EC00BE6A09 /* Sources */,
 				94E35983269DE7EC00BE6A09 /* Frameworks */,
 				94E35984269DE7EC00BE6A09 /* Resources */,
+				523FAA14BB6F83A584F7AB74 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -288,6 +334,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49129ECF55EF260D78C9AF5E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BulletJournalTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		523FAA14BB6F83A584F7AB74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F393E9D92D7D69FA8EC595D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BulletJournal-BulletJournalUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBB06D8B3B54480336E5777B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BulletJournal/Pods-BulletJournal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BulletJournal/Pods-BulletJournal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BulletJournal/Pods-BulletJournal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F936170478FC7FF35C33FF8B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BulletJournal-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		94E3595C269DE7EB00BE6A09 /* Sources */ = {
@@ -470,6 +619,7 @@
 		};
 		94E35990269DE7EC00BE6A09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 666EB844025B964832EE89D9 /* Pods-BulletJournal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -488,6 +638,7 @@
 		};
 		94E35991269DE7EC00BE6A09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 933FCFDEAC2A16EA32CB3628 /* Pods-BulletJournal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -506,6 +657,7 @@
 		};
 		94E35993269DE7EC00BE6A09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EA8C8442E016FB427E404D2 /* Pods-BulletJournalTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -526,6 +678,7 @@
 		};
 		94E35994269DE7EC00BE6A09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -546,6 +699,7 @@
 		};
 		94E35996269DE7EC00BE6A09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56EA754A31D889F2AE89E394 /* Pods-BulletJournal-BulletJournalUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BR38JM45T5;
@@ -564,6 +718,7 @@
 		};
 		94E35997269DE7EC00BE6A09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F07026697D7A843DE6E5A55A /* Pods-BulletJournal-BulletJournalUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BR38JM45T5;
