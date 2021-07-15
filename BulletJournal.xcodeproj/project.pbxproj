@@ -26,6 +26,7 @@
 		94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359AA26A0EE6800BE6A09 /* Bullet.m */; };
 		94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359AD26A0EE9600BE6A09 /* BulletCell.m */; };
 		94E359B426A0EFEC00BE6A09 /* Flair.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B326A0EFEC00BE6A09 /* Flair.m */; };
+		94E359B726A0F59800BE6A09 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B626A0F59800BE6A09 /* User.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		94E359AD26A0EE9600BE6A09 /* BulletCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletCell.m; sourceTree = "<group>"; };
 		94E359B226A0EFEC00BE6A09 /* Flair.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flair.h; sourceTree = "<group>"; };
 		94E359B326A0EFEC00BE6A09 /* Flair.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flair.m; sourceTree = "<group>"; };
+		94E359B526A0F59800BE6A09 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		94E359B626A0F59800BE6A09 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulletJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournalTests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournalTests/Pods-BulletJournalTests.release.xcconfig"; sourceTree = "<group>"; };
 		F07026697D7A843DE6E5A55A /* Pods-BulletJournal-BulletJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -214,6 +217,8 @@
 				94E359AD26A0EE9600BE6A09 /* BulletCell.m */,
 				94E359B226A0EFEC00BE6A09 /* Flair.h */,
 				94E359B326A0EFEC00BE6A09 /* Flair.m */,
+				94E359B526A0F59800BE6A09 /* User.h */,
+				94E359B626A0F59800BE6A09 /* User.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */,
 				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
 				94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */,
+				94E359B726A0F59800BE6A09 /* User.m in Sources */,
 				94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */,
 				94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */,
 				94E359B426A0EFEC00BE6A09 /* Flair.m in Sources */,
