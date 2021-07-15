@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,9 @@
 		94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A0269F5FD900BE6A09 /* DailyTodoViewController.m */; };
 		94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */; };
 		94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A6269F600600BE6A09 /* CollectionsViewController.m */; };
+		94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359AA26A0EE6800BE6A09 /* Bullet.m */; };
+		94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359AD26A0EE9600BE6A09 /* BulletCell.m */; };
+		94E359B426A0EFEC00BE6A09 /* Flair.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B326A0EFEC00BE6A09 /* Flair.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,12 @@
 		94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyReviewViewController.m; sourceTree = "<group>"; };
 		94E359A5269F600600BE6A09 /* CollectionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionsViewController.h; sourceTree = "<group>"; };
 		94E359A6269F600600BE6A09 /* CollectionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionsViewController.m; sourceTree = "<group>"; };
+		94E359A926A0EE6800BE6A09 /* Bullet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		94E359AA26A0EE6800BE6A09 /* Bullet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
+		94E359AC26A0EE9600BE6A09 /* BulletCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletCell.h; sourceTree = "<group>"; };
+		94E359AD26A0EE9600BE6A09 /* BulletCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletCell.m; sourceTree = "<group>"; };
+		94E359B226A0EFEC00BE6A09 /* Flair.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flair.h; sourceTree = "<group>"; };
+		94E359B326A0EFEC00BE6A09 /* Flair.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flair.m; sourceTree = "<group>"; };
 		966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulletJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournalTests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournalTests/Pods-BulletJournalTests.release.xcconfig"; sourceTree = "<group>"; };
 		F07026697D7A843DE6E5A55A /* Pods-BulletJournal-BulletJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,14 +127,12 @@
 				1EA8C8442E016FB427E404D2 /* Pods-BulletJournalTests.debug.xcconfig */,
 				D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		94E35957269DE7EB00BE6A09 = {
 			isa = PBXGroup;
 			children = (
-				94E35998269F553300BE6A09 /* View Controllers */,
 				94E35962269DE7EB00BE6A09 /* BulletJournal */,
 				94E3597E269DE7EC00BE6A09 /* BulletJournalTests */,
 				94E35989269DE7EC00BE6A09 /* BulletJournalUITests */,
@@ -148,6 +155,8 @@
 		94E35962269DE7EB00BE6A09 /* BulletJournal */ = {
 			isa = PBXGroup;
 			children = (
+				94E359A826A0EE3D00BE6A09 /* Models */,
+				94E35998269F553300BE6A09 /* View Controllers */,
 				94E35963269DE7EB00BE6A09 /* AppDelegate.h */,
 				94E35964269DE7EB00BE6A09 /* AppDelegate.m */,
 				94E35966269DE7EB00BE6A09 /* SceneDelegate.h */,
@@ -194,6 +203,19 @@
 				94E359A6269F600600BE6A09 /* CollectionsViewController.m */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		94E359A826A0EE3D00BE6A09 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				94E359A926A0EE6800BE6A09 /* Bullet.h */,
+				94E359AA26A0EE6800BE6A09 /* Bullet.m */,
+				94E359AC26A0EE9600BE6A09 /* BulletCell.h */,
+				94E359AD26A0EE9600BE6A09 /* BulletCell.m */,
+				94E359B226A0EFEC00BE6A09 /* Flair.h */,
+				94E359B326A0EFEC00BE6A09 /* Flair.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C7D0AC2380388CFC3570C905 /* Frameworks */ = {
@@ -448,9 +470,12 @@
 				94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */,
 				94E3599B269F554F00BE6A09 /* HomeViewController.m in Sources */,
 				94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */,
+				94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */,
 				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
+				94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */,
 				94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */,
 				94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */,
+				94E359B426A0EFEC00BE6A09 /* Flair.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

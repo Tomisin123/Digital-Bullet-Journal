@@ -120,14 +120,40 @@
                     <view key="view" contentMode="scaleToFill" id="j3B-Dm-zrW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Wh-N9-MH3">
+                                <rect key="frame" x="0.0" y="56" width="414" height="654"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BulletCell" rowHeight="116" id="hDu-M4-4Vc" customClass="BulletCell">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="116"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hDu-M4-4Vc" id="ly8-bo-aqe">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="116"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Zit-P7-duT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Zit-P7-duT" firstAttribute="bottom" secondItem="4Wh-N9-MH3" secondAttribute="bottom" id="63Z-zO-E8Q"/>
+                            <constraint firstItem="4Wh-N9-MH3" firstAttribute="leading" secondItem="Zit-P7-duT" secondAttribute="leading" id="J7h-dQ-92D"/>
+                            <constraint firstItem="Zit-P7-duT" firstAttribute="trailing" secondItem="4Wh-N9-MH3" secondAttribute="trailing" id="We0-j6-u6q"/>
+                            <constraint firstItem="4Wh-N9-MH3" firstAttribute="top" secondItem="Zit-P7-duT" secondAttribute="top" id="aST-FB-yfr"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="Sbd-fR-8rS"/>
+                    <toolbarItems>
+                        <barButtonItem title="Add New Bullet" id="jWt-vm-Q0B"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qam-FB-bE7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-77" y="1590"/>
+            <point key="canvasLocation" x="-78.260869565217391" y="1589.7321428571429"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="n1M-AE-Rxi">
