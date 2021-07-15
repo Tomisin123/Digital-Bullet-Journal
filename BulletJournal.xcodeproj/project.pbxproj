@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35964269DE7EB00BE6A09 /* AppDelegate.m */; };
 		94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35967269DE7EB00BE6A09 /* SceneDelegate.m */; };
-		94E3596B269DE7EB00BE6A09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3596A269DE7EB00BE6A09 /* ViewController.m */; };
 		94E3596E269DE7EB00BE6A09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E3596C269DE7EB00BE6A09 /* Main.storyboard */; };
 		94E35970269DE7EC00BE6A09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E3596F269DE7EC00BE6A09 /* Assets.xcassets */; };
 		94E35973269DE7EC00BE6A09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E35971269DE7EC00BE6A09 /* LaunchScreen.storyboard */; };
 		94E35976269DE7EC00BE6A09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35975269DE7EC00BE6A09 /* main.m */; };
 		94E35980269DE7EC00BE6A09 /* BulletJournalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3597F269DE7EC00BE6A09 /* BulletJournalTests.m */; };
 		94E3598B269DE7EC00BE6A09 /* BulletJournalUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3598A269DE7EC00BE6A09 /* BulletJournalUITests.m */; };
+		94E3599B269F554F00BE6A09 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3599A269F554F00BE6A09 /* HomeViewController.m */; };
+		94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3599D269F5F9400BE6A09 /* LoginViewController.m */; };
+		94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A0269F5FD900BE6A09 /* DailyTodoViewController.m */; };
+		94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */; };
+		94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A6269F600600BE6A09 /* CollectionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +45,6 @@
 		94E35964269DE7EB00BE6A09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		94E35966269DE7EB00BE6A09 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		94E35967269DE7EB00BE6A09 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		94E35969269DE7EB00BE6A09 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		94E3596A269DE7EB00BE6A09 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		94E3596D269DE7EB00BE6A09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94E3596F269DE7EC00BE6A09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94E35972269DE7EC00BE6A09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +56,16 @@
 		94E35986269DE7EC00BE6A09 /* BulletJournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BulletJournalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E3598A269DE7EC00BE6A09 /* BulletJournalUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletJournalUITests.m; sourceTree = "<group>"; };
 		94E3598C269DE7EC00BE6A09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94E35999269F554F00BE6A09 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		94E3599A269F554F00BE6A09 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		94E3599C269F5F9400BE6A09 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		94E3599D269F5F9400BE6A09 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		94E3599F269F5FD900BE6A09 /* DailyTodoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailyTodoViewController.h; sourceTree = "<group>"; };
+		94E359A0269F5FD900BE6A09 /* DailyTodoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyTodoViewController.m; sourceTree = "<group>"; };
+		94E359A2269F5FEC00BE6A09 /* DailyReviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailyReviewViewController.h; sourceTree = "<group>"; };
+		94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyReviewViewController.m; sourceTree = "<group>"; };
+		94E359A5269F600600BE6A09 /* CollectionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionsViewController.h; sourceTree = "<group>"; };
+		94E359A6269F600600BE6A09 /* CollectionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +96,7 @@
 		94E35957269DE7EB00BE6A09 = {
 			isa = PBXGroup;
 			children = (
+				94E35998269F553300BE6A09 /* View Controllers */,
 				94E35962269DE7EB00BE6A09 /* BulletJournal */,
 				94E3597E269DE7EC00BE6A09 /* BulletJournalTests */,
 				94E35989269DE7EC00BE6A09 /* BulletJournalUITests */,
@@ -108,8 +121,6 @@
 				94E35964269DE7EB00BE6A09 /* AppDelegate.m */,
 				94E35966269DE7EB00BE6A09 /* SceneDelegate.h */,
 				94E35967269DE7EB00BE6A09 /* SceneDelegate.m */,
-				94E35969269DE7EB00BE6A09 /* ViewController.h */,
-				94E3596A269DE7EB00BE6A09 /* ViewController.m */,
 				94E3596C269DE7EB00BE6A09 /* Main.storyboard */,
 				94E3596F269DE7EC00BE6A09 /* Assets.xcassets */,
 				94E35971269DE7EC00BE6A09 /* LaunchScreen.storyboard */,
@@ -135,6 +146,23 @@
 				94E3598C269DE7EC00BE6A09 /* Info.plist */,
 			);
 			path = BulletJournalUITests;
+			sourceTree = "<group>";
+		};
+		94E35998269F553300BE6A09 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				94E35999269F554F00BE6A09 /* HomeViewController.h */,
+				94E3599A269F554F00BE6A09 /* HomeViewController.m */,
+				94E3599C269F5F9400BE6A09 /* LoginViewController.h */,
+				94E3599D269F5F9400BE6A09 /* LoginViewController.m */,
+				94E3599F269F5FD900BE6A09 /* DailyTodoViewController.h */,
+				94E359A0269F5FD900BE6A09 /* DailyTodoViewController.m */,
+				94E359A2269F5FEC00BE6A09 /* DailyReviewViewController.h */,
+				94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */,
+				94E359A5269F600600BE6A09 /* CollectionsViewController.h */,
+				94E359A6269F600600BE6A09 /* CollectionsViewController.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,10 +294,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94E3596B269DE7EB00BE6A09 /* ViewController.m in Sources */,
 				94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */,
 				94E35976269DE7EC00BE6A09 /* main.m in Sources */,
 				94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */,
+				94E3599B269F554F00BE6A09 /* HomeViewController.m in Sources */,
+				94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */,
+				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
+				94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */,
+				94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
