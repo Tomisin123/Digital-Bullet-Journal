@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+    ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
 
         configuration.applicationId = @"T0ae8GJ6pRBQ5EPPyE4EHISlZYIAGJCgHeXH88Wi"; // <- UPDATE
         configuration.clientKey = @"kyCxZrIaUCXj8yXujWtxRoBnuDlGJYA6Mklgy83g"; // <- UPDATE
@@ -27,6 +27,7 @@ ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithB
 
     [Parse initializeWithConfiguration:config];
     
+
     return YES;
 }
 

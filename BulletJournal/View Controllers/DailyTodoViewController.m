@@ -7,7 +7,11 @@
 
 #import "DailyTodoViewController.h"
 
-@interface DailyTodoViewController ()
+#import "BulletCell.h"
+
+@interface DailyTodoViewController () <UITableViewDelegate, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -16,7 +20,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    BulletCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BulletCell"];
+    //cell.post = self.posts[indexPath.row];
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  {
+    return 10;
+}
+
 
 /*
 #pragma mark - Navigation
