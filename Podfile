@@ -7,6 +7,7 @@ target 'BulletJournal' do
 
   # Pods for BulletJournal
   pod "Parse"
+  pod 'FSCalendar'
 
   target 'BulletJournalTests' do
     inherit! :search_paths

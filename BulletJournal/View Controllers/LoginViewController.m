@@ -44,12 +44,14 @@
 }
 - (IBAction)didSignUp:(id)sender {
     if ([self checkFields]){
+        NSLog(@"Signing up...");
         [self registerUser];
     }
 }
 
 - (IBAction)didLogin:(id)sender {
     if ([self checkFields]){
+        NSLog(@"Logging in...");
         [self loginUser];
     }
 }
@@ -62,8 +64,12 @@
 }
 
 - (void)registerUser {
+    
+    NSLog(@"Entered Register User Function");
+    
     // initialize a user object
     PFUser *newUser = [PFUser user];
+    NSLog(@"Made a new user");
     
     // set user properties
     newUser.username = self.usernameField.text;
@@ -87,6 +93,9 @@
 }
 
 - (void)loginUser {
+    
+    NSLog(@"Entered Login User Function");
+    
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     

@@ -27,6 +27,8 @@
 		94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359AD26A0EE9600BE6A09 /* BulletCell.m */; };
 		94E359B426A0EFEC00BE6A09 /* Flair.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B326A0EFEC00BE6A09 /* Flair.m */; };
 		94E359B726A0F59800BE6A09 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B626A0F59800BE6A09 /* User.m */; };
+		94E359BA26A5C31800BE6A09 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B926A5C31800BE6A09 /* CalendarViewController.m */; };
+		94E359BD26A5D82200BE6A09 /* AddBulletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,10 @@
 		94E359B326A0EFEC00BE6A09 /* Flair.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flair.m; sourceTree = "<group>"; };
 		94E359B526A0F59800BE6A09 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		94E359B626A0F59800BE6A09 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		94E359B826A5C31800BE6A09 /* CalendarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		94E359B926A5C31800BE6A09 /* CalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		94E359BB26A5D82200BE6A09 /* AddBulletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddBulletViewController.h; sourceTree = "<group>"; };
+		94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddBulletViewController.m; sourceTree = "<group>"; };
 		966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulletJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournalTests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournalTests/Pods-BulletJournalTests.release.xcconfig"; sourceTree = "<group>"; };
 		F07026697D7A843DE6E5A55A /* Pods-BulletJournal-BulletJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +210,10 @@
 				94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */,
 				94E359A5269F600600BE6A09 /* CollectionsViewController.h */,
 				94E359A6269F600600BE6A09 /* CollectionsViewController.m */,
+				94E359B826A5C31800BE6A09 /* CalendarViewController.h */,
+				94E359B926A5C31800BE6A09 /* CalendarViewController.m */,
+				94E359BB26A5D82200BE6A09 /* AddBulletViewController.h */,
+				94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -474,8 +484,10 @@
 				94E35976269DE7EC00BE6A09 /* main.m in Sources */,
 				94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */,
 				94E3599B269F554F00BE6A09 /* HomeViewController.m in Sources */,
+				94E359BD26A5D82200BE6A09 /* AddBulletViewController.m in Sources */,
 				94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */,
 				94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */,
+				94E359BA26A5C31800BE6A09 /* CalendarViewController.m in Sources */,
 				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
 				94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */,
 				94E359B726A0F59800BE6A09 /* User.m in Sources */,
