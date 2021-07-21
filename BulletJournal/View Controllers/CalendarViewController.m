@@ -12,6 +12,11 @@
 @interface CalendarViewController () <FSCalendarDelegate>
 
 @property (weak, nonatomic) IBOutlet FSCalendar *calendar;
+@property (weak, nonatomic) IBOutlet UIImageView *weatherImage;
+@property (weak, nonatomic) IBOutlet UILabel *weatherHigh;
+@property (weak, nonatomic) IBOutlet UILabel *weatherLow;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dayPreview;
 
 @end
 
@@ -29,6 +34,7 @@
     formatter.dateFormat = @"EEEE MM-dd-YYYY";
     NSString *dateString = [formatter stringFromDate:date];
     NSLog(@"%@", dateString);
+    //TODO: do a query to load the bottom half of the days
 }
 
 /*
