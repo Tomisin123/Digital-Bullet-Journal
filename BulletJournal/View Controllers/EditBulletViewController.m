@@ -7,7 +7,12 @@
 
 #import "EditBulletViewController.h"
 
-@interface EditBulletViewController ()
+@interface EditBulletViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
+@property (weak, nonatomic) IBOutlet UIPickerView *typePicker;
+@property (strong, nonatomic) NSArray *pickerArray;
+@property (weak, nonatomic) IBOutlet UITextField *desc;
+@property (weak, nonatomic) IBOutlet UISwitch *completed;
+@property (weak, nonatomic) IBOutlet UISwitch *unnecessary;
 
 @end
 
@@ -16,6 +21,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.typePicker.dataSource = self;
+    self.typePicker.delegate = self;
+    
+    //TODO: set Picker Array to type already picked
+    self.pickerArray = [NSArray arrayWithObjects:@"Task", @"Event", @"Note", nil];
+}
+
+- (void) loadData {
+    
+    //TODO: Load Bullet Data here
+    
+}
+
+- (IBAction)didEditBullet:(id)sender {
+    
 }
 
 /*

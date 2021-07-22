@@ -8,10 +8,12 @@
 #import "DailyTodoViewController.h"
 
 #import "BulletCell.h"
+#import "Parse/Parse.h"
 
 @interface DailyTodoViewController () <UITableViewDelegate, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *posts;
 
 @end
 
@@ -24,26 +26,61 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    [self fetchPosts];
+    
+}
+
+- (void) fetchPosts {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
+    query.limit = 20;
+    [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error){
+        if (posts != nil) {
+            self.posts = posts;
+            
+            //NSLog(@"%@", [posts objectAtIndex:0][@"Description"]);
+            [self.tableView reloadData];
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        //[self.refreshControl endRefreshing];
+    }];
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     BulletCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BulletCell"];
-    //cell.post = self.posts[indexPath.row];
+    cell.bullet = self.posts[indexPath.row];
+    cell.desc.text = cell.bullet[@"Description"];
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  {
-    return 2;
+    return self.posts.count;
 }
 
 
-/*
-#pragma mark - Navigation
 
+#pragma mark - Navigation
+/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    UITableViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    NSDictionary *bullet = self.bullet[indexPath.row];
+    
+    DailyTodoViewController *dailyTodoVC = [segue destinationViewController];
+    dailyTodoVC.bullet = bullet;
+    
+    NSLog(@"Tapping on a movie");
+    
+    
+    
 }
 */
 

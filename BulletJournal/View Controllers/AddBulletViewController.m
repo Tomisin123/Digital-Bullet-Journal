@@ -31,10 +31,8 @@
 
 - (IBAction)didCreateBullet:(id)sender {
     
-    //TODO: Assert that input values are correct
-   
     PFObject *bullet = [PFObject objectWithClassName:@"Bullet"];
-    bullet[@"User"] = PFUser.currentUser; //TODO: change
+    bullet[@"User"] = PFUser.currentUser;
     NSInteger row = [self.typePicker selectedRowInComponent:0];
     bullet[@"Type"] = [self.pickerArray objectAtIndex:row];;
     bullet[@"Relevant"] = @YES;
@@ -42,22 +40,22 @@
     bullet[@"Description"] = self.desc.text;
     
     [bullet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                  if (succeeded) {
-                         NSLog(@"Object saved!");
-                  } else {
-                         NSLog(@"Error: %@", error.description);
-                  }
+        if (succeeded) {
+            NSLog(@"Object saved!");
+        } else {
+            NSLog(@"Error: %@", error.description);
+        }
     }];
     
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
-     return 1;
+    return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)thePickerView
 numberOfRowsInComponent:(NSInteger)component {
-     return 3;
+    return 3;
 }
 
 - (NSString *)pickerView:(UIPickerView *)thePickerView
@@ -67,6 +65,7 @@ numberOfRowsInComponent:(NSInteger)component {
     return title;
 }
 
+//TODO: Remove this
 //- (void)pickerView:(UIPickerView *)thePickerView
 //      didSelectRow:(NSInteger)row
 //       inComponent:(NSInteger)component {
@@ -83,13 +82,13 @@ numberOfRowsInComponent:(NSInteger)component {
 //}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

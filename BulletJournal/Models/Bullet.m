@@ -9,4 +9,9 @@
 
 @implementation Bullet
 
+@dynamic desc;
+@dynamic completed;
+@dynamic type;
+@dynamic user;
+
 @end

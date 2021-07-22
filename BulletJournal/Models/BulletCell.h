@@ -7,9 +7,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Bullet.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BulletCell : UITableViewCell
+
+@property (strong, nonatomic) Bullet *bullet;
+@property (weak, nonatomic) IBOutlet UILabel *desc;
+@property (weak, nonatomic) IBOutlet UIImageView *img;
 
 @end
 
