@@ -10,6 +10,7 @@
 #import "FSCalendar.h"
 #import "CoreLocation/CoreLocation.h"
 #import "Parse/Parse.h"
+#import "WeatherRadar.h"
 
 @interface CalendarViewController () <FSCalendarDelegate, CLLocationManagerDelegate>
 
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSString *latitude;
 @property (strong, nonatomic) NSString *longitude;
+@property (strong, nonatomic) WeatherRadar *weatherRadar;
 
 @end
 
@@ -35,6 +37,7 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
+    
     
     
 }
@@ -80,19 +83,33 @@
         CLLocationCoordinate2D coordinate = [[self.locationManager location] coordinate];
         self.latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
         self.longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
+        float latFloat = [self.latitude floatValue];
+        float longFloat = [self.longitude floatValue];
+        
+        
         NSLog(@"%@", [self.locationManager location]);
-
+        NSLog(@"Outside getCurrentWeather Completion Block");
+        //NSLog(@"%@", self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:<#^(Weather * _Nonnull)completionBlock#>
+        [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
+            //TODO: won't execute the inside of this completion bloc for some reason
+            NSLog(@"Inside getCurrentWeather Completion Block");
+            NSLog(@"%@", weather);
+        }];
+        
+        
+        
+        
     }
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

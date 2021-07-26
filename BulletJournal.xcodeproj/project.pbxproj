@@ -30,6 +30,8 @@
 		94E359BA26A5C31800BE6A09 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B926A5C31800BE6A09 /* CalendarViewController.m */; };
 		94E359BD26A5D82200BE6A09 /* AddBulletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */; };
 		94E359C026A6175400BE6A09 /* EditBulletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359BF26A6175400BE6A09 /* EditBulletViewController.m */; };
+		94E359C326AF589D00BE6A09 /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359C226AF589D00BE6A09 /* Weather.m */; };
+		94E359C626AF58E400BE6A09 /* WeatherRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359C526AF58E400BE6A09 /* WeatherRadar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,10 @@
 		94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddBulletViewController.m; sourceTree = "<group>"; };
 		94E359BE26A6175400BE6A09 /* EditBulletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditBulletViewController.h; sourceTree = "<group>"; };
 		94E359BF26A6175400BE6A09 /* EditBulletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditBulletViewController.m; sourceTree = "<group>"; };
+		94E359C126AF589D00BE6A09 /* Weather.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Weather.h; sourceTree = "<group>"; };
+		94E359C226AF589D00BE6A09 /* Weather.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
+		94E359C426AF58E400BE6A09 /* WeatherRadar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherRadar.h; sourceTree = "<group>"; };
+		94E359C526AF58E400BE6A09 /* WeatherRadar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherRadar.m; sourceTree = "<group>"; };
 		966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulletJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournalTests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournalTests/Pods-BulletJournalTests.release.xcconfig"; sourceTree = "<group>"; };
 		F07026697D7A843DE6E5A55A /* Pods-BulletJournal-BulletJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +240,10 @@
 				94E359B326A0EFEC00BE6A09 /* Flair.m */,
 				94E359B526A0F59800BE6A09 /* User.h */,
 				94E359B626A0F59800BE6A09 /* User.m */,
+				94E359C126AF589D00BE6A09 /* Weather.h */,
+				94E359C226AF589D00BE6A09 /* Weather.m */,
+				94E359C426AF58E400BE6A09 /* WeatherRadar.h */,
+				94E359C526AF58E400BE6A09 /* WeatherRadar.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -489,10 +499,12 @@
 				94E35976269DE7EC00BE6A09 /* main.m in Sources */,
 				94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */,
 				94E3599B269F554F00BE6A09 /* HomeViewController.m in Sources */,
+				94E359C326AF589D00BE6A09 /* Weather.m in Sources */,
 				94E359BD26A5D82200BE6A09 /* AddBulletViewController.m in Sources */,
 				94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */,
 				94E359C026A6175400BE6A09 /* EditBulletViewController.m in Sources */,
 				94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */,
+				94E359C626AF58E400BE6A09 /* WeatherRadar.m in Sources */,
 				94E359BA26A5C31800BE6A09 /* CalendarViewController.m in Sources */,
 				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
 				94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */,
