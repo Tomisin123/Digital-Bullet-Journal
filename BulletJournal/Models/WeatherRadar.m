@@ -68,6 +68,9 @@
     // formulate the url to query the api to get current weather
     NSString* url = [NSString stringWithFormat:@"https://api.openweathermap.org/data/2.5/weather?units=imperial&cnt=7&lat=%f&lon=%f&appid=89b2d0173476e146d1c1ef3e99d0f495", latitude, longitude];
     
+    NSLog(@"Latitude: %f", latitude);
+    NSLog(@"Longitude: %f", longitude);
+    
     // escape the url to avoid any potential errors
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     

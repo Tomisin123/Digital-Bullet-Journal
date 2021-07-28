@@ -38,6 +38,7 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
+    self.currentUserLocation = [[CLLocation alloc] initWithLatitude:32.7767 longitude:-96.7970]; //Coordinates for Dallas, TX
     
     self.weatherRadar = [[WeatherRadar alloc] init];
     
@@ -92,12 +93,23 @@
     float longFloat = [self.longitude floatValue];
 
     NSLog(@"%@", [self.locationManager location]);
-    NSLog(@"Outside getCurrentWeather Completion Block");
+    
+    
+    
+    
+    NSLog(@"%@", self.currentUserLocation);
+    
+    
+    
+    
     //NSLog(@"%@", self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:<#^(Weather * _Nonnull)completionBlock#>
     [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
         //TODO: won't execute the inside of this completion bloc for some reason
         NSLog(@"Inside getCurrentWeather Completion Block");
-        NSLog(@"%@", weather);
+        NSLog(@"%@", weather.condition);
+        
+        self.weatherHigh.text = [NSString stringWithFormat:@"%i", weather.temperatureMax];
+        self.weatherLow.text = [NSString stringWithFormat:@"%i", weather.temperatureMin];
     }];
     
 }
