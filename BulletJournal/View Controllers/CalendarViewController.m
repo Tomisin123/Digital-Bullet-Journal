@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSString *latitude;
 @property (strong, nonatomic) NSString *longitude;
 @property (strong, nonatomic) WeatherRadar *weatherRadar;
+@property (strong, nonatomic) CLLocation *currentUserLocation;
 
 @end
 
@@ -38,6 +39,10 @@
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
     
+    self.weatherRadar = [[WeatherRadar alloc] init];
+    
+    
+    
     
     
 }
@@ -49,6 +54,7 @@
     NSLog(@"%@", dateString);
     self.dateLabel.text = dateString;
     
+    [self updateWeather];
     
     
     //Query to load the bottom half of the days
@@ -77,30 +83,44 @@
     
 }
 
-- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
-    if (manager.authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse ||
-        manager.authorizationStatus == kCLAuthorizationStatusAuthorizedAlways){
-        CLLocationCoordinate2D coordinate = [[self.locationManager location] coordinate];
-        self.latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
-        self.longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
-        float latFloat = [self.latitude floatValue];
-        float longFloat = [self.longitude floatValue];
-        
-        
-        NSLog(@"%@", [self.locationManager location]);
-        NSLog(@"Outside getCurrentWeather Completion Block");
-        //NSLog(@"%@", self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:<#^(Weather * _Nonnull)completionBlock#>
-        [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
-            //TODO: won't execute the inside of this completion bloc for some reason
-            NSLog(@"Inside getCurrentWeather Completion Block");
-            NSLog(@"%@", weather);
-        }];
-        
-        
-        
-        
-    }
+- (void) updateWeather {
+    
+    CLLocationCoordinate2D coordinate = [self.currentUserLocation coordinate];
+    self.latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
+    self.longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
+    float latFloat = [self.latitude floatValue];
+    float longFloat = [self.longitude floatValue];
+
+    NSLog(@"%@", [self.locationManager location]);
+    NSLog(@"Outside getCurrentWeather Completion Block");
+    //NSLog(@"%@", self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:<#^(Weather * _Nonnull)completionBlock#>
+    [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
+        //TODO: won't execute the inside of this completion bloc for some reason
+        NSLog(@"Inside getCurrentWeather Completion Block");
+        NSLog(@"%@", weather);
+    }];
+    
 }
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+
+    self.currentUserLocation = [locations lastObject];
+    [self.locationManager stopUpdatingLocation];
+    
+    
+
+}
+
+//
+//- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
+//    if (!(manager.authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) &&
+//        !(manager.authorizationStatus == kCLAuthorizationStatusAuthorizedAlways)){
+//
+//        //TODO: can't use weather api
+//
+//    }
+//}
 
 /*
  #pragma mark - Navigation

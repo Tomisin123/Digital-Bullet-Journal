@@ -7,7 +7,10 @@
 
 #import "DailyReviewViewController.h"
 
+#import "Parse/Parse.h"
+
 @interface DailyReviewViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *reviewText;
 
 @end
 
@@ -16,6 +19,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //TODO: load review if it exists
+    
+}
+
+
+
+- (IBAction)didSaveReview:(id)sender {
+    
+    PFObject *review = [PFObject objectWithClassName:@"Review"];
+    review[@"User"] = PFUser.currentUser;
+    review[@"Text"] = self.reviewText.text;
+    
+    [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Object saved!");
+        } else {
+            NSLog(@"Error: %@", error.description);
+        }
+    }];
+    
 }
 
 /*
