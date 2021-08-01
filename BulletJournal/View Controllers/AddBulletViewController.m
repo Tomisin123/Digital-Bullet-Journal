@@ -38,6 +38,11 @@
     bullet[@"Relevant"] = @YES;
     bullet[@"Completed"] = @NO;
     bullet[@"Description"] = self.desc.text;
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormat stringFromDate:today];
+    bullet[@"Date"] = dateString;
     
     [bullet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSString *longitude;
 @property (strong, nonatomic) WeatherRadar *weatherRadar;
 @property (strong, nonatomic) CLLocation *currentUserLocation;
+@property (strong, nonatomic) NSDate *dateSelected;
 
 @end
 
@@ -42,6 +43,7 @@
     
     self.weatherRadar = [[WeatherRadar alloc] init];
     
+    //TODO: self.dateSelected = Today;
     
     
     
@@ -50,10 +52,14 @@
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"EEEE MM/dd";
+    //formatter.dateFormat = @"EEEE MM/dd";
+    formatter.dateFormat = @"dd/MM/yyyy";
     NSString *dateString = [formatter stringFromDate:date];
     NSLog(@"%@", dateString);
     self.dateLabel.text = dateString;
+    self.dateSelected = date;
+    
+    NSLog(@"Date Selected: %@", self.dateSelected);
     
     [self updateWeather];
     
@@ -70,10 +76,21 @@
             unsigned long i, cnt = [posts count];
             for(i = 0; i < cnt; i++)
             {
-                NSString *string = [posts objectAtIndex:i][@"Description"];
-                string = [string stringByAppendingString:@"\n"];
-                NSString *dayPreviewString = [self.dayPreview.text stringByAppendingString:string];
-                self.dayPreview.text = dayPreviewString;
+                NSLog(@"Post:%@", [posts objectAtIndex:i]);
+                //MARK: Why is this null right now?
+                NSString *postDate = [posts objectAtIndex:i][@"Date"];
+                NSLog(@"PostDate:%@", postDate);
+                
+                if ([postDate isEqualToString:dateString]){
+                    NSString *string = [posts objectAtIndex:i][@"Description"];
+                    string = [string stringByAppendingString:@"\n"];
+                    NSString *dayPreviewString = [self.dayPreview.text stringByAppendingString:string];
+                    self.dayPreview.text = dayPreviewString;
+                }
+                
+                
+                
+                
             }
             
         }
@@ -83,6 +100,9 @@
     }];
     
 }
+
+//- (NSDate *) getDay:(NSDate *)date {
+//}
 
 - (void) updateWeather {
     
