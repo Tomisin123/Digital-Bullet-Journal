@@ -39,15 +39,10 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
-    self.currentUserLocation = [[CLLocation alloc] initWithLatitude:32.7767 longitude:-96.7970]; //Coordinates for Dallas, TX
-    
+    self.currentUserLocation = [[CLLocation alloc] initWithLatitude:32.7767 longitude:-96.7970]; //TODO: This sets coordinates for Dallas, TX
     self.weatherRadar = [[WeatherRadar alloc] init];
     
-    //TODO: self.dateSelected = Today;
-    
-    
-    
-    
+    //TODO: self.dateSelected = Today; for before a date is selected
 }
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition{
@@ -63,10 +58,7 @@
     
     [self updateWeather];
     
-    
     //Query to load the bottom half of the days
-    //TODO: similar method as fetchPosts in DailyTodoViewController
-    //TODO: filter for only the day selected
     self.dayPreview.text = @"";
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
     query.limit = 20;
@@ -76,23 +68,15 @@
             unsigned long i, cnt = [posts count];
             for(i = 0; i < cnt; i++)
             {
-                NSLog(@"Post:%@", [posts objectAtIndex:i]);
-                //MARK: Why is this null right now?
-                NSString *postDate = [posts objectAtIndex:i][@"Date"];
-                NSLog(@"PostDate:%@", postDate);
                 
+                NSString *postDate = [posts objectAtIndex:i][@"Date"];
                 if ([postDate isEqualToString:dateString]){
                     NSString *string = [posts objectAtIndex:i][@"Description"];
                     string = [string stringByAppendingString:@"\n"];
                     NSString *dayPreviewString = [self.dayPreview.text stringByAppendingString:string];
                     self.dayPreview.text = dayPreviewString;
                 }
-                
-                
-                
-                
             }
-            
         }
         else {
             NSLog(@"%@", error.localizedDescription);
@@ -101,9 +85,6 @@
     
 }
 
-//- (NSDate *) getDay:(NSDate *)date {
-//}
-
 - (void) updateWeather {
     
     CLLocationCoordinate2D coordinate = [self.currentUserLocation coordinate];
@@ -111,23 +92,13 @@
     self.longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
     float latFloat = [self.latitude floatValue];
     float longFloat = [self.longitude floatValue];
-
-    NSLog(@"%@", [self.locationManager location]);
     
+    NSLog(@"Location Manager: %@", [self.locationManager location]);
     
+    NSLog(@"Current User Location: %@", self.currentUserLocation);
     
-    
-    NSLog(@"%@", self.currentUserLocation);
-    
-    
-    
-    
-    //NSLog(@"%@", self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:<#^(Weather * _Nonnull)completionBlock#>
     [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
-        //TODO: won't execute the inside of this completion bloc for some reason
-        NSLog(@"Inside getCurrentWeather Completion Block");
-        NSLog(@"%@", weather.condition);
-        
+        //TODO: set image based on weather.condition
         self.weatherHigh.text = [NSString stringWithFormat:@"%i", weather.temperatureMax];
         self.weatherLow.text = [NSString stringWithFormat:@"%i", weather.temperatureMin];
     }];
@@ -136,23 +107,9 @@
 
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-
     self.currentUserLocation = [locations lastObject];
     [self.locationManager stopUpdatingLocation];
-    
-    
-
 }
-
-//
-//- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
-//    if (!(manager.authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) &&
-//        !(manager.authorizationStatus == kCLAuthorizationStatusAuthorizedAlways)){
-//
-//        //TODO: can't use weather api
-//
-//    }
-//}
 
 /*
  #pragma mark - Navigation

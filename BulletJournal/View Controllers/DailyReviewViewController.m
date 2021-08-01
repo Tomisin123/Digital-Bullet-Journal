@@ -31,6 +31,12 @@
     PFObject *review = [PFObject objectWithClassName:@"Review"];
     review[@"User"] = PFUser.currentUser;
     review[@"Text"] = self.reviewText.text;
+    //TODO: repetitive code with AddBulletViewController
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormat stringFromDate:today];
+    review[@"Date"] = dateString;
     
     [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

@@ -13,7 +13,7 @@
 @interface DailyTodoViewController () <UITableViewDelegate, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *posts;
+@property (strong, nonatomic) NSMutableArray *posts;
 
 @end
 
@@ -26,20 +26,31 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    self.posts = [[NSMutableArray alloc] init];
+    
     [self fetchPosts];
     
 }
 
 - (void) fetchPosts {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"dd/MM/yyyy";
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error){
         if (posts != nil) {
-            self.posts = posts;
-            
-            //NSLog(@"%@", [posts objectAtIndex:0][@"Description"]);
+            unsigned long i, cnt = [posts count];
+            for(i = 0; i < cnt; i++)
+            {
+                NSString *postDate = [posts objectAtIndex:i][@"Date"];
+                if ([postDate isEqualToString:dateString]){
+                    [self.posts addObject:[posts objectAtIndex:i]];
+                }
+            }
+
             [self.tableView reloadData];
         }
         else {
