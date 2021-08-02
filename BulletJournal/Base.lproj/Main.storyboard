@@ -198,7 +198,7 @@
                                         <connections>
                                             <outlet property="desc" destination="lzg-Cu-1j8" id="TA9-sQ-VIg"/>
                                             <outlet property="img" destination="Dif-3Y-xFX" id="uej-uh-4SQ"/>
-                                            <segue destination="CqX-om-QlU" kind="presentation" id="HfT-lj-oGs"/>
+                                            <segue destination="CqX-om-QlU" kind="presentation" identifier="editBulletSegue" id="HfT-lj-oGs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EditBulletViewController : UIViewController
 
+@property (nonatomic, strong) NSDictionary *bullet;
+
 @end
 
 NS_ASSUME_NONNULL_END

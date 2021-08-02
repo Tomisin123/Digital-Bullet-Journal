@@ -21,10 +21,36 @@
     // Do any additional setup after loading the view.
     
     //TODO: load review if it exists
+    [self fetchReview];
     
 }
 
-
+//TODO: weird behaviours for when a review already exists, look at Back4App to know what I'm talking about
+- (void) fetchReview {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"dd/MM/yyyy";
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Review"];
+    query.limit = 20;
+    [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error){
+        if (posts != nil) {
+            unsigned long i, cnt = [posts count];
+            for(i = 0; i < cnt; i++)
+            {
+                NSString *postDate = [posts objectAtIndex:i][@"Date"];
+                if ([postDate isEqualToString:dateString] /*TODO: And User is equal to current user*/){
+                    self.reviewText.text = [posts objectAtIndex:i][@"Text"];
+                }
+            }
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
+}
 
 - (IBAction)didSaveReview:(id)sender {
     
