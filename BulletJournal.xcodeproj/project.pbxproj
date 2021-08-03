@@ -32,6 +32,7 @@
 		94E359C026A6175400BE6A09 /* EditBulletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359BF26A6175400BE6A09 /* EditBulletViewController.m */; };
 		94E359C326AF589D00BE6A09 /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359C226AF589D00BE6A09 /* Weather.m */; };
 		94E359C626AF58E400BE6A09 /* WeatherRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359C526AF58E400BE6A09 /* WeatherRadar.m */; };
+		94E359CA26B85B5C00BE6A09 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359C926B85B5C00BE6A09 /* NSDate+Utilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,8 @@
 		94E359C226AF589D00BE6A09 /* Weather.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
 		94E359C426AF58E400BE6A09 /* WeatherRadar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherRadar.h; sourceTree = "<group>"; };
 		94E359C526AF58E400BE6A09 /* WeatherRadar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherRadar.m; sourceTree = "<group>"; };
+		94E359C826B85B5C00BE6A09 /* NSDate+Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		94E359C926B85B5C00BE6A09 /* NSDate+Utilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulletJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournalTests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournalTests/Pods-BulletJournalTests.release.xcconfig"; sourceTree = "<group>"; };
 		F07026697D7A843DE6E5A55A /* Pods-BulletJournal-BulletJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; path = "Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		94E35962269DE7EB00BE6A09 /* BulletJournal */ = {
 			isa = PBXGroup;
 			children = (
+				94E359C726B85B0800BE6A09 /* Utilities */,
 				94E359A826A0EE3D00BE6A09 /* Models */,
 				94E35998269F553300BE6A09 /* View Controllers */,
 				94E35963269DE7EB00BE6A09 /* AppDelegate.h */,
@@ -246,6 +250,15 @@
 				94E359C526AF58E400BE6A09 /* WeatherRadar.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		94E359C726B85B0800BE6A09 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				94E359C826B85B5C00BE6A09 /* NSDate+Utilities.h */,
+				94E359C926B85B5C00BE6A09 /* NSDate+Utilities.m */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		C7D0AC2380388CFC3570C905 /* Frameworks */ = {
@@ -508,6 +521,7 @@
 				94E359BA26A5C31800BE6A09 /* CalendarViewController.m in Sources */,
 				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
 				94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */,
+				94E359CA26B85B5C00BE6A09 /* NSDate+Utilities.m in Sources */,
 				94E359B726A0F59800BE6A09 /* User.m in Sources */,
 				94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */,
 				94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */,

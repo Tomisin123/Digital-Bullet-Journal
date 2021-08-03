@@ -33,11 +33,11 @@
 }
 
 - (void)getWeeklyWeather:(float)latitude longitude:(float)longitude completionBlock:(void (^)(NSArray *))completionBlock {
-    
+    NSLog(@"Getting Weekly Weather");
     // formulate the url to query the api to get the 7 day
     // forecast. cnt=7 asks the api for 7 days. units = imperial
     // will return temperatures in Farenheit
-    NSString* url = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=7&lat=%f&lon=%f", latitude, longitude];
+    NSString* url = [NSString stringWithFormat:@"https://api.openweathermap.org/data/2.5/onecall?units=imperial&cnt=7&lat=%f&lon=%f&appid=f6d837c705a5c7b371dc4641289d2e43&exclude=minutely,hourly", latitude, longitude];
     
     // escape the url to avoid any potential errors
     url = [url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
@@ -48,9 +48,10 @@
         // create an array of weather objects (one for each day)
         // initialize them using the function from listing 7
         // and return the results to the calling controller
+        
         NSMutableArray *weeklyWeather = [[NSMutableArray alloc] init];
         
-        for(NSDictionary* weather in weatherData[@"list"]) {
+        for(NSDictionary* weather in weatherData[@"daily"]) {
             // pass false since the weather is a future forecast
             // this lets the init function know which format of
             // data to parse

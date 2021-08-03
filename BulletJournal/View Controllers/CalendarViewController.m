@@ -11,6 +11,7 @@
 #import "CoreLocation/CoreLocation.h"
 #import "Parse/Parse.h"
 #import "WeatherRadar.h"
+#import "NSDate+Utilities.h"
 
 @interface CalendarViewController () <FSCalendarDelegate, CLLocationManagerDelegate>
 
@@ -56,6 +57,8 @@
     
     NSLog(@"Date Selected: %@", self.dateSelected);
     
+    
+    
     [self updateWeather];
     
     //Query to load the bottom half of the days
@@ -93,15 +96,48 @@
     float latFloat = [self.latitude floatValue];
     float longFloat = [self.longitude floatValue];
     
-    NSLog(@"Location Manager: %@", [self.locationManager location]);
+//    NSLog(@"Location Manager: %@", [self.locationManager location]);
+//    NSLog(@"Current User Location: %@", self.currentUserLocation);
     
-    NSLog(@"Current User Location: %@", self.currentUserLocation);
     
-    [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
-        //TODO: set image based on weather.condition
-        self.weatherHigh.text = [NSString stringWithFormat:@"%i", weather.temperatureMax];
-        self.weatherLow.text = [NSString stringWithFormat:@"%i", weather.temperatureMin];
-    }];
+    
+    //If date selected is today, just use current weather predictor for today
+    if ([self.dateSelected isToday]){
+        NSLog(@"Selected Today");
+        [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
+            //TODO: set image based on weather.condition
+            self.weatherHigh.text = [NSString stringWithFormat:@"%i", weather.temperatureMax];
+            self.weatherLow.text = [NSString stringWithFormat:@"%i", weather.temperatureMin];
+        }];
+    }
+    
+    //If date selected is yesterday or further in the past, use historical weathed data call
+    else if ([self.dateSelected isEarlierThanDate:[[NSDate date] dateAtStartOfDay]]){
+        NSLog(@"Selected day before today");
+    }
+    
+    //If date selected more than a week in the future, weather data isn't obtainable
+    else if ([self.dateSelected isLaterThanDate:[[NSDate date] dateByAddingDays:7]]){
+        NSLog(@"Selected day more than a week in a future");
+        self.weatherHigh.text = @"N/A";
+        self.weatherLow.text = @"N/A";
+    }
+    
+    else { //Need to get weekly forecast
+        NSLog(@"Selected day less than or equal to a week in the future");
+        
+        [self.weatherRadar getWeeklyWeather:latFloat longitude:longFloat completionBlock:^(NSArray *weatherArray) {
+            Weather *weather = [weatherArray objectAtIndex:[[NSDate date] distanceInDaysToDate:self.dateSelected]];
+            //TODO: set image based on weather.condition
+            self.weatherHigh.text = [NSString stringWithFormat:@"%i", weather.temperatureMax];
+            self.weatherLow.text = [NSString stringWithFormat:@"%i", weather.temperatureMin];
+        }];
+    }
+    
+    
+    
+    
+    
     
 }
 
