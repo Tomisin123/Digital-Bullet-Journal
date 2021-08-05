@@ -10,8 +10,9 @@
 #import "BulletCell.h"
 #import "Parse/Parse.h"
 #import "EditBulletViewController.h"
+#import "DailyTabBarController.h"
 
-@interface DailyTodoViewController () <UITableViewDelegate, UITableViewDelegate>
+@interface DailyTodoViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *posts;
@@ -31,9 +32,19 @@
     
     [self fetchPosts];
     
+    
+    
 }
 
 - (void) fetchPosts {
+    
+    if (self.date == nil){
+        NSLog(@"No Date given, using today");
+    }
+    else{
+        NSLog(@"Date given: %@", self.date);
+    }
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"dd/MM/yyyy";
     NSString *dateString = [formatter stringFromDate:[NSDate date]];

@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.9.1)
+  - EGOCache (2.2.0)
   - FSCalendar (2.8.2)
   - Parse (1.19.2):
     - Parse/Core (= 1.19.2)
@@ -29,6 +30,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - EGOCache (~> 2.2.0)
   - FSCalendar
   - Parse
 
@@ -36,15 +38,17 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - Bolts
+    - EGOCache
     - FSCalendar
     - Parse
 
 SPEC CHECKSUMS:
   AFNetworking: 8dd5f9b9691e09186393069a12cc3b5ed7c8b511
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  EGOCache: 191fd213da6804d487b49b1a91772ba904f3e324
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
 
-PODFILE CHECKSUM: 45da4110b0e445db0e1dde77c7933a17b4a57d99
+PODFILE CHECKSUM: c5d3c68e9a54f9516bcb5c34fcc5c6fe072b2e60
 
 COCOAPODS: 1.10.1

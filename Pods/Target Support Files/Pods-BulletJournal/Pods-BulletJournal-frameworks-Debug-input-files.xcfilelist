@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-BulletJournal/Pods-BulletJournal-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
 ${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework
+${BUILT_PRODUCTS_DIR}/EGOCache/EGOCache.framework
 ${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework
 ${BUILT_PRODUCTS_DIR}/Parse/Parse.framework

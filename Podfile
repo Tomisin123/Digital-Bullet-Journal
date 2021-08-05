@@ -9,6 +9,7 @@ target 'BulletJournal' do
   pod "Parse"
   pod 'FSCalendar'
   pod "AFNetworking", "~> 2.0"
+  pod 'EGOCache', '~> 2.2.0'
 
   target 'BulletJournalTests' do
     inherit! :search_paths

@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// light rain, heavy snow, etc...
 @property (nonatomic, strong) NSString* condition;
 
+@property (nonatomic, strong) NSString* icon;
+
 /// min/max temp in farenheit
 @property (nonatomic) int temperatureMin;
 @property (nonatomic) int temperatureMax;

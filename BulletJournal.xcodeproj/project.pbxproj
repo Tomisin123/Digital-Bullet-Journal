@@ -10,6 +10,13 @@
 		42DADB8B4F414A9F88394B87 /* Pods_BulletJournal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F15194C48C1C31F0C664CB /* Pods_BulletJournal.framework */; };
 		519082F5F5AAB4E5137FAC4D /* Pods_BulletJournalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */; };
 		562C166E47EFE057852FE998 /* Pods_BulletJournal_BulletJournalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D17FDA2B4C906CA86613658 /* Pods_BulletJournal_BulletJournalUITests.framework */; };
+		9483221026BB7430004D0186 /* DailyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483220F26BB7430004D0186 /* DailyTabBarController.m */; };
+		9483221326BBB7C5004D0186 /* AddHabitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483221226BBB7C5004D0186 /* AddHabitViewController.m */; };
+		9483221626BBB7EE004D0186 /* HabitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483221526BBB7EE004D0186 /* HabitViewController.m */; };
+		9483221926BBB9DF004D0186 /* EditHabitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483221826BBB9DF004D0186 /* EditHabitViewController.m */; };
+		9483221C26BBBF25004D0186 /* HabitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483221B26BBBF25004D0186 /* HabitCell.m */; };
+		9483221F26BBC065004D0186 /* Habit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483221E26BBC065004D0186 /* Habit.m */; };
+		9483222226BBCE4B004D0186 /* HabitCheckerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222126BBCE4B004D0186 /* HabitCheckerCell.m */; };
 		94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35964269DE7EB00BE6A09 /* AppDelegate.m */; };
 		94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35967269DE7EB00BE6A09 /* SceneDelegate.m */; };
 		94E3596E269DE7EB00BE6A09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E3596C269DE7EB00BE6A09 /* Main.storyboard */; };
@@ -59,6 +66,20 @@
 		56EA754A31D889F2AE89E394 /* Pods-BulletJournal-BulletJournalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal-BulletJournalUITests.debug.xcconfig"; path = "Target Support Files/Pods-BulletJournal-BulletJournalUITests/Pods-BulletJournal-BulletJournalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		666EB844025B964832EE89D9 /* Pods-BulletJournal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal.debug.xcconfig"; path = "Target Support Files/Pods-BulletJournal/Pods-BulletJournal.debug.xcconfig"; sourceTree = "<group>"; };
 		933FCFDEAC2A16EA32CB3628 /* Pods-BulletJournal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BulletJournal.release.xcconfig"; path = "Target Support Files/Pods-BulletJournal/Pods-BulletJournal.release.xcconfig"; sourceTree = "<group>"; };
+		9483220E26BB7430004D0186 /* DailyTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailyTabBarController.h; sourceTree = "<group>"; };
+		9483220F26BB7430004D0186 /* DailyTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyTabBarController.m; sourceTree = "<group>"; };
+		9483221126BBB7C5004D0186 /* AddHabitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddHabitViewController.h; sourceTree = "<group>"; };
+		9483221226BBB7C5004D0186 /* AddHabitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddHabitViewController.m; sourceTree = "<group>"; };
+		9483221426BBB7EE004D0186 /* HabitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HabitViewController.h; sourceTree = "<group>"; };
+		9483221526BBB7EE004D0186 /* HabitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HabitViewController.m; sourceTree = "<group>"; };
+		9483221726BBB9DF004D0186 /* EditHabitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditHabitViewController.h; sourceTree = "<group>"; };
+		9483221826BBB9DF004D0186 /* EditHabitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditHabitViewController.m; sourceTree = "<group>"; };
+		9483221A26BBBF25004D0186 /* HabitCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HabitCell.h; sourceTree = "<group>"; };
+		9483221B26BBBF25004D0186 /* HabitCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HabitCell.m; sourceTree = "<group>"; };
+		9483221D26BBC065004D0186 /* Habit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Habit.h; sourceTree = "<group>"; };
+		9483221E26BBC065004D0186 /* Habit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Habit.m; sourceTree = "<group>"; };
+		9483222026BBCE4B004D0186 /* HabitCheckerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HabitCheckerCell.h; sourceTree = "<group>"; };
+		9483222126BBCE4B004D0186 /* HabitCheckerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HabitCheckerCell.m; sourceTree = "<group>"; };
 		94E35960269DE7EB00BE6A09 /* BulletJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BulletJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E35963269DE7EB00BE6A09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94E35964269DE7EB00BE6A09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -229,6 +250,14 @@
 				94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */,
 				94E359BE26A6175400BE6A09 /* EditBulletViewController.h */,
 				94E359BF26A6175400BE6A09 /* EditBulletViewController.m */,
+				9483220E26BB7430004D0186 /* DailyTabBarController.h */,
+				9483220F26BB7430004D0186 /* DailyTabBarController.m */,
+				9483221126BBB7C5004D0186 /* AddHabitViewController.h */,
+				9483221226BBB7C5004D0186 /* AddHabitViewController.m */,
+				9483221426BBB7EE004D0186 /* HabitViewController.h */,
+				9483221526BBB7EE004D0186 /* HabitViewController.m */,
+				9483221726BBB9DF004D0186 /* EditHabitViewController.h */,
+				9483221826BBB9DF004D0186 /* EditHabitViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -248,6 +277,12 @@
 				94E359C226AF589D00BE6A09 /* Weather.m */,
 				94E359C426AF58E400BE6A09 /* WeatherRadar.h */,
 				94E359C526AF58E400BE6A09 /* WeatherRadar.m */,
+				9483221A26BBBF25004D0186 /* HabitCell.h */,
+				9483221B26BBBF25004D0186 /* HabitCell.m */,
+				9483221D26BBC065004D0186 /* Habit.h */,
+				9483221E26BBC065004D0186 /* Habit.m */,
+				9483222026BBCE4B004D0186 /* HabitCheckerCell.h */,
+				9483222126BBCE4B004D0186 /* HabitCheckerCell.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -509,10 +544,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */,
+				9483221026BB7430004D0186 /* DailyTabBarController.m in Sources */,
 				94E35976269DE7EC00BE6A09 /* main.m in Sources */,
+				9483221C26BBBF25004D0186 /* HabitCell.m in Sources */,
+				9483221326BBB7C5004D0186 /* AddHabitViewController.m in Sources */,
 				94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */,
 				94E3599B269F554F00BE6A09 /* HomeViewController.m in Sources */,
 				94E359C326AF589D00BE6A09 /* Weather.m in Sources */,
+				9483221926BBB9DF004D0186 /* EditHabitViewController.m in Sources */,
+				9483222226BBCE4B004D0186 /* HabitCheckerCell.m in Sources */,
 				94E359BD26A5D82200BE6A09 /* AddBulletViewController.m in Sources */,
 				94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */,
 				94E359C026A6175400BE6A09 /* EditBulletViewController.m in Sources */,
@@ -522,8 +562,10 @@
 				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
 				94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */,
 				94E359CA26B85B5C00BE6A09 /* NSDate+Utilities.m in Sources */,
+				9483221F26BBC065004D0186 /* Habit.m in Sources */,
 				94E359B726A0F59800BE6A09 /* User.m in Sources */,
 				94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */,
+				9483221626BBB7EE004D0186 /* HabitViewController.m in Sources */,
 				94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */,
 				94E359B426A0EFEC00BE6A09 /* Flair.m in Sources */,
 			);

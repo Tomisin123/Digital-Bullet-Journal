@@ -7,6 +7,11 @@
 
 #import "HomeViewController.h"
 
+//for logout method
+#import "AppDelegate.h"
+#import "LoginViewController.h"
+//#import "APIManager.h"
+
 @interface HomeViewController ()
 
 @end
@@ -16,6 +21,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)didLogOut:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    
+    //[[APIManager shared] logout];
 }
 
 /*

@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *typePicker;
 @property (strong, nonatomic) NSArray *bulletTypePickerArray;
 @property (weak, nonatomic) IBOutlet UITextField *desc;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 @end
 
@@ -34,14 +35,14 @@
     PFObject *bullet = [PFObject objectWithClassName:@"Bullet"];
     bullet[@"User"] = PFUser.currentUser;
     NSInteger row = [self.typePicker selectedRowInComponent:0];
-    bullet[@"Type"] = [self.bulletTypePickerArray objectAtIndex:row];;
+    bullet[@"Type"] = [self.bulletTypePickerArray objectAtIndex:row];
     bullet[@"Relevant"] = @YES;
     bullet[@"Completed"] = @NO;
     bullet[@"Description"] = self.desc.text;
-    NSDate *today = [NSDate date];
+    NSDate *dateSelected = [self.datePicker date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString = [dateFormat stringFromDate:today];
+    NSString *dateString = [dateFormat stringFromDate:dateSelected];
     bullet[@"Date"] = dateString;
     
     [bullet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

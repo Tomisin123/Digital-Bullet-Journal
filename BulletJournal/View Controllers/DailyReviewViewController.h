@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DailyReviewViewController : UIViewController
 
+@property (nonatomic, strong) NSDate *date;
+
 @end
 
 NS_ASSUME_NONNULL_END

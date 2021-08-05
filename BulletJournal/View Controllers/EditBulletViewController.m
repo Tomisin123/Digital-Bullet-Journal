@@ -60,6 +60,7 @@
     
     //Delete bullet that already exists in backend
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable bullets, NSError * _Nullable error) {
+        //TODO: Make deletion criteria more robust
         if (bullets != nil) {
             for (PFObject *bullet in bullets) {
                 if([bullet[@"Description"] isEqualToString:self.bullet[@"Description"]]){

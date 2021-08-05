@@ -100,6 +100,11 @@
                 if (condition) {
                     _condition = condition;
                 }
+                
+                NSString *icon = weatherData[@"icon"];
+                if (icon) {
+                    _icon = icon;
+                }
             }
         }
         
