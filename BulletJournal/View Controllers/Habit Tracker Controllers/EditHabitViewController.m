@@ -31,6 +31,7 @@
     
     [self didDeleteHabit:nil];
     
+    //TODO: potentially repetitive code
     habitObj[@"User"] = PFUser.currentUser;
     habitObj[@"Name"] = self.habitName.text;
     habitObj[@"Reason"] = self.reason.text;
@@ -54,9 +55,9 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable habits, NSError * _Nullable error) {
         if (habits != nil) {
             for (PFObject *habit in habits) {
-                //TODO: Make deletion criteria more robust
-                if([habit[@"Reason"] isEqualToString:self.habit[@"Reason"]]){
-                     [habit deleteInBackground];
+                PFUser *habitUser = habit[@"User"];
+                if([habit[@"Reason"] isEqualToString:self.habit[@"Reason"]] && [[PFUser.currentUser objectId] isEqual:[habitUser objectId]]){
+                    [habit deleteInBackground];
                     NSLog(@"Deleting Habit: %@", habit);
                 }
             }
@@ -67,15 +68,5 @@
     }];
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

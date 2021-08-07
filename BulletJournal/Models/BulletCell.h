@@ -13,9 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BulletCell : UITableViewCell
 
+//MARK: Properties
 @property (strong, nonatomic) Bullet *bullet;
-@property (weak, nonatomic) IBOutlet UILabel *desc;
-@property (weak, nonatomic) IBOutlet UIImageView *img;
+@property (weak, nonatomic) IBOutlet UILabel *desc; // Text content of Bullet
+@property (weak, nonatomic) IBOutlet UIImageView *img; //Image denoting type of bullet
 
 @end
 

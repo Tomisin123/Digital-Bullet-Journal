@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WeatherRadar : NSObject
 
+//MARK: Methods
 /**
  *  Returns weekly forecasted weather conditions
  *  for the specified lat/long

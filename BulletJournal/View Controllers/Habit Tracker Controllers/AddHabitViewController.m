@@ -24,13 +24,12 @@
 
 - (IBAction)didCreateHabit:(id)sender {
     
-    //TODO: probably change this to use Habit model
+    //TODO: potentially repetitive code
     PFObject *habit = [PFObject objectWithClassName:@"Habit"];
     habit[@"User"] = PFUser.currentUser;
     habit[@"Name"] = self.habitName.text;
     habit[@"Reason"] = self.reason.text;
     habit[@"DatesCompleted"] = [[NSArray alloc] init];
-    //TODO: figure out dates completed
     
     [habit saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -41,15 +40,5 @@
         }
     }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -13,10 +13,12 @@
 #import "WeatherRadar.h"
 #import "NSDate+Utilities.h"
 #import "DailyTabBarController.h"
+#import "DailyTodoViewController.h"
+#import "DailyReviewViewController.h"
 #import "UIImageView+AFNetworking.h"
-#import "EGOCache.h"
+#import "TimeSensitiveCache.h"
 
-@interface CalendarViewController () <FSCalendarDelegate, CLLocationManagerDelegate>
+@interface CalendarViewController () <FSCalendarDelegate, CLLocationManagerDelegate, NSCacheDelegate>
 
 @property (weak, nonatomic) IBOutlet FSCalendar *calendar;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherImage;
@@ -30,7 +32,8 @@
 @property (strong, nonatomic) WeatherRadar *weatherRadar;
 @property (strong, nonatomic) CLLocation *currentUserLocation;
 @property (strong, nonatomic) NSDate *dateSelected;
-@property (strong, nonatomic) NSCache *cache;
+@property (strong, nonatomic) TimeSensitiveCache *cache;
+@property (nonatomic) NSTimeInterval cacheTimeInterval;
 
 @end
 
@@ -40,28 +43,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    
     self.calendar.delegate = self;
+    
+    //Initializing Location for Weather Information
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
     self.currentUserLocation = [[CLLocation alloc] initWithLatitude:32.7767 longitude:-96.7970]; //TODO: This sets coordinates for Dallas, TX
     self.weatherRadar = [[WeatherRadar alloc] init];
     
+    
+    //Initializing Calendar information
     self.dateSelected = [[NSDate date] dateAtStartOfDay];
     [self.calendar selectDate:self.dateSelected];
     
-    
-    self.cache = [[NSCache alloc] init];
-//    NSData *imageData = [self.cache objectForKey:self.dateSelected];
-    
-    
+    //Initializing Cache
+    self.cache = [[TimeSensitiveCache alloc] init];
+    self.cacheTimeInterval = 3600; //Storing
 }
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition{
+    
+    //TODO: potentially repetitive code
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    //formatter.dateFormat = @"EEEE MM/dd";
     formatter.dateFormat = @"dd/MM/yyyy";
     NSString *dateString = [formatter stringFromDate:date];
     NSLog(@"%@", dateString);
@@ -70,24 +74,24 @@
     
     NSLog(@"Date Selected: %@", self.dateSelected);
     
-    
-    
     [self updateWeather];
         
     //Query to load the bottom half of the days
+    //TODO: potentially repetitive code
     self.dayPreview.text = @"";
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error){
-        if (posts != nil) {
-            unsigned long i, cnt = [posts count];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *bullets, NSError *error){
+        if (bullets != nil) {
+            unsigned long i, cnt = [bullets count];
             for(i = 0; i < cnt; i++)
             {
                 
-                NSString *postDate = [posts objectAtIndex:i][@"Date"];
-                if ([postDate isEqualToString:dateString]){
-                    NSString *string = [posts objectAtIndex:i][@"Description"];
+                NSString *bulletDate = [bullets objectAtIndex:i][@"Date"];
+                if ([bulletDate isEqualToString:dateString]){
+                    //Creating Readable Day Preview on Calendar Screen
+                    NSString *string = [bullets objectAtIndex:i][@"Description"];
                     string = [string stringByAppendingString:@"\n"];
                     NSString *dayPreviewString = [self.dayPreview.text stringByAppendingString:string];
                     self.dayPreview.text = dayPreviewString;
@@ -103,89 +107,88 @@
 
 - (void) updateWeather {
     
+    //Getting Latitude and Longitude
     CLLocationCoordinate2D coordinate = [self.currentUserLocation coordinate];
     self.latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
     self.longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
     float latFloat = [self.latitude floatValue];
     float longFloat = [self.longitude floatValue];
     
-//    NSLog(@"Location Manager: %@", [self.locationManager location]);
-//    NSLog(@"Current User Location: %@", self.currentUserLocation);
-    
-    
+    //Formatting Weather
+    //TODO: potentially repetitive code
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     //formatter.dateFormat = @"EEEE MM/dd";
     formatter.dateFormat = @"dd/MM/yyyy";
     NSString *dateString = [formatter stringFromDate:self.dateSelected];
     
-    
+    //Obtaining Weather Predictions Based on Date chosen from calendar
     //If date selected is today, just use current weather predictor for today
     if ([self.dateSelected isToday]){
         NSLog(@"Selected Today");
-        [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
-            //TODO: set image based on weather.condition
-            NSString *iconURLString = [NSString stringWithFormat:@"https://openweathermap.org/img/wn/%@.png", weather.icon];
-            NSURL *iconURL = [NSURL URLWithString:iconURLString];
-            [self.weatherImage setImageWithURL:iconURL];
-            self.weatherHigh.text = [NSString stringWithFormat:@"%i", weather.temperatureMax];
-            self.weatherLow.text = [NSString stringWithFormat:@"%i", weather.temperatureMin];
-            
-            
-            //MARK: Testing things out with cache
-            [self.cache setObject:weather.condition forKey:dateString];
-        }];
+        
+        if ([self.cache objectForKey:dateString] != nil){
+            NSLog(@"Using Cached Weather Object");
+            Weather *weather = [self.cache objectForKey:dateString];
+            [self setWeatherInformation:weather withKey:dateString];
+        }
+        else {
+            [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
+                [self setWeatherInformation:weather withKey:dateString];
+            }];
+        }
     }
     
     //If date selected is yesterday or further in the past, use historical weathed data call
     else if ([self.dateSelected isEarlierThanDate:[[NSDate date] dateAtStartOfDay]]){
+        //TODO: Create weather database and check if weather from that date is stored
         NSLog(@"Selected day before today");
         self.weatherHigh.text = @"N/A";
         self.weatherLow.text = @"N/A";
-        //TODO: Look into getting money for subscription plan
+        
     }
     
     //If date selected more than a week in the future, weather data isn't obtainable
+    //Currently seven day forecast, could obtain 30-day with paid subscription
     else if ([self.dateSelected isLaterThanDate:[[NSDate date] dateByAddingDays:7]]){
         NSLog(@"Selected day more than a week in a future");
         self.weatherHigh.text = @"N/A";
         self.weatherLow.text = @"N/A";
-        //TODO: Look into getting money for subscription plan
     }
     
-    else { //Need to get weekly forecast
+    else { //Need to acquire weekly forecast
         NSLog(@"Selected day less than or equal to a week in the future");
-        
-        [self.weatherRadar getWeeklyWeather:latFloat longitude:longFloat completionBlock:^(NSArray *weatherArray) {
-            Weather *weather = [weatherArray objectAtIndex:[[NSDate date] distanceInDaysToDate:self.dateSelected]];
-            NSString *iconURLString = [NSString stringWithFormat:@"https://openweathermap.org/img/wn/%@.png", weather.icon];
-            NSURL *iconURL = [NSURL URLWithString:iconURLString];
-            [self.weatherImage setImageWithURL:iconURL];
-            self.weatherHigh.text = [NSString stringWithFormat:@"%i", weather.temperatureMax];
-            self.weatherLow.text = [NSString stringWithFormat:@"%i", weather.temperatureMin];
-            //[self.cache setObject:weather.condition forKey:self.dateSelected];
-        }];
+        if ([self.cache objectForKey:dateString] != nil){
+            NSLog(@"Using Cached Weather Object");
+            Weather *weather = [self.cache objectForKey:dateString];
+            [self setWeatherInformation:weather withKey:dateString];
+        }
+        else {
+            [self.weatherRadar getWeeklyWeather:latFloat longitude:longFloat completionBlock:^(NSArray *weatherArray) {
+                Weather *weather = [weatherArray objectAtIndex:[[NSDate date] distanceInDaysToDate:self.dateSelected]];
+                [self setWeatherInformation:weather withKey:dateString];
+            }];
+        }
     }
-    
-    
-    
-//    for (NSObject *object in self.cache) {
-//        NSLog(@"Cached: %@", object);
-//    }
-    
-    NSLog(@"Cached weather today: %@", [self.cache objectForKey:dateString]);
-    
-    
-    
-    
-    
     
 }
 
+-(void)setWeatherInformation:(Weather *)weather withKey:(NSString *)dateString{
+    NSString *iconURLString = [NSString stringWithFormat:@"https://openweathermap.org/img/wn/%@.png", weather.icon];
+    NSURL *iconURL = [NSURL URLWithString:iconURLString];
+    [self.weatherImage setImageWithURL:iconURL];
+    self.weatherHigh.text = [NSString stringWithFormat:@"%i", weather.temperatureMax];
+    self.weatherLow.text = [NSString stringWithFormat:@"%i", weather.temperatureMin];
+    
+    if ([self.cache objectForKey:dateString] == nil){ //Cache object if it's not in cache
+        [self.cache setObject:weather forKey:dateString timeout:self.cacheTimeInterval];
+    }
+}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     self.currentUserLocation = [locations lastObject];
     [self.locationManager stopUpdatingLocation];
 }
+
 
 
  #pragma mark - Navigation
@@ -194,11 +197,14 @@
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
-     
      if ([segue.identifier isEqual:@"calendarDaySegue"]){
          NSDate *date = [self.dateSelected dateAtStartOfDay];
          DailyTabBarController *dailyTabBarController = [segue destinationViewController];
+         DailyTodoViewController *dailyTodoController = dailyTabBarController.viewControllers[0];
+         DailyReviewViewController *dailyReviewController = dailyTabBarController.viewControllers[1];
          dailyTabBarController.date = date;
+         dailyTodoController.date = date;
+         dailyReviewController.date = date;
          NSLog(@"Segueing with Date: %@", date);
      }
      

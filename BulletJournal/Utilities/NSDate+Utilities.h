@@ -13,18 +13,8 @@
 #define D_YEAR        31556926
 
 @interface NSDate (Utilities)
-+ (NSCalendar *) currentCalendar; // avoid bottlenecks
 
-// Relative dates from the current date
-+ (NSDate *) dateTomorrow;
-+ (NSDate *) dateYesterday;
-+ (NSDate *) dateWithDaysFromNow: (NSInteger) days;
-+ (NSDate *) dateWithDaysBeforeNow: (NSInteger) days;
-+ (NSDate *) dateWithHoursFromNow: (NSInteger) dHours;
-+ (NSDate *) dateWithHoursBeforeNow: (NSInteger) dHours;
-+ (NSDate *) dateWithMinutesFromNow: (NSInteger) dMinutes;
-+ (NSDate *) dateWithMinutesBeforeNow: (NSInteger) dMinutes;
-
+//MARK: Properties
 // Short string utilities
 - (NSString *) stringWithDateStyle: (NSDateFormatterStyle) dateStyle timeStyle: (NSDateFormatterStyle) timeStyle;
 - (NSString *) stringWithFormat: (NSString *) format;
@@ -38,6 +28,20 @@
 @property (nonatomic, readonly) NSString *longDateString;
 @property (nonatomic, readonly) NSString *longTimeString;
 
+// Decomposing dates
+@property (readonly) NSInteger nearestHour;
+@property (readonly) NSInteger hour;
+@property (readonly) NSInteger minute;
+@property (readonly) NSInteger seconds;
+@property (readonly) NSInteger day;
+@property (readonly) NSInteger month;
+@property (readonly) NSInteger week;
+@property (readonly) NSInteger weekday;
+@property (readonly) NSInteger nthWeekday; // e.g. 2nd Tuesday of the month == 2
+@property (readonly) NSInteger year;
+
+
+//MARK: Methods
 // Comparing dates
 - (BOOL) isEqualToDateIgnoringTime: (NSDate *) aDate;
 
@@ -95,15 +99,17 @@
 - (NSInteger) daysBeforeDate: (NSDate *) aDate;
 - (NSInteger)distanceInDaysToDate:(NSDate *)anotherDate;
 
-// Decomposing dates
-@property (readonly) NSInteger nearestHour;
-@property (readonly) NSInteger hour;
-@property (readonly) NSInteger minute;
-@property (readonly) NSInteger seconds;
-@property (readonly) NSInteger day;
-@property (readonly) NSInteger month;
-@property (readonly) NSInteger week;
-@property (readonly) NSInteger weekday;
-@property (readonly) NSInteger nthWeekday; // e.g. 2nd Tuesday of the month == 2
-@property (readonly) NSInteger year;
++ (NSCalendar *) currentCalendar; // avoid bottlenecks
+
+// Relative dates from the current date
++ (NSDate *) dateTomorrow;
++ (NSDate *) dateYesterday;
++ (NSDate *) dateWithDaysFromNow: (NSInteger) days;
++ (NSDate *) dateWithDaysBeforeNow: (NSInteger) days;
++ (NSDate *) dateWithHoursFromNow: (NSInteger) dHours;
++ (NSDate *) dateWithHoursBeforeNow: (NSInteger) dHours;
++ (NSDate *) dateWithMinutesFromNow: (NSInteger) dMinutes;
++ (NSDate *) dateWithMinutesBeforeNow: (NSInteger) dMinutes;
+
+
 @end

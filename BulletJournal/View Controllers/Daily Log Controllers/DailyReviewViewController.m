@@ -15,8 +15,8 @@
 #import "NSDate+Utilities.h"
 
 @interface DailyReviewViewController () <CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITextView *reviewText;
 
+@property (weak, nonatomic) IBOutlet UITextView *reviewText;
 @property (strong, nonatomic) WeatherRadar *weatherRadar;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *currentUserLocation;
@@ -32,7 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //TODO: load review if it exists
     [self fetchReview];
     
     self.habits = [[NSMutableArray alloc] init];
@@ -41,8 +40,7 @@
     self.habitsTableView.delegate = self;
     self.habitsTableView.dataSource = self;
     
-
-    
+    //TODO: potentially repetitive code
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
@@ -50,27 +48,32 @@
     self.weatherRadar = [[WeatherRadar alloc] init];
     [self getWeather];
     
-    self.date = [[NSDate date] dateAtStartOfDay]; //TODO: make this whatever date was passed in
+    //TODO: potentially repetitive code
+    if (self.date == nil) {
+        self.date = [[NSDate date] dateAtStartOfDay];
+    }
     
 }
 
-//TODO: weird behaviours for when a review already exists, look at Back4App to know what I'm talking about
 - (void) fetchReview {
+    //TODO: potentially repetitive code
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"dd/MM/yyyy";
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     
+    //TODO: potentially repetitive code
     PFQuery *query = [PFQuery queryWithClassName:@"Review"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error){
-        if (posts != nil) {
-            unsigned long i, cnt = [posts count];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *reviews, NSError *error){
+        if (reviews != nil) {
+            unsigned long i, cnt = [reviews count];
             for(i = 0; i < cnt; i++)
             {
-                NSString *postDate = [posts objectAtIndex:i][@"Date"];
-                if ([postDate isEqualToString:dateString] /*TODO: And User is equal to current user*/){
-                    self.reviewText.text = [posts objectAtIndex:i][@"Text"];
+                NSString *reviewDate = [reviews objectAtIndex:i][@"Date"];
+                PFUser *reviewUser = [reviews objectAtIndex:i][@"User"];
+                if ([reviewDate isEqualToString:dateString] && [[PFUser.currentUser objectId] isEqual:[reviewUser objectId]]){
+                    self.reviewText.text = [reviews objectAtIndex:i][@"Text"];
                 }
             }
         }
@@ -83,25 +86,18 @@
 
 - (IBAction)didSaveReview:(id)sender {
     
+    //TODO: potentially repetitive code
     PFObject *review = [PFObject objectWithClassName:@"Review"];
     review[@"User"] = PFUser.currentUser;
     review[@"Text"] = self.reviewText.text;
-    //TODO: repetitive code with AddBulletViewController
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
     NSString *dateString = [dateFormat stringFromDate:today];
     review[@"Date"] = dateString;
+    review[@"Weather"] = [self getWeatherDictionary:self.weather];
     
-    
-    
-    
-    
-    NSLog(@"User: %@ \n Review: %@ \n Date: %@ \n Weather: %@ \n Weather Condition: %@", PFUser.currentUser, self.reviewText.text, dateString, [self.weather class], self.weather.condition);
-    
-    //TODO: This doesn't work because I can't store classes
-    //review[@"Weather"] = self.weather;//[self getWeather];
-    
+    //TODO: potentially repetitive code
     [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Object saved!");
@@ -112,7 +108,6 @@
     
     
     
-    //TODO: Store completed attribute for habit
     //For each habit that was completed
     for (HabitCheckerCell *checkerCell in [self.habitsTableView visibleCells]){
         Habit *habit = checkerCell.habit;
@@ -139,12 +134,12 @@
     
     [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
         self.weather = weather;
-        NSLog(@"Self.weather: %@", self.weather);
     }];
     
 }
 
 - (void) fetchHabits {
+    //TODO: potentially repetitive code
     PFQuery *query = [PFQuery queryWithClassName:@"Habit"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
@@ -153,25 +148,27 @@
             unsigned long i, cnt = [habits count];
             for(i = 0; i < cnt; i++)
             {
-                //TODO: check if this is the correct User
-                [self.habits addObject:[habits objectAtIndex:i]];
+                PFUser *habitUser = [habits objectAtIndex:i][@"User"];
+                if ([[PFUser.currentUser objectId] isEqual:[habitUser objectId]]){
+                    [self.habits addObject:[habits objectAtIndex:i]];
+                }
+                
             }
             [self.habitsTableView reloadData];
         }
         else {
             NSLog(@"%@", error.localizedDescription);
         }
-        //[self.refreshControl endRefreshing];
     }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     HabitCheckerCell *cell = [self.habitsTableView dequeueReusableCellWithIdentifier:@"HabitCheckerCell"];
     cell.habit = self.habits[indexPath.row];
-    
     cell.habitName.text = cell.habit[@"Name"];
     
-    //Set on if habit was completed today
+    //Set completed switch to On if habit was completed today
     if ([cell.habit[@"DatesCompleted"] containsObject:self.date]){
         [cell.completed setOn:YES];
     }
@@ -191,10 +188,11 @@
 
 
 //MARK: similar to editHabitViewController
+//TODO: potentially repetitive code
 - (void) addHabitCompletionDate:(Habit*)habit :(NSDate*)dateOfCompletion {
     
     NSString *name = habit[@"Name"];
-    NSString *reason = habit[@"Name"];
+    NSString *reason = habit[@"Reason"];
     NSMutableArray *datesCompleted = [[NSMutableArray alloc] init];
     for (NSDate *date in habit[@"DatesCompleted"]){
         [datesCompleted addObject:date];
@@ -221,8 +219,9 @@
 }
 
 - (void) deleteHabitCompletionDate:(Habit*)habit :(NSDate*)dateOfCompletion {
+    //TODO: potentially repetitive code, very similar to addHabitCompletion Date, only diff is removeObject, and check why you have that addObject inside the for loop
     NSString *name = habit[@"Name"];
-    NSString *reason = habit[@"Name"];
+    NSString *reason = habit[@"Reason"];
     NSMutableArray *datesCompleted = [[NSMutableArray alloc] init];
     for (NSDate *date in habit[@"DatesCompleted"]){
         [datesCompleted addObject:date];
@@ -253,10 +252,9 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable habits, NSError * _Nullable error) {
         if (habits != nil) {
             for (PFObject *habitObj in habits) {
-                //TODO: Make deletion criteria more robust
-                if([habitObj[@"Reason"] isEqualToString:habit[@"Reason"]]){
-                     [habitObj deleteInBackground];
-                    NSLog(@"Deleting Habit: %@", habitObj);
+                PFUser *habitUser = habitObj[@"User"];
+                if([habitObj[@"Name"] isEqualToString:habit[@"Name"]] && [habitObj[@"Reason"] isEqualToString:habit[@"Reason"]] && [[PFUser.currentUser objectId] isEqual:[habitUser objectId]]){
+                    [habitObj deleteInBackground];
                 }
             }
         }
@@ -266,17 +264,11 @@
     }];
 }
 
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//TODO: consider making this a part of the Weather Model
+-(NSDictionary *)getWeatherDictionary:(Weather*)weather{
+    NSDictionary *dictionary;
+    dictionary = @{@"description": weather.description, @"icon": weather.icon, @"date": weather.dateOfForecast, @"main": weather.condition, @"tempHigh": [NSString stringWithFormat:@"%i", weather.temperatureMax], @"tempLow": [NSString stringWithFormat:@"%i", weather.temperatureMin]};
+    return dictionary;
 }
-*/
 
 @end

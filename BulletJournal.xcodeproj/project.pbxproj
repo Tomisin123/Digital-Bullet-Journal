@@ -17,6 +17,8 @@
 		9483221C26BBBF25004D0186 /* HabitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483221B26BBBF25004D0186 /* HabitCell.m */; };
 		9483221F26BBC065004D0186 /* Habit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483221E26BBC065004D0186 /* Habit.m */; };
 		9483222226BBCE4B004D0186 /* HabitCheckerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222126BBCE4B004D0186 /* HabitCheckerCell.m */; };
+		9483222526BE583A004D0186 /* TimeSensitiveCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222426BE583A004D0186 /* TimeSensitiveCache.m */; };
+		9483222C26BE7CDC004D0186 /* DatabaseUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */; };
 		94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35964269DE7EB00BE6A09 /* AppDelegate.m */; };
 		94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35967269DE7EB00BE6A09 /* SceneDelegate.m */; };
 		94E3596E269DE7EB00BE6A09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E3596C269DE7EB00BE6A09 /* Main.storyboard */; };
@@ -29,10 +31,8 @@
 		94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E3599D269F5F9400BE6A09 /* LoginViewController.m */; };
 		94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A0269F5FD900BE6A09 /* DailyTodoViewController.m */; };
 		94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */; };
-		94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359A6269F600600BE6A09 /* CollectionsViewController.m */; };
 		94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359AA26A0EE6800BE6A09 /* Bullet.m */; };
 		94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359AD26A0EE9600BE6A09 /* BulletCell.m */; };
-		94E359B426A0EFEC00BE6A09 /* Flair.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B326A0EFEC00BE6A09 /* Flair.m */; };
 		94E359B726A0F59800BE6A09 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B626A0F59800BE6A09 /* User.m */; };
 		94E359BA26A5C31800BE6A09 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359B926A5C31800BE6A09 /* CalendarViewController.m */; };
 		94E359BD26A5D82200BE6A09 /* AddBulletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */; };
@@ -80,6 +80,10 @@
 		9483221E26BBC065004D0186 /* Habit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Habit.m; sourceTree = "<group>"; };
 		9483222026BBCE4B004D0186 /* HabitCheckerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HabitCheckerCell.h; sourceTree = "<group>"; };
 		9483222126BBCE4B004D0186 /* HabitCheckerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HabitCheckerCell.m; sourceTree = "<group>"; };
+		9483222326BE583A004D0186 /* TimeSensitiveCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeSensitiveCache.h; sourceTree = "<group>"; };
+		9483222426BE583A004D0186 /* TimeSensitiveCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeSensitiveCache.m; sourceTree = "<group>"; };
+		9483222A26BE7CDC004D0186 /* DatabaseUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseUtilities.h; sourceTree = "<group>"; };
+		9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseUtilities.m; sourceTree = "<group>"; };
 		94E35960269DE7EB00BE6A09 /* BulletJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BulletJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E35963269DE7EB00BE6A09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94E35964269DE7EB00BE6A09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -104,14 +108,10 @@
 		94E359A0269F5FD900BE6A09 /* DailyTodoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyTodoViewController.m; sourceTree = "<group>"; };
 		94E359A2269F5FEC00BE6A09 /* DailyReviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailyReviewViewController.h; sourceTree = "<group>"; };
 		94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyReviewViewController.m; sourceTree = "<group>"; };
-		94E359A5269F600600BE6A09 /* CollectionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionsViewController.h; sourceTree = "<group>"; };
-		94E359A6269F600600BE6A09 /* CollectionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionsViewController.m; sourceTree = "<group>"; };
 		94E359A926A0EE6800BE6A09 /* Bullet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		94E359AA26A0EE6800BE6A09 /* Bullet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
 		94E359AC26A0EE9600BE6A09 /* BulletCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletCell.h; sourceTree = "<group>"; };
 		94E359AD26A0EE9600BE6A09 /* BulletCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletCell.m; sourceTree = "<group>"; };
-		94E359B226A0EFEC00BE6A09 /* Flair.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flair.h; sourceTree = "<group>"; };
-		94E359B326A0EFEC00BE6A09 /* Flair.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flair.m; sourceTree = "<group>"; };
 		94E359B526A0F59800BE6A09 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		94E359B626A0F59800BE6A09 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		94E359B826A5C31800BE6A09 /* CalendarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
@@ -170,6 +170,53 @@
 				D091A3E77DD5920B95353BBC /* Pods-BulletJournalTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9483222626BE6832004D0186 /* Daily Log Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9483222726BE685A004D0186 /* Bullet Controllers */,
+				9483220E26BB7430004D0186 /* DailyTabBarController.h */,
+				9483220F26BB7430004D0186 /* DailyTabBarController.m */,
+				94E3599F269F5FD900BE6A09 /* DailyTodoViewController.h */,
+				94E359A0269F5FD900BE6A09 /* DailyTodoViewController.m */,
+				94E359A2269F5FEC00BE6A09 /* DailyReviewViewController.h */,
+				94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */,
+			);
+			path = "Daily Log Controllers";
+			sourceTree = "<group>";
+		};
+		9483222726BE685A004D0186 /* Bullet Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				94E359BB26A5D82200BE6A09 /* AddBulletViewController.h */,
+				94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */,
+				94E359BE26A6175400BE6A09 /* EditBulletViewController.h */,
+				94E359BF26A6175400BE6A09 /* EditBulletViewController.m */,
+			);
+			path = "Bullet Controllers";
+			sourceTree = "<group>";
+		};
+		9483222826BE687E004D0186 /* Calendar Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				94E359B826A5C31800BE6A09 /* CalendarViewController.h */,
+				94E359B926A5C31800BE6A09 /* CalendarViewController.m */,
+			);
+			path = "Calendar Controllers";
+			sourceTree = "<group>";
+		};
+		9483222926BE6899004D0186 /* Habit Tracker Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9483221126BBB7C5004D0186 /* AddHabitViewController.h */,
+				9483221226BBB7C5004D0186 /* AddHabitViewController.m */,
+				9483221426BBB7EE004D0186 /* HabitViewController.h */,
+				9483221526BBB7EE004D0186 /* HabitViewController.m */,
+				9483221726BBB9DF004D0186 /* EditHabitViewController.h */,
+				9483221826BBB9DF004D0186 /* EditHabitViewController.m */,
+			);
+			path = "Habit Tracker Controllers";
 			sourceTree = "<group>";
 		};
 		94E35957269DE7EB00BE6A09 = {
@@ -234,30 +281,13 @@
 		94E35998269F553300BE6A09 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9483222926BE6899004D0186 /* Habit Tracker Controllers */,
+				9483222826BE687E004D0186 /* Calendar Controllers */,
+				9483222626BE6832004D0186 /* Daily Log Controllers */,
 				94E35999269F554F00BE6A09 /* HomeViewController.h */,
 				94E3599A269F554F00BE6A09 /* HomeViewController.m */,
 				94E3599C269F5F9400BE6A09 /* LoginViewController.h */,
 				94E3599D269F5F9400BE6A09 /* LoginViewController.m */,
-				94E3599F269F5FD900BE6A09 /* DailyTodoViewController.h */,
-				94E359A0269F5FD900BE6A09 /* DailyTodoViewController.m */,
-				94E359A2269F5FEC00BE6A09 /* DailyReviewViewController.h */,
-				94E359A3269F5FEC00BE6A09 /* DailyReviewViewController.m */,
-				94E359A5269F600600BE6A09 /* CollectionsViewController.h */,
-				94E359A6269F600600BE6A09 /* CollectionsViewController.m */,
-				94E359B826A5C31800BE6A09 /* CalendarViewController.h */,
-				94E359B926A5C31800BE6A09 /* CalendarViewController.m */,
-				94E359BB26A5D82200BE6A09 /* AddBulletViewController.h */,
-				94E359BC26A5D82200BE6A09 /* AddBulletViewController.m */,
-				94E359BE26A6175400BE6A09 /* EditBulletViewController.h */,
-				94E359BF26A6175400BE6A09 /* EditBulletViewController.m */,
-				9483220E26BB7430004D0186 /* DailyTabBarController.h */,
-				9483220F26BB7430004D0186 /* DailyTabBarController.m */,
-				9483221126BBB7C5004D0186 /* AddHabitViewController.h */,
-				9483221226BBB7C5004D0186 /* AddHabitViewController.m */,
-				9483221426BBB7EE004D0186 /* HabitViewController.h */,
-				9483221526BBB7EE004D0186 /* HabitViewController.m */,
-				9483221726BBB9DF004D0186 /* EditHabitViewController.h */,
-				9483221826BBB9DF004D0186 /* EditHabitViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -269,8 +299,6 @@
 				94E359AA26A0EE6800BE6A09 /* Bullet.m */,
 				94E359AC26A0EE9600BE6A09 /* BulletCell.h */,
 				94E359AD26A0EE9600BE6A09 /* BulletCell.m */,
-				94E359B226A0EFEC00BE6A09 /* Flair.h */,
-				94E359B326A0EFEC00BE6A09 /* Flair.m */,
 				94E359B526A0F59800BE6A09 /* User.h */,
 				94E359B626A0F59800BE6A09 /* User.m */,
 				94E359C126AF589D00BE6A09 /* Weather.h */,
@@ -292,6 +320,10 @@
 			children = (
 				94E359C826B85B5C00BE6A09 /* NSDate+Utilities.h */,
 				94E359C926B85B5C00BE6A09 /* NSDate+Utilities.m */,
+				9483222326BE583A004D0186 /* TimeSensitiveCache.h */,
+				9483222426BE583A004D0186 /* TimeSensitiveCache.m */,
+				9483222A26BE7CDC004D0186 /* DatabaseUtilities.h */,
+				9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -552,14 +584,15 @@
 				94E3599B269F554F00BE6A09 /* HomeViewController.m in Sources */,
 				94E359C326AF589D00BE6A09 /* Weather.m in Sources */,
 				9483221926BBB9DF004D0186 /* EditHabitViewController.m in Sources */,
+				9483222C26BE7CDC004D0186 /* DatabaseUtilities.m in Sources */,
 				9483222226BBCE4B004D0186 /* HabitCheckerCell.m in Sources */,
 				94E359BD26A5D82200BE6A09 /* AddBulletViewController.m in Sources */,
-				94E359A7269F600600BE6A09 /* CollectionsViewController.m in Sources */,
 				94E359C026A6175400BE6A09 /* EditBulletViewController.m in Sources */,
 				94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */,
 				94E359C626AF58E400BE6A09 /* WeatherRadar.m in Sources */,
 				94E359BA26A5C31800BE6A09 /* CalendarViewController.m in Sources */,
 				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
+				9483222526BE583A004D0186 /* TimeSensitiveCache.m in Sources */,
 				94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */,
 				94E359CA26B85B5C00BE6A09 /* NSDate+Utilities.m in Sources */,
 				9483221F26BBC065004D0186 /* Habit.m in Sources */,
@@ -567,7 +600,6 @@
 				94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */,
 				9483221626BBB7EE004D0186 /* HabitViewController.m in Sources */,
 				94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */,
-				94E359B426A0EFEC00BE6A09 /* Flair.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

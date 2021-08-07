@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HabitCheckerCell : UITableViewCell
 
 @property (strong, nonatomic) Habit *habit;
-@property (weak, nonatomic) IBOutlet UISwitch *completed;
-@property (weak, nonatomic) IBOutlet UILabel *habitName;
+@property (weak, nonatomic) IBOutlet UISwitch *completed; // switch that determines whether a habit was completed for the day
+@property (weak, nonatomic) IBOutlet UILabel *habitName; //name of habit
 
 @end
 

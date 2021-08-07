@@ -11,10 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Habit : PFObject
 
-@property (nonatomic, strong) NSString *habit;
-@property (nonatomic, strong) NSString *reason;
-@property (nonatomic, strong) NSArray *datesCompleted;
-@property (nonatomic, strong) PFUser *user;
+@property (nonatomic, strong) NSString *habitName; // name of habit
+@property (nonatomic, strong) NSString *reason; //reason for keeping habit
+@property (nonatomic, strong) NSArray *datesCompleted; // list of dates habit was completed
+@property (nonatomic, strong) PFUser *user; // user that created habit
 
 @end
 

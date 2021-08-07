@@ -10,7 +10,7 @@
  General Thanks: sstreza, Scott Lawrence, Kevin Ballard, NoOneButMe, Avi`, August Joki. Lily Vulcano, jcromartiej, Blagovest Dachev, Matthias Plappert,  Slava Bushtruk, Ali Servet Donmez, Ricardo1980, pip8786, Danny Thuerin, Dennis Madsen
  
  Include GMT and time zone utilities?
-*/
+ */
 
 #import "NSDate+Utilities.h"
 
@@ -85,7 +85,7 @@ static const unsigned componentFlags = (NSYearCalendarUnit| NSMonthCalendarUnit 
 - (NSString *) stringWithFormat: (NSString *) format
 {
     NSDateFormatter *formatter = [NSDateFormatter new];
-//    formatter.locale = [NSLocale currentLocale]; // Necessary?
+    //    formatter.locale = [NSLocale currentLocale]; // Necessary?
     formatter.dateFormat = format;
     return [formatter stringFromDate:self];
 }
@@ -95,7 +95,7 @@ static const unsigned componentFlags = (NSYearCalendarUnit| NSMonthCalendarUnit 
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateStyle = dateStyle;
     formatter.timeStyle = timeStyle;
-//    formatter.locale = [NSLocale currentLocale]; // Necessary?
+    //    formatter.locale = [NSLocale currentLocale]; // Necessary?
     return [formatter stringFromDate:self];
 }
 

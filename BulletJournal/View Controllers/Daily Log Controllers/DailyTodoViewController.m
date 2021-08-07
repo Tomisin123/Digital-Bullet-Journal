@@ -11,11 +11,12 @@
 #import "Parse/Parse.h"
 #import "EditBulletViewController.h"
 #import "DailyTabBarController.h"
+#import "NSDate+Utilities.h"
 
 @interface DailyTodoViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *posts;
+@property (strong, nonatomic) NSMutableArray *bullets;
 
 @end
 
@@ -28,60 +29,61 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.posts = [[NSMutableArray alloc] init];
+    self.bullets = [[NSMutableArray alloc] init];
     
-    [self fetchPosts];
-    
-    
-    
-}
-
-- (void) fetchPosts {
-    
+    //Setting Date for Bullet Recall
     if (self.date == nil){
         NSLog(@"No Date given, using today");
+        self.date = [[NSDate date] dateAtStartOfDay];
     }
     else{
         NSLog(@"Date given: %@", self.date);
     }
     
+    [self fetchBullets];
+    
+    
+    
+}
+
+- (void) fetchBullets {
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"dd/MM/yyyy";
-    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    NSString *dateString = [formatter stringFromDate:self.date];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error){
-        if (posts != nil) {
-            unsigned long i, cnt = [posts count];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *bullets, NSError *error){
+        if (bullets != nil) {
+            unsigned long i, cnt = [bullets count];
             for(i = 0; i < cnt; i++)
             {
-                NSString *postDate = [posts objectAtIndex:i][@"Date"];
-                if ([postDate isEqualToString:dateString]){
-                    [self.posts addObject:[posts objectAtIndex:i]];
+                NSString *bulletDate = [bullets objectAtIndex:i][@"Date"];
+                if ([bulletDate isEqualToString:dateString]){
+                    [self.bullets addObject:[bullets objectAtIndex:i]];
                 }
             }
-
+            
             [self.tableView reloadData];
         }
         else {
             NSLog(@"%@", error.localizedDescription);
         }
-        //[self.refreshControl endRefreshing];
     }];
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     BulletCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BulletCell"];
-    cell.bullet = self.posts[indexPath.row];
+    cell.bullet = self.bullets[indexPath.row];
     cell.desc.text = cell.bullet[@"Description"];
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  {
-    return self.posts.count;
+    return self.bullets.count;
 }
 
 
@@ -94,11 +96,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-
+    
     if ([segue.identifier isEqual:@"editBulletSegue"]){
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        NSDictionary *bullet = self.posts[indexPath.row];
+        NSDictionary *bullet = self.bullets[indexPath.row];
         EditBulletViewController *editBulletVC = [segue destinationViewController];
         editBulletVC.bullet = bullet;
         NSLog(@"Tapping on a bullet: %@", bullet[@"Description"]);

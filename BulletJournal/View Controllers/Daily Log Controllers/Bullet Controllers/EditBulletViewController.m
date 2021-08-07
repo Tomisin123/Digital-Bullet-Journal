@@ -29,10 +29,9 @@
     self.typePicker.dataSource = self;
     self.typePicker.delegate = self;
     
-    //TODO: set Picker Array to type already picked
     self.bulletTypePickerArray = [NSArray arrayWithObjects:@"Task", @"Event", @"Note", nil];
     
-    //TODO: Fix inefficient code
+    //TODO: Fix inefficient code, maybe Enum
     NSString *bulletType = self.bullet[@"Type"];
     if([bulletType isEqualToString:@"Task"]){
         [self.typePicker selectRow:0 inComponent:0 animated:NO];
@@ -60,11 +59,11 @@
     
     //Delete bullet that already exists in backend
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable bullets, NSError * _Nullable error) {
-        //TODO: Make deletion criteria more robust
         if (bullets != nil) {
             for (PFObject *bullet in bullets) {
-                if([bullet[@"Description"] isEqualToString:self.bullet[@"Description"]]){
-                     [bullet deleteInBackground];
+                PFUser *bulletUser = bullet[@"User"];
+                if([bullet[@"Description"] isEqualToString:self.bullet[@"Description"]] && [[PFUser.currentUser objectId] isEqual:[bulletUser objectId]]){
+                    [bullet deleteInBackground];
                     NSLog(@"Deleting Bullet: %@", bullet);
                 }
             }
@@ -75,6 +74,7 @@
     }];
     
     //Create new bullet with updated information
+    //TODO: potentially repetitive code
     bullet[@"User"] = PFUser.currentUser;
     NSInteger row = [self.typePicker selectedRowInComponent:0];
     bullet[@"Type"] = [self.bulletTypePickerArray objectAtIndex:row];;
@@ -113,14 +113,5 @@ numberOfRowsInComponent:(NSInteger)component {
     return title;
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

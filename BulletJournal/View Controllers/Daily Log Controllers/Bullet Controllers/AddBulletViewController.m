@@ -25,13 +25,15 @@
     
     self.typePicker.dataSource = self;
     self.typePicker.delegate = self;
-
+    
+    //TODO: make some type of enum out of this
     self.bulletTypePickerArray = [NSArray arrayWithObjects:@"Task", @"Event", @"Note", nil];
     
 }
 
 - (IBAction)didCreateBullet:(id)sender {
     
+    //TODO: potentially repetitive code, have to change if creating enum, also need to change last pickerView method
     PFObject *bullet = [PFObject objectWithClassName:@"Bullet"];
     bullet[@"User"] = PFUser.currentUser;
     NSInteger row = [self.typePicker selectedRowInComponent:0];
@@ -64,22 +66,9 @@ numberOfRowsInComponent:(NSInteger)component {
     return 3;
 }
 
-- (NSString *)pickerView:(UIPickerView *)thePickerView
-             titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+- (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString * title = [self.bulletTypePickerArray objectAtIndex:row];;
-    
     return title;
 }
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

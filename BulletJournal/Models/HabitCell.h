@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HabitCell : UITableViewCell
 @property (strong, nonatomic) Habit *habit;
-@property (weak, nonatomic) IBOutlet UILabel *habitName;
-@property (weak, nonatomic) IBOutlet UILabel *reason;
+@property (weak, nonatomic) IBOutlet UILabel *habitName; // name of habit
+@property (weak, nonatomic) IBOutlet UILabel *reason; // reason for keeping habit
 
 @end
 

@@ -9,7 +9,7 @@
 
 @implementation Habit
 
-@dynamic habit;
+@dynamic habitName;
 @dynamic reason;
 @dynamic datesCompleted;
 @dynamic user;

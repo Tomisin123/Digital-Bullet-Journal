@@ -7,22 +7,18 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Flair.h"
 #import "Parse/Parse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Bullet : PFObject//NSObject
+@interface Bullet : PFObject
 
 //MARK: Properties
-//@property (nonatomic, strong) NSString *idStr; // For favoriting, retweeting & replying
 @property (nonatomic, strong) NSString *desc; // Text content of bullet
 @property (nonatomic) BOOL *completed; // Marks whether or not a bullet is completed
-@property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) PFUser *user;
+@property (nonatomic, strong) NSString *type; // Marks type of bullet (Task, Event, or Note)
+@property (nonatomic, strong) PFUser *user; // User who created bullet
 
-
-//MARK: Methods
 
 
 @end

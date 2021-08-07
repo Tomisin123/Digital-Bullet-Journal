@@ -43,7 +43,7 @@
 
 
 - (void) fetchHabits {
-    
+    //TODO: potentially repetitive code
     PFQuery *query = [PFQuery queryWithClassName:@"Habit"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
@@ -52,15 +52,16 @@
             unsigned long i, cnt = [habits count];
             for(i = 0; i < cnt; i++)
             {
-                //TODO: check if this is the correct User
-                [self.habits addObject:[habits objectAtIndex:i]];
+                PFUser *habitUser = [habits objectAtIndex:i][@"User"];
+                if ([[PFUser.currentUser objectId] isEqual:[habitUser objectId]]){
+                    [self.habits addObject:[habits objectAtIndex:i]];
+                }
             }
             [self.tableView reloadData];
         }
         else {
             NSLog(@"%@", error.localizedDescription);
         }
-        //[self.refreshControl endRefreshing];
     }];
 }
 
