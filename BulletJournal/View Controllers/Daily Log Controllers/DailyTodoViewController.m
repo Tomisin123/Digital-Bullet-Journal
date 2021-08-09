@@ -107,7 +107,12 @@
         cell.desc.alpha = .5;
     }
     if([cell.bullet[@"Relevant"]  isEqual: @NO]){
-        
+        //Add Strikethrough for text
+        NSNumber *strikeSize = [NSNumber numberWithInt:2];
+        NSDictionary *strikeThroughAttribute = [NSDictionary dictionaryWithObject:strikeSize
+        forKey:NSStrikethroughStyleAttributeName];
+        NSAttributedString* strikeThroughText = [[NSAttributedString alloc] initWithString:cell.desc.text attributes:strikeThroughAttribute];
+        cell.desc.attributedText = strikeThroughText;
     }
     
     return cell;
