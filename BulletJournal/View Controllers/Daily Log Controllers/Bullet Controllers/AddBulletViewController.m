@@ -39,6 +39,7 @@
     
     [StyleMethods styleBackground:self];
     [StyleMethods styleButtons:self.createBulletButton];
+    [StyleMethods styleTextField:self.desc];
     
 }
 
@@ -73,7 +74,9 @@
         } else {
             NSLog(@"Error: %@", error.description);
         }
-        [self dismissViewControllerAnimated:TRUE completion:nil];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
+        [self presentViewController:homeVC animated:YES completion:nil];
     }];
     
     

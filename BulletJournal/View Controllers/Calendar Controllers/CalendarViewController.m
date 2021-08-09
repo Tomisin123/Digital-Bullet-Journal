@@ -27,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *weatherHigh;
 @property (weak, nonatomic) IBOutlet UILabel *weatherLow;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *dayPreview;
 @property (weak, nonatomic) IBOutlet UITextView *dayPreview;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSString *latitude;
@@ -37,6 +36,7 @@
 @property (strong, nonatomic) NSDate *dateSelected;
 @property (strong, nonatomic) TimeSensitiveCache *cache;
 @property (nonatomic) NSTimeInterval cacheTimeInterval;
+@property (weak, nonatomic) IBOutlet UIButton *dayPageSegueButton;
 
 @end
 
@@ -68,6 +68,8 @@
     
     [StyleMethods styleBackground:self];
     [StyleMethods styleCalendar:self.calendar];
+    [StyleMethods styleButtons:self.dayPageSegueButton];
+    [StyleMethods styleTextView:self.dayPreview];
 }
 
 

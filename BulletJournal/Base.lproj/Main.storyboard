@@ -755,7 +755,7 @@
                                     <constraint firstAttribute="height" constant="150" id="agp-A0-K6S"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -788,6 +788,7 @@
                     <connections>
                         <outlet property="calendar" destination="EKn-l2-nwW" id="pUx-71-Eyo"/>
                         <outlet property="dateLabel" destination="iv8-Ra-9mh" id="okR-jQ-qGC"/>
+                        <outlet property="dayPageSegueButton" destination="ZnC-ag-eaE" id="8CR-Ct-bhS"/>
                         <outlet property="dayPreview" destination="wWB-8j-agg" id="cwc-fj-b0k"/>
                         <outlet property="weatherHigh" destination="X5w-1t-fwQ" id="rL5-9E-yTJ"/>
                         <outlet property="weatherImage" destination="DV0-e0-xGR" id="eVQ-ti-0Ta"/>
@@ -866,7 +867,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cne-Bb-dJu"/>
+        <segue reference="lb0-bk-RJY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="book.circle.fill" catalog="system" width="128" height="121"/>

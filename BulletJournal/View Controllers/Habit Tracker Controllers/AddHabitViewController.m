@@ -29,6 +29,8 @@
     
     [StyleMethods styleBackground:self];
     [StyleMethods styleButtons:self.addHabitButton];
+    [StyleMethods styleTextView:self.reason];
+    [StyleMethods styleTextField:self.habitName];
 }
 
 -(void)dismissKeyboard
@@ -42,6 +44,9 @@
         
     [DatabaseUtilities createHabit:PFUser.currentUser withName:self.habitName.text withReason:self.reason.text withDatesCompleted: [[NSArray alloc] init]];
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
+    [self presentViewController:homeVC animated:YES completion:nil];
 }
 
 @end

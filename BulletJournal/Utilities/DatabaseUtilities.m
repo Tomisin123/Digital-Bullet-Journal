@@ -78,10 +78,6 @@ NSMutableArray *objectList;
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
     
-    // a semaphore is used to prevent execution until the asynchronous task is completed
-//    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-//    NSLog(@"<<< sema created >>>");
-//    NSLog(@"THsi:%@",[query findObjectsInBackground]);
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if (objects != nil) {
             unsigned long i, cnt = [objects count];
@@ -95,21 +91,6 @@ NSMutableArray *objectList;
             NSLog(@"%@", error.localizedDescription);
         }
         
-        // send a signal that indicates that this asynchronous task is completed
-//        dispatch_semaphore_signal(sema);
-//        NSLog(@"<<< signal dispatched >>>");
-    }];
-    
-    // execution is halted, until a signal is received from another thread ...
-//    NSLog(@"<<< wait for signal >>>");
-//    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-//    dispatch_release(sema);
-//    NSLog(@"<<< signal received >>>");
-    
-//    while ([objectList count] == 0){
-//        //NSLog(@"Count:%@", [objectList count]);
-//    }
-    NSLog(@"FinalobjectList:%@", objectList);
     return objectList;
     
     

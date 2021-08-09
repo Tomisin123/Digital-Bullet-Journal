@@ -51,7 +51,7 @@
     }
     
     [self.unnecessary setOn:!self.bullet[@"Relevant"]];
-    [self.completed setOn:self.bullet[@"Completed"]];
+    [self.completed setOn:!self.bullet[@"Completed"]];
     self.desc.text = self.bullet[@"Description"];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -59,6 +59,7 @@
     
     [StyleMethods styleBackground:self];
     [StyleMethods styleButtons:self.editBulletButton];
+    [StyleMethods styleTextField:self.desc];
     
 }
 
@@ -95,7 +96,9 @@
     NSString *type = [self.bulletTypePickerArray objectAtIndex:row];
     [DatabaseUtilities createBullet:PFUser.user withType:type withRelevancy:[NSNumber numberWithBool:!self.unnecessary.isOn] withCompletion:[NSNumber numberWithBool:self.completed.isOn] withDescription:self.desc.text withDate:dateString];
     
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
+    [self presentViewController:homeVC animated:YES completion:nil];
     
     
 }

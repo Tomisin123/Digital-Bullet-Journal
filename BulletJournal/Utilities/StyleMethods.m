@@ -54,4 +54,20 @@
     [calendar setBackgroundColor:notebookPaper];
 }
 
++(void) styleTextField:(UITextField *)textField {
+    textField.layer.cornerRadius=8.0f;
+    textField.layer.masksToBounds=YES;
+    textField.layer.borderColor=[[UIColor grayColor]CGColor];
+    textField.layer.borderWidth= 3.0f;
+    textField.layer.cornerRadius = 15;
+}
+
++(void) styleTextView:(UITextView*)textView {
+    textView.layer.cornerRadius=8.0f;
+    textView.layer.masksToBounds=YES;
+    textView.layer.borderColor=[[UIColor grayColor]CGColor];
+    textView.layer.borderWidth= 3.0f;
+    textView.layer.cornerRadius = 15;
+}
+
 @end

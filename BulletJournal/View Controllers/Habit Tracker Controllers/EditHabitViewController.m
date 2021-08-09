@@ -45,6 +45,8 @@
     [StyleMethods styleCalendar:self.calendar];
     [StyleMethods styleButtons:self.editHabitButton];
     [StyleMethods styleButtons:self.deleteHabitButton];
+    [StyleMethods styleTextView:self.reason];
+    [StyleMethods styleTextField:self.habitName];
 }
 
 -(void)dismissKeyboard
@@ -68,6 +70,9 @@
     
     [DatabaseUtilities createHabit:PFUser.currentUser withName:self.habitName.text withReason:self.reason.text withDatesCompleted:self.datesCompleted];
 
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
+    [self presentViewController:homeVC animated:YES completion:nil];
     
 }
 
@@ -89,6 +94,9 @@
         else{
             NSLog(@"%@", error.localizedDescription);
         }
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
+        [self presentViewController:homeVC animated:YES completion:nil];
     }];
 }
 
