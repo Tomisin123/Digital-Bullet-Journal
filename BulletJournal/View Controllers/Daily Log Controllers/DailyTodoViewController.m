@@ -117,6 +117,50 @@
     }
 }
 
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Swiped");
+    UIContextualAction *migrate = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive
+        title:@"Migrate"
+        handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        
+        PFObject *bullet = [self.bullets objectAtIndex:indexPath.row];
+        PFUser *user = bullet[@"User"];
+        NSString *type = bullet[@"Type"];
+        NSNumber *relevancy = bullet[@"Relevant"];
+        NSNumber *completion = bullet[@"Completed"];
+        NSString *desc = bullet[@"Description"];
+        NSString *dateString = [DatabaseUtilities getDateString:[self.date dateByAddingDays:1]];
+        [self deleteBullet:bullet];
+        PFObject *newBullet = [PFObject objectWithClassName:@"Bullet"];
+        newBullet[@"User"] = user;
+        newBullet[@"Type"] = type;
+        newBullet[@"Relevant"] = relevancy;
+        newBullet[@"Completed"] = completion;
+        newBullet[@"Description"] = desc;
+        newBullet[@"Date"] = dateString;
+        [newBullet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"Object saved!");
+            } else {
+                NSLog(@"Error: %@", error.description);
+            }
+        }];
+        
+        
+        [self.bullets removeObjectAtIndex:indexPath.row];
+        [tableView reloadData];
+        
+        completionHandler(YES);
+        
+    }];
+    migrate.backgroundColor = [UIColor systemBlueColor];
+   
+    UISwipeActionsConfiguration *swipeActionConfig = [UISwipeActionsConfiguration configurationWithActions:@[migrate]];
+    swipeActionConfig.performsFirstActionWithFullSwipe = NO;
+    return swipeActionConfig;
+}
+
+
 - (void)deleteBullet:(PFObject*)bullet {
     
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
