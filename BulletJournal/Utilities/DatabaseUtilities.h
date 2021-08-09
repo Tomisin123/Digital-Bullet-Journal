@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DatabaseUtilities : PFObject
 
-+(void) testClassFunction;
-
 +(NSString*) getDateString:(NSDate*)date;
 +(void) savePFObject:(PFObject*)object;
 +(BOOL) checkUserIsCurrrentUser:(PFUser*)user;

@@ -13,7 +13,6 @@
 
 @interface SplashViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *mainLogo;
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
 
 @end
 
@@ -29,10 +28,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [self showSplash];
-    
-    
-    
-    
 }
 
 -(void) openHome {

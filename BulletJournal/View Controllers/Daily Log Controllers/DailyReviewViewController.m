@@ -28,6 +28,7 @@
 @property (strong, nonatomic) NSMutableArray *habits;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) Review *review;
+@property (weak, nonatomic) IBOutlet UIButton *saveReviewButton;
 
 @end
 
@@ -51,7 +52,6 @@
     self.habitsTableView.delegate = self;
     self.habitsTableView.dataSource = self;
     
-    //TODO: potentially repetitive code
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
@@ -65,6 +65,7 @@
     
     [StyleMethods styleBackground:self];
     [StyleMethods styleTableView:self.habitsTableView];
+    [StyleMethods styleButtons:self.saveReviewButton];
     
 }
 
@@ -76,8 +77,6 @@
 - (void) fetchReview {
     NSString *dateString = [DatabaseUtilities getDateString:self.date];
     
-    
-    //TODO: potentially repetitive code
     PFQuery *query = [PFQuery queryWithClassName:@"Review"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
@@ -117,15 +116,17 @@
         Habit *habit = checkerCell.habit;
         if ([checkerCell.completed isOn]){
             [self editHabitCompletionDate:habit withDate:self.date adding:YES];
-//            [self addHabitCompletionDate:habit :self.date];
         }
         else{
             if ([habit[@"DatesCompleted"] containsObject:self.date]){
                 [self editHabitCompletionDate:habit withDate:self.date adding:NO];
-//                [self deleteHabitCompletionDate:habit :self.date];
             }
         }
     }
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
+    [self presentViewController:homeVC animated:YES completion:nil];
     
 }
 
@@ -161,7 +162,6 @@
 }
 
 - (void) fetchHabits {
-    //TODO: potentially repetitive code
     PFQuery *query = [PFQuery queryWithClassName:@"Habit"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
@@ -208,67 +208,6 @@
 }
 
 
-
-
-
-////MARK: similar to editHabitViewController
-////TODO: potentially repetitive code
-//- (void) addHabitCompletionDate:(Habit*)habit :(NSDate*)dateOfCompletion {
-//
-//    NSString *name = habit[@"Name"];
-//    NSString *reason = habit[@"Reason"];
-//    NSMutableArray *datesCompleted = [[NSMutableArray alloc] init];
-//    for (NSDate *date in habit[@"DatesCompleted"]){
-//        [datesCompleted addObject:date];
-//    }
-//    [datesCompleted addObject:dateOfCompletion];
-//
-//    [self deleteHabit:habit];
-//
-//    PFObject *habitObj = [PFObject objectWithClassName:@"Habit"];
-//    habitObj[@"User"] = PFUser.currentUser;
-//    habitObj[@"Name"] = name;
-//    habitObj[@"Reason"] = reason;
-//    habitObj[@"DatesCompleted"] = datesCompleted;
-//
-//    [habitObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            NSLog(@"Habit Object saved!");
-//        } else {
-//            NSLog(@"Error: %@", error.description);
-//        }
-//    }];
-//
-//
-//}
-//
-//- (void) deleteHabitCompletionDate:(Habit*)habit :(NSDate*)dateOfCompletion {
-//    //TODO: potentially repetitive code, very similar to addHabitCompletion Date, only diff is removeObject, and check why you have that addObject inside the for loop
-//    NSString *name = habit[@"Name"];
-//    NSString *reason = habit[@"Reason"];
-//    NSMutableArray *datesCompleted = [[NSMutableArray alloc] init];
-//    for (NSDate *date in habit[@"DatesCompleted"]){
-//        [datesCompleted addObject:date];
-//    }
-//    [datesCompleted removeObject:dateOfCompletion];
-//
-//    [self deleteHabit:habit];
-//
-//    PFObject *habitObj = [PFObject objectWithClassName:@"Habit"];
-//    habitObj[@"User"] = PFUser.currentUser;
-//    habitObj[@"Name"] = name;
-//    habitObj[@"Reason"] = reason;
-//    habitObj[@"DatesCompleted"] = datesCompleted;
-//
-//    [habitObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            NSLog(@"Habit Object saved!");
-//        } else {
-//            NSLog(@"Error: %@", error.description);
-//        }
-//    }];
-//}
-
 - (void) editHabitCompletionDate:(Habit*)habit withDate:(NSDate*)dateOfCompletion adding:(BOOL)adding {
     
     NSString *name = habit[@"Name"];
@@ -310,7 +249,6 @@
     }];
 }
 
-//TODO: consider making this a part of the Weather Model
 -(NSDictionary *)getWeatherDictionary:(Weather*)weather{
     NSDictionary *dictionary;
     dictionary = @{

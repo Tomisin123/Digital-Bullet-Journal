@@ -11,8 +11,6 @@
 
 @implementation StyleMethods
 
-
-
 +(void) styleBackground:(UIViewController*)vc {
     UIColor *notebookPaper = [UIColor colorWithRed:224.0/255.0 green:201.0/255.0 blue:166.0/255.0 alpha:1];
     vc.view.backgroundColor = notebookPaper;
@@ -69,6 +67,7 @@
     textView.layer.borderWidth= 3.0f;
     textView.layer.cornerRadius = 15;
 }
+
 
 
 @end

@@ -12,13 +12,9 @@
 NSMutableArray *objectList;
 
 
-+(void) testClassFunction {
-    NSLog(@"TESTING CLASS FUNCTION");
-}
-
 +(NSString*) getDateString:(NSDate*)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"dd/MM/yyyy";
+    formatter.dateFormat = @"MMMM d, u";
     NSString *dateString = [formatter stringFromDate:date];
     return dateString;
 }

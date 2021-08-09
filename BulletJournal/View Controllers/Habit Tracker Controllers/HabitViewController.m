@@ -38,29 +38,9 @@
     [StyleMethods styleButtons:self.addNewHabitButton];
 }
 
-//TODO: Get data to reload after adding new habit
-//- (void)viewDidAppear:(BOOL)animated {
-//    NSLog(@"View Will Appear");
-//    self.habits = [[NSMutableArray alloc] init];
-//    [self fetchHabits];
-//}
-
-
-
-
 - (void) fetchHabits {
     [self.activityIndicator startAnimating];
-//    self.habits = [DatabaseUtilities fetchPFObjectList:@"Habit"];
-//    NSLog(@"Habit List:%@", self.habits);
-//    for (Habit *habit in self.habits){
-//        NSLog(@"Habit:%@", habit);
-//        if (![DatabaseUtilities checkUserIsCurrrentUser:habit[@"User"]]){
-//            [self.habits removeObject:habit];
-//        }
-//    }
-//    [self.tableView reloadData];
-    
-//    //TODO: potentially repetitive code
+
     PFQuery *query = [PFQuery queryWithClassName:@"Habit"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];

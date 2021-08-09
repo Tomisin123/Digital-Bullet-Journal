@@ -10,7 +10,6 @@
 //for logout method
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-//#import "APIManager.h"
 #import "StyleMethods.h"
 
 #import "Parse/Parse.h"
@@ -34,9 +33,7 @@
     [StyleMethods styleButtons:self.calendarButton];
 }
 
-//TODO: test log out method
 - (IBAction)didLogOut:(id)sender {
-//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
@@ -45,9 +42,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
     [self presentViewController:loginViewController animated:YES completion:nil];
-//    appDelegate.window.rootViewController = loginViewController;
-    
-    //[[APIManager shared] logout];
+
 }
 
 @end

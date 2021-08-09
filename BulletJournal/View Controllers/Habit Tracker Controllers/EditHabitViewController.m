@@ -58,7 +58,10 @@
 
 - (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleDefaultColorForDate:(NSDate *)date{
     
-    if ([self.datesCompleted containsObject:date]){
+    if ([date isLaterThanDate:[NSDate date]]){
+        return [UIColor lightGrayColor];
+    }
+    else if ([self.datesCompleted containsObject:date]){
         return [UIColor greenColor];
     }
     return [UIColor systemPinkColor];

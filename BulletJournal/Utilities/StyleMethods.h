@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface StyleMethods : UIApplication
 
-extern UIColor *notebookPaper;
+extern UIColor * _Nullable notebookPaper;
 
 +(void) styleBackground:(UIViewController*)vc;
 +(void) styleButtons:(UIButton*)button;

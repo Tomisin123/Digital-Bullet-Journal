@@ -50,7 +50,7 @@
     self.calendar.delegate = self;
     self.calendar.dataSource = self;
     self.dateSelected = [[NSDate date] dateAtStartOfDay];
-    [self.calendar selectDate:self.dateSelected];
+    //[self.calendar selectDate:self.dateSelected];
     
     //Initializing Location for Weather Information
     self.locationManager = [[CLLocationManager alloc] init];
@@ -83,7 +83,7 @@
 
 - (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date{
     if ([date isToday]){
-        return 1;
+        return 0;
     }
     return 0;
 }
@@ -103,7 +103,6 @@
     [self updateWeather];
         
     //Query to load the bottom half of the days
-    //TODO: potentially repetitive code (fetchBullets)
     self.dayPreview.text = @"";
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
     query.limit = 20;
@@ -163,7 +162,6 @@
     
     //If date selected is yesterday or further in the past, use historical weathed data call
     else if ([self.dateSelected isEarlierThanDate:[[NSDate date] dateAtStartOfDay]]){
-        //TODO: Create weather database and check if weather from that date is stored
         
         PFQuery *query = [PFQuery queryWithClassName:@"Review"];
         query.limit = 20;
