@@ -23,13 +23,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
         
-    [self doAnimation:@"hi" completionBlock:^(NSDictionary * completion) {
-        NSLog(@"hello");
-    }];
+    
     
 }
 
--(void) doAnimation:(NSString*)dummy completionBlock:(void (^)(NSDictionary *))completionBlock {
+- (void) viewDidAppear:(BOOL)animated {
+    [self showSplash];
+    
+    
+    
+    
+}
+
+-(void) openHome {
+    
+    //User Persistence
+    if (PFUser.currentUser) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
+        [self presentViewController:homeVC animated:YES completion:nil];
+    }
+    else {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
+        [self presentViewController:loginVC animated:YES completion:nil];
+    }
+}
+
+-(void) doAnimation {
     POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
     anim.toValue = [NSValue valueWithCGPoint:CGPointMake(.8, .8)];
     anim.velocity = [NSValue valueWithCGPoint:CGPointMake(.5, .5)];
@@ -37,6 +58,12 @@
     [self.mainLogo pop_addAnimation:anim forKey:@"myKey"];
     
     [self.mainLogo animationDuration];
+
+}
+
+- (void)showSplash {
+    [self doAnimation];
+  [self performSelector:@selector(openHome) withObject:nil afterDelay:2];
 }
 
 

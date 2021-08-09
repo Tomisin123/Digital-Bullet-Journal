@@ -91,6 +91,8 @@ NSMutableArray *objectList;
             NSLog(@"%@", error.localizedDescription);
         }
         
+    }];
+    
     return objectList;
     
     
