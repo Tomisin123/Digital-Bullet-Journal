@@ -85,6 +85,19 @@
     BulletCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BulletCell"];
     cell.bullet = self.bullets[indexPath.row];
     cell.desc.text = cell.bullet[@"Description"];
+    NSString *type = cell.bullet[@"Type"];
+
+
+    [cell.img setTintColor:[UIColor blackColor]];
+    if ([type isEqualToString:@"Task"]){
+        cell.img.image = [UIImage systemImageNamed:@"hammer"];
+    }
+    else if ([type isEqualToString:@"Event"]){
+        cell.img.image = [UIImage systemImageNamed:@"calendar"];
+    }
+    else {
+        cell.img.image = [UIImage systemImageNamed:@"pencil"];
+    }
     UIColor *notebookPaper = [UIColor colorWithRed:224.0/255.0 green:201.0/255.0 blue:166.0/255.0 alpha:1];
     cell.backgroundColor = notebookPaper;
     

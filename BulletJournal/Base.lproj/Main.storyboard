@@ -263,7 +263,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzg-Cu-1j8">
-                                                    <rect key="frame" x="360.5" y="23" width="41.5" height="51"/>
+                                                    <rect key="frame" x="86" y="23" width="316" height="51"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -272,20 +272,27 @@
                                                     <rect key="frame" x="-73" y="65" width="48" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dif-3Y-xFX">
-                                                    <rect key="frame" x="20" y="23" width="51" height="51"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dif-3Y-xFX">
+                                                    <rect key="frame" x="8" y="10.5" width="70" height="72.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="FLz-7d-Dt7"/>
+                                                        <constraint firstAttribute="height" constant="70" id="hAw-pQ-pll"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="lzg-Cu-1j8" firstAttribute="top" secondItem="ly8-bo-aqe" secondAttribute="topMargin" constant="12" id="0XG-wk-Jib"/>
+                                                <constraint firstItem="Dif-3Y-xFX" firstAttribute="top" secondItem="ly8-bo-aqe" secondAttribute="top" constant="8" id="0uH-6N-yck"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="lzg-Cu-1j8" secondAttribute="bottom" constant="8" id="7be-80-a2H"/>
+                                                <constraint firstItem="lzg-Cu-1j8" firstAttribute="leading" secondItem="Dif-3Y-xFX" secondAttribute="trailing" constant="8" id="GCW-dA-cxf"/>
+                                                <constraint firstAttribute="bottom" secondItem="Dif-3Y-xFX" secondAttribute="bottom" constant="8" id="MZb-lT-NdL"/>
                                                 <constraint firstItem="lzg-Cu-1j8" firstAttribute="trailing" secondItem="ly8-bo-aqe" secondAttribute="trailingMargin" constant="8" id="aib-28-XhP"/>
+                                                <constraint firstItem="Dif-3Y-xFX" firstAttribute="leading" secondItem="ly8-bo-aqe" secondAttribute="leading" constant="8" id="uLi-ia-AXZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="desc" destination="lzg-Cu-1j8" id="TA9-sQ-VIg"/>
-                                            <outlet property="img" destination="Dif-3Y-xFX" id="uej-uh-4SQ"/>
+                                            <outlet property="img" destination="Dif-3Y-xFX" id="Vuw-xM-0vg"/>
                                             <segue destination="CqX-om-QlU" kind="presentation" identifier="editBulletSegue" id="HfT-lj-oGs"/>
                                         </connections>
                                     </tableViewCell>
@@ -311,7 +318,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qam-FB-bE7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2806" y="1612"/>
+            <point key="canvasLocation" x="-2807.2463768115945" y="1611.8303571428571"/>
         </scene>
         <!--Add Bullet View Controller-->
         <scene sceneID="0ss-4h-TSL">
@@ -868,6 +875,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="book.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
