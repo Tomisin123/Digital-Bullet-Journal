@@ -12,6 +12,7 @@ target 'BulletJournal' do
   pod 'BDBOAuth1Manager'
   pod 'EGOCache', '~> 2.2.0'
   pod 'pop', '~> 1.0'
+  pod 'CCTextFieldEffects'
 
   target 'BulletJournalTests' do
     inherit! :search_paths

@@ -11,10 +11,14 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 //#import "APIManager.h"
+#import "StyleMethods.h"
 
 #import "Parse/Parse.h"
 
 @interface HomeViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *dailyLogButton;
+@property (weak, nonatomic) IBOutlet UIButton *habitTrackerButton;
+@property (weak, nonatomic) IBOutlet UIButton *calendarButton;
 
 @end
 
@@ -23,6 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [StyleMethods styleBackground:self];
+    [StyleMethods styleButtons:self.dailyLogButton];
+    [StyleMethods styleButtons:self.habitTrackerButton];
+    [StyleMethods styleButtons:self.calendarButton];
 }
 
 //TODO: test log out method

@@ -12,7 +12,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
                   isCurrentWeather:(BOOL)isCurrentWeather{
     self = [super init];
-    
+        
     if (self) {
         /*
          * Parse weather data from the API into this weather

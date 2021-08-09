@@ -13,6 +13,7 @@
 #import "DailyTabBarController.h"
 #import "NSDate+Utilities.h"
 #import "DatabaseUtilities.h"
+#import "StyleMethods.h"
 
 @interface DailyTodoViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -45,6 +46,9 @@
     self.bullets = [[NSMutableArray alloc] init];
     
     [self fetchBullets];
+    
+    [StyleMethods styleBackground:self];
+    [StyleMethods styleTableView:self.tableView];
     
 }
 
@@ -81,9 +85,13 @@
     BulletCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BulletCell"];
     cell.bullet = self.bullets[indexPath.row];
     cell.desc.text = cell.bullet[@"Description"];
+    UIColor *notebookPaper = [UIColor colorWithRed:224.0/255.0 green:201.0/255.0 blue:166.0/255.0 alpha:1];
+    cell.backgroundColor = notebookPaper;
     
     if([cell.bullet[@"Completed"]  isEqual: @YES]){
         cell.desc.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+        cell.desc.textColor = [UIColor lightGrayColor];
+        cell.desc.alpha = .5;
     }
     if([cell.bullet[@"Relevant"]  isEqual: @NO]){
         

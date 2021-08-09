@@ -18,6 +18,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "TimeSensitiveCache.h"
 #import "DatabaseUtilities.h"
+#import "StyleMethods.h"
 
 @interface CalendarViewController () <FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance, CLLocationManagerDelegate, NSCacheDelegate>
 
@@ -48,7 +49,6 @@
     //Initializing Calendar information
     self.calendar.delegate = self;
     self.calendar.dataSource = self;
-    [self styleCalendar];
     self.dateSelected = [[NSDate date] dateAtStartOfDay];
     [self.calendar selectDate:self.dateSelected];
     
@@ -65,25 +65,16 @@
     self.cacheTimeInterval = 3600; //Storing
     
     self.dayPreview.editable = NO;
+    
+    [StyleMethods styleBackground:self];
+    [StyleMethods styleCalendar:self.calendar];
 }
 
--(void)styleCalendar{
-    
-    self.calendar.scope = FSCalendarScopeMonth;
-    self.calendar.appearance.titleFont = [UIFont systemFontOfSize:15];
-    self.calendar.appearance.headerTitleFont = [UIFont boldSystemFontOfSize:20];
-    self.calendar.appearance.weekdayFont = [UIFont boldSystemFontOfSize:15];
-    
-    self.calendar.appearance.todayColor = [UIColor systemGreenColor];
-    self.calendar.appearance.titleTodayColor = [UIColor whiteColor];
-    self.calendar.appearance.titleDefaultColor = [UIColor systemBlueColor];
-    self.calendar.appearance.headerTitleColor = [UIColor systemPinkColor];
-    self.calendar.appearance.weekdayTextColor = [UIColor systemRedColor];
-}
+
 
 - (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleDefaultColorForDate:(NSDate *)date{
     if ([date isTypicallyWorkday]){
-        return [UIColor greenColor];
+        return [UIColor blackColor];
     }
     return nil;
 }
@@ -171,6 +162,30 @@
     //If date selected is yesterday or further in the past, use historical weathed data call
     else if ([self.dateSelected isEarlierThanDate:[[NSDate date] dateAtStartOfDay]]){
         //TODO: Create weather database and check if weather from that date is stored
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Review"];
+        query.limit = 20;
+        [query orderByDescending:@"createdAt"];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *reviews, NSError *error){
+            if (reviews != nil) {
+                unsigned long i, cnt = [reviews count];
+                for(i = 0; i < cnt; i++)
+                {
+                    NSString *dateString = [DatabaseUtilities getDateString:self.dateSelected];
+                    if ([[reviews objectAtIndex:i][@"Date"] isEqual:dateString]){
+                        Weather *weather = [[Weather alloc] initWithDictionary:[reviews objectAtIndex:i][@"Weather"] isCurrentWeather:NO];
+                        NSLog(@"Weather stuff: %@", weather.condition);
+                        [self setWeatherInformation:weather withKey:dateString];
+                    }
+                    
+                }
+            }
+            else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        
         NSLog(@"Selected day before today");
         self.weatherHigh.text = @"N/A";
         self.weatherLow.text = @"N/A";

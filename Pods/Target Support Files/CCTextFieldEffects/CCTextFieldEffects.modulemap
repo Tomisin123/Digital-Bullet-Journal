@@ -1,0 +1,6 @@
+framework module CCTextFieldEffects {
+  umbrella header "CCTextFieldEffects-umbrella.h"
+
+  export *
+  module * { export * }
+}

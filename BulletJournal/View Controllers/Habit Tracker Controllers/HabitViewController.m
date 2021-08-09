@@ -12,12 +12,14 @@
 #import "EditHabitViewController.h"
 #import "AddHabitViewController.h"
 #import "DatabaseUtilities.h"
+#import "StyleMethods.h"
 
 @interface HabitViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *habits;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *addNewHabitButton;
 
 @end
 
@@ -32,6 +34,8 @@
     self.habits = [[NSMutableArray alloc] init];
     [self fetchHabits];
     
+    [StyleMethods styleTableView:self.tableView];
+    [StyleMethods styleButtons:self.addNewHabitButton];
 }
 
 //TODO: Get data to reload after adding new habit
@@ -84,6 +88,8 @@
     cell.habit = self.habits[indexPath.row];
     cell.habitName.text = cell.habit[@"Name"];
     cell.reason.text = cell.habit[@"Reason"];
+    UIColor *notebookPaper = [UIColor colorWithRed:224.0/255.0 green:201.0/255.0 blue:166.0/255.0 alpha:1];
+    cell.backgroundColor = notebookPaper;
     return cell;
 }
 

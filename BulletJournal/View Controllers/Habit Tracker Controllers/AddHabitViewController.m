@@ -9,10 +9,12 @@
 
 #import "Parse/Parse.h"
 #import "DatabaseUtilities.h"
+#import "StyleMethods.h"
 
 @interface AddHabitViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *habitName;
 @property (weak, nonatomic) IBOutlet UITextView *reason;
+@property (weak, nonatomic) IBOutlet UIButton *addHabitButton;
 
 @end
 
@@ -25,6 +27,8 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
     
+    [StyleMethods styleBackground:self];
+    [StyleMethods styleButtons:self.addHabitButton];
 }
 
 -(void)dismissKeyboard

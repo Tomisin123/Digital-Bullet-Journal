@@ -8,11 +8,16 @@
 #import "LoginViewController.h"
 
 #import "Parse/Parse.h"
+#import <QuartzCore/QuartzCore.h>
+#import "StyleMethods.h"
 
 @interface LoginViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) UIAlertController *alert;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 
 @end
 
@@ -41,7 +46,16 @@
                                                      }];
     // add the OK action to the alert controller
     [self.alert addAction:okAction];
+        
+    [StyleMethods styleBackground:self];
+    [StyleMethods styleLoginTextFields:self.usernameField];
+    [StyleMethods styleLoginTextFields:self.passwordField];
+    [StyleMethods styleButtons:self.loginButton];
+    [StyleMethods styleButtons:self.signUpButton];
+    
 }
+
+
 - (IBAction)didSignUp:(id)sender {
     if ([self checkFields]){
         NSLog(@"Signing up...");

@@ -54,6 +54,11 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="calendarButton" destination="Iv9-Fw-shQ" id="OrS-qU-eby"/>
+                        <outlet property="dailyLogButton" destination="vra-lG-IDb" id="6r7-o7-ce2"/>
+                        <outlet property="habitTrackerButton" destination="Kyj-LF-EkR" id="ck9-Zk-Sbw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dtc-nS-9yF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -67,48 +72,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qdy-Mm-RLs">
-                                <rect key="frame" x="67" y="245" width="281" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qdy-Mm-RLs">
+                                <rect key="frame" x="20" y="238" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="gQi-tq-u7b"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mN9-Ax-VvG">
-                                <rect key="frame" x="67" y="322" width="281" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mN9-Ax-VvG">
+                                <rect key="frame" x="20" y="308" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Mig-a2-4dy"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d27-UV-Mfk">
-                                <rect key="frame" x="67" y="364" width="89" height="63"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Sign Up"/>
-                                <connections>
-                                    <action selector="didSignUp:" destination="B93-mQ-qUn" eventType="touchUpInside" id="LKT-me-Ikc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ld-uq-unP">
-                                <rect key="frame" x="259" y="364" width="89" height="63"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhQ-ey-TW3">
+                                <rect key="frame" x="132" y="378" width="150" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="8YB-X8-hFX"/>
+                                    <constraint firstAttribute="height" constant="50" id="n8V-iB-dVY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="didLogin:" destination="B93-mQ-qUn" eventType="touchUpInside" id="gav-xr-P3E"/>
+                                    <action selector="didLogin:" destination="B93-mQ-qUn" eventType="touchUpInside" id="LFC-qJ-NyX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zdg-3S-IRf">
+                                <rect key="frame" x="132" y="448" width="150" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HYh-Y4-M4e"/>
+                                    <constraint firstAttribute="width" constant="150" id="MF2-PF-fNl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <action selector="didSignUp:" destination="B93-mQ-qUn" eventType="touchUpInside" id="kfe-kj-DIX"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="k5L-ka-qec"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mN9-Ax-VvG" firstAttribute="leading" secondItem="qdy-Mm-RLs" secondAttribute="leading" id="2Rv-Sc-JuB"/>
+                            <constraint firstItem="Zdg-3S-IRf" firstAttribute="top" secondItem="qhQ-ey-TW3" secondAttribute="bottom" constant="20" id="2uw-Op-QGC"/>
+                            <constraint firstItem="qdy-Mm-RLs" firstAttribute="leading" secondItem="k5L-ka-qec" secondAttribute="leading" constant="20" id="EoB-9L-A8o"/>
+                            <constraint firstItem="mN9-Ax-VvG" firstAttribute="top" secondItem="qdy-Mm-RLs" secondAttribute="bottom" constant="20" id="Jo1-CM-cOl"/>
+                            <constraint firstItem="k5L-ka-qec" firstAttribute="trailing" secondItem="qdy-Mm-RLs" secondAttribute="trailing" constant="20" id="PuC-P0-Yon"/>
+                            <constraint firstItem="qdy-Mm-RLs" firstAttribute="top" secondItem="k5L-ka-qec" secondAttribute="top" constant="150" id="Uq5-jf-po0"/>
+                            <constraint firstItem="Zdg-3S-IRf" firstAttribute="centerX" secondItem="mN9-Ax-VvG" secondAttribute="centerX" id="d5g-6C-fIK"/>
+                            <constraint firstItem="mN9-Ax-VvG" firstAttribute="trailing" secondItem="qdy-Mm-RLs" secondAttribute="trailing" id="eiy-h4-FWm"/>
+                            <constraint firstItem="qhQ-ey-TW3" firstAttribute="top" secondItem="mN9-Ax-VvG" secondAttribute="bottom" constant="20" id="sq1-4E-LMV"/>
+                            <constraint firstItem="qhQ-ey-TW3" firstAttribute="centerX" secondItem="mN9-Ax-VvG" secondAttribute="centerX" id="x0e-rh-BYQ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R4y-Wa-TAm"/>
                     <connections>
+                        <outlet property="loginButton" destination="qhQ-ey-TW3" id="Qm5-hA-kiy"/>
                         <outlet property="passwordField" destination="mN9-Ax-VvG" id="M6O-B7-6fz"/>
+                        <outlet property="signUpButton" destination="Zdg-3S-IRf" id="BSt-JC-aml"/>
                         <outlet property="usernameField" destination="qdy-Mm-RLs" id="ntO-i4-2gt"/>
                         <segue destination="A2U-dC-jYi" kind="show" identifier="loginSegue" id="Lh5-yy-3mF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MjH-dL-HhT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="626.08695652173913" y="83.705357142857139"/>
+            <point key="canvasLocation" x="624.63768115942037" y="83.705357142857139"/>
         </scene>
         <!--Daily Review-->
         <scene sceneID="CUv-7Y-2tJ">
@@ -343,6 +374,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="oec-f8-g5P" id="tz6-E2-GBG"/>
+                        <outlet property="createBulletButton" destination="4kM-bP-2Do" id="NrE-gC-XoF"/>
                         <outlet property="datePicker" destination="iPT-QH-Deo" id="HZd-EB-rSb"/>
                         <outlet property="desc" destination="jJz-oT-eSO" id="EqS-37-lpR"/>
                         <outlet property="typePicker" destination="GX8-Ng-AST" id="nBD-ug-YtS"/>
@@ -428,6 +460,7 @@
                         <outlet property="activityIndicator" destination="gdq-Z2-3uR" id="qbD-Ua-UGx"/>
                         <outlet property="completed" destination="8WP-eA-HrC" id="O4E-XD-73O"/>
                         <outlet property="desc" destination="9kc-rl-yes" id="lja-gT-yo5"/>
+                        <outlet property="editBulletButton" destination="KYR-iT-l60" id="0LW-V4-vOA"/>
                         <outlet property="typePicker" destination="3gY-Jc-v1g" id="8Fv-DV-ah6"/>
                         <outlet property="unnecessary" destination="3FT-nT-Yqg" id="sy3-Pu-tRg"/>
                     </connections>
@@ -526,6 +559,7 @@
                     <navigationItem key="navigationItem" id="XoZ-z8-KIu"/>
                     <connections>
                         <outlet property="activityIndicator" destination="lXz-3j-Lp5" id="mbO-m8-bbX"/>
+                        <outlet property="addNewHabitButton" destination="T9k-5e-YZU" id="kZL-Ab-S0R"/>
                         <outlet property="tableView" destination="sRU-f1-uqU" id="GxA-hx-rwQ"/>
                     </connections>
                 </viewController>
@@ -584,6 +618,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="PHy-9d-CzV"/>
                     <connections>
+                        <outlet property="addHabitButton" destination="gME-je-zMF" id="ojj-eE-v00"/>
                         <outlet property="habitName" destination="hxY-Rg-qze" id="ghZ-Va-3wX"/>
                         <outlet property="reason" destination="WQd-9c-oGN" id="aLT-QG-U5O"/>
                     </connections>
@@ -658,6 +693,8 @@
                     <navigationItem key="navigationItem" id="bpC-hv-Zrx"/>
                     <connections>
                         <outlet property="calendar" destination="Mav-z1-iJa" id="oOU-ZH-tBk"/>
+                        <outlet property="deleteHabitButton" destination="m71-Ah-6Xq" id="daQ-Lf-DzW"/>
+                        <outlet property="editHabitButton" destination="fBE-xN-3wE" id="9Vy-pQ-qMT"/>
                         <outlet property="habitName" destination="Hej-fr-l9Z" id="cAT-FE-oZG"/>
                         <outlet property="reason" destination="IEd-Y8-KBi" id="6Ez-d5-7kl"/>
                     </connections>

@@ -9,6 +9,7 @@
 
 #import "Parse/Parse.h"
 #import "DatabaseUtilities.h"
+#import "StyleMethods.h"
 
 @interface EditBulletViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UIPickerView *typePicker;
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *completed;
 @property (weak, nonatomic) IBOutlet UISwitch *unnecessary;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *editBulletButton;
 
 
 
@@ -54,6 +56,9 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    [StyleMethods styleBackground:self];
+    [StyleMethods styleButtons:self.editBulletButton];
     
 }
 

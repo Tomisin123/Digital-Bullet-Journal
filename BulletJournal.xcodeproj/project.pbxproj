@@ -20,6 +20,8 @@
 		9483222526BE583A004D0186 /* TimeSensitiveCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222426BE583A004D0186 /* TimeSensitiveCache.m */; };
 		9483222C26BE7CDC004D0186 /* DatabaseUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9483223326C0D8D7004D0186 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483223226C0D8D7004D0186 /* SplashViewController.m */; };
+		9483223B26C1021D004D0186 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483223A26C1021D004D0186 /* Review.m */; };
+		9483224126C1331A004D0186 /* StyleMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483224026C1331A004D0186 /* StyleMethods.m */; };
 		94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35964269DE7EB00BE6A09 /* AppDelegate.m */; };
 		94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35967269DE7EB00BE6A09 /* SceneDelegate.m */; };
 		94E3596E269DE7EB00BE6A09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E3596C269DE7EB00BE6A09 /* Main.storyboard */; };
@@ -87,6 +89,10 @@
 		9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseUtilities.m; sourceTree = "<group>"; };
 		9483223126C0D8D7004D0186 /* SplashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
 		9483223226C0D8D7004D0186 /* SplashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
+		9483223926C1021D004D0186 /* Review.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
+		9483223A26C1021D004D0186 /* Review.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
+		9483223F26C1331A004D0186 /* StyleMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StyleMethods.h; sourceTree = "<group>"; };
+		9483224026C1331A004D0186 /* StyleMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StyleMethods.m; sourceTree = "<group>"; };
 		94E35960269DE7EB00BE6A09 /* BulletJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BulletJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E35963269DE7EB00BE6A09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94E35964269DE7EB00BE6A09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -324,6 +330,8 @@
 				9483221E26BBC065004D0186 /* Habit.m */,
 				9483222026BBCE4B004D0186 /* HabitCheckerCell.h */,
 				9483222126BBCE4B004D0186 /* HabitCheckerCell.m */,
+				9483223926C1021D004D0186 /* Review.h */,
+				9483223A26C1021D004D0186 /* Review.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -337,6 +345,8 @@
 				9483222426BE583A004D0186 /* TimeSensitiveCache.m */,
 				9483222A26BE7CDC004D0186 /* DatabaseUtilities.h */,
 				9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */,
+				9483223F26C1331A004D0186 /* StyleMethods.h */,
+				9483224026C1331A004D0186 /* StyleMethods.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -603,12 +613,14 @@
 				94E359BD26A5D82200BE6A09 /* AddBulletViewController.m in Sources */,
 				94E359C026A6175400BE6A09 /* EditBulletViewController.m in Sources */,
 				94E359AB26A0EE6800BE6A09 /* Bullet.m in Sources */,
+				9483224126C1331A004D0186 /* StyleMethods.m in Sources */,
 				94E359C626AF58E400BE6A09 /* WeatherRadar.m in Sources */,
 				94E359BA26A5C31800BE6A09 /* CalendarViewController.m in Sources */,
 				94E359A1269F5FD900BE6A09 /* DailyTodoViewController.m in Sources */,
 				9483222526BE583A004D0186 /* TimeSensitiveCache.m in Sources */,
 				94E359AE26A0EE9600BE6A09 /* BulletCell.m in Sources */,
 				94E359CA26B85B5C00BE6A09 /* NSDate+Utilities.m in Sources */,
+				9483223B26C1021D004D0186 /* Review.m in Sources */,
 				9483221F26BBC065004D0186 /* Habit.m in Sources */,
 				94E359B726A0F59800BE6A09 /* User.m in Sources */,
 				9483223326C0D8D7004D0186 /* SplashViewController.m in Sources */,

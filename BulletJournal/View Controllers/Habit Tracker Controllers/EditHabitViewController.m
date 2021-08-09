@@ -10,6 +10,7 @@
 #import "DatabaseUtilities.h"
 #import "FSCalendar.h"
 #import "NSDate+Utilities.h"
+#import "StyleMethods.h"
 
 @interface EditHabitViewController () <FSCalendarDelegate, FSCalendarDelegateAppearance, FSCalendarDataSource>
 
@@ -17,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *reason;
 @property (strong, nonatomic) NSArray *datesCompleted;
 @property (weak, nonatomic) IBOutlet FSCalendar *calendar;
+@property (weak, nonatomic) IBOutlet UIButton *editHabitButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteHabitButton;
 
 @end
 
@@ -38,6 +41,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
     
+    [StyleMethods styleBackground:self];
+    [StyleMethods styleCalendar:self.calendar];
+    [StyleMethods styleButtons:self.editHabitButton];
+    [StyleMethods styleButtons:self.deleteHabitButton];
 }
 
 -(void)dismissKeyboard

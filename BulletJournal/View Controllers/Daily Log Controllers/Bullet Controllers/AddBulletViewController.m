@@ -10,6 +10,7 @@
 #import "Parse/Parse.h"
 #import "DatabaseUtilities.h"
 #import "DailyTodoViewController.h"
+#import "StyleMethods.h"
 
 @interface AddBulletViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UIPickerView *typePicker;
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *desc;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *createBulletButton;
 
 @end
 
@@ -34,6 +36,9 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    [StyleMethods styleBackground:self];
+    [StyleMethods styleButtons:self.createBulletButton];
     
 }
 
@@ -100,5 +105,6 @@ numberOfRowsInComponent:(NSInteger)component {
     NSString * title = [self.bulletTypePickerArray objectAtIndex:row];;
     return title;
 }
+
 
 @end
