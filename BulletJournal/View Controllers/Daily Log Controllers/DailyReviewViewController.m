@@ -13,6 +13,7 @@
 #import "CalendarViewController.h"
 #import "HabitCheckerCell.h"
 #import "NSDate+Utilities.h"
+#import "DatabaseUtilities.h"
 
 @interface DailyReviewViewController () <CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) Weather *weather;
 @property (weak, nonatomic) IBOutlet UITableView *habitsTableView;
 @property (strong, nonatomic) NSMutableArray *habits;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -31,6 +33,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.activityIndicator startAnimating];
+    
+    //TODO: potentially repetitive code
+    if (self.date == nil) {
+        self.date = [[NSDate date] dateAtStartOfDay];
+    }
     
     [self fetchReview];
     
@@ -44,22 +53,18 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
-    self.currentUserLocation = [[CLLocation alloc] initWithLatitude:32.7767 longitude:-96.7970]; //TODO: This sets coordinates for Dallas, TX
+    self.currentUserLocation = self.locationManager.location;
     self.weatherRadar = [[WeatherRadar alloc] init];
     [self getWeather];
     
-    //TODO: potentially repetitive code
-    if (self.date == nil) {
-        self.date = [[NSDate date] dateAtStartOfDay];
-    }
+    
+    
     
 }
 
 - (void) fetchReview {
-    //TODO: potentially repetitive code
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"dd/MM/yyyy";
-    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    NSString *dateString = [DatabaseUtilities getDateString:self.date];
+    
     
     //TODO: potentially repetitive code
     PFQuery *query = [PFQuery queryWithClassName:@"Review"];
@@ -72,6 +77,7 @@
             {
                 NSString *reviewDate = [reviews objectAtIndex:i][@"Date"];
                 PFUser *reviewUser = [reviews objectAtIndex:i][@"User"];
+                
                 if ([reviewDate isEqualToString:dateString] && [[PFUser.currentUser objectId] isEqual:[reviewUser objectId]]){
                     self.reviewText.text = [reviews objectAtIndex:i][@"Text"];
                 }
@@ -80,31 +86,16 @@
         else {
             NSLog(@"%@", error.localizedDescription);
         }
+        [self.activityIndicator stopAnimating];
     }];
-    
 }
 
 - (IBAction)didSaveReview:(id)sender {
+        
+    //TODO: Delete existing reviews with same User and same Date
+    NSString *dateString = [DatabaseUtilities getDateString:self.date];
+    [DatabaseUtilities createReview:PFUser.currentUser withText:self.reviewText.text withDate:dateString withWeather:[self getWeatherDictionary:self.weather]];
     
-    //TODO: potentially repetitive code
-    PFObject *review = [PFObject objectWithClassName:@"Review"];
-    review[@"User"] = PFUser.currentUser;
-    review[@"Text"] = self.reviewText.text;
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString = [dateFormat stringFromDate:today];
-    review[@"Date"] = dateString;
-    review[@"Weather"] = [self getWeatherDictionary:self.weather];
-    
-    //TODO: potentially repetitive code
-    [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Object saved!");
-        } else {
-            NSLog(@"Error: %@", error.description);
-        }
-    }];
     
     
     
@@ -128,10 +119,10 @@
 }
 
 - (void) getWeather {
+    self.currentUserLocation = self.locationManager.location;
     CLLocationCoordinate2D coordinate = [self.currentUserLocation coordinate];
     float latFloat = [[NSString stringWithFormat:@"%f", coordinate.latitude] floatValue];
     float longFloat = [[NSString stringWithFormat:@"%f", coordinate.longitude] floatValue];
-    
     [self.weatherRadar getCurrentWeather:latFloat longitude:longFloat completionBlock:^(Weather *weather){
         self.weather = weather;
     }];

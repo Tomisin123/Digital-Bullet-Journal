@@ -2,8 +2,6 @@
   <img src="https://raw.github.com/AFNetworking/AFNetworking/assets/afnetworking-logo.png" alt="AFNetworking" title="AFNetworking">
 </p>
 
-[![Build Status](https://travis-ci.org/AFNetworking/AFNetworking.svg)](https://travis-ci.org/AFNetworking/AFNetworking)
-
 AFNetworking is a delightful networking library for iOS and Mac OS X. It's built on top of the [Foundation URL Loading System](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html), extending the powerful high-level networking abstractions built into Cocoa. It has a modular architecture with well-designed, feature-rich APIs that are a joy to use.
 
 Perhaps the most important feature of all, however, is the amazing community of developers who use and contribute to AFNetworking every day. AFNetworking powers some of the most popular and critically-acclaimed apps on the iPhone, iPad, and Mac.
@@ -14,20 +12,12 @@ Choose AFNetworking for your next project, or migrate over your existing project
 
 - [Download AFNetworking](https://github.com/AFNetworking/AFNetworking/archive/master.zip) and try out the included Mac and iPhone example apps
 - Read the ["Getting Started" guide](https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking), [FAQ](https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ), or [other articles on the Wiki](https://github.com/AFNetworking/AFNetworking/wiki)
-- Check out the [documentation](http://cocoadocs.org/docsets/AFNetworking/) for a comprehensive look at all of the APIs available in AFNetworking
-- Read the [AFNetworking 2.0 Migration Guide](https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-2.0-Migration-Guide) for an overview of the architectural changes from 1.0.
-
-## Communication
-
-- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/afnetworking). (Tag 'afnetworking')
-- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/afnetworking).
-- If you **found a bug**, _and can provide steps to reliably reproduce it_, open an issue.
-- If you **have a feature request**, open an issue.
-- If you **want to contribute**, submit a pull request.
+- Check out the [documentation](http://cocoadocs.org/docsets/AFNetworking/2.0.0/) for a comprehensive look at all of the APIs available in AFNetworking
+- Questions? [Stack Overflow](http://stackoverflow.com/questions/tagged/afnetworking) is the best place to find answers
 
 ### Installation with CocoaPods
 
-[CocoaPods](https://cocoapods.org/) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like AFNetworking in your projects. See the ["Getting Started" guide for more information](https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking).
+[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like AFNetworking in your projects. See the ["Getting Started" guide for more information](https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking).
 
 #### Podfile
 
@@ -36,18 +26,27 @@ platform :ios, '7.0'
 pod "AFNetworking", "~> 2.0"
 ```
 
+## 2.0
+
+AFNetworking 2.0 is a major update to the framework. Building on 2 years of development, this new version introduces powerful new features, while providing an easy upgrade path for existing users.
+
+**Read the [AFNetworking 2.0 Migration Guide](https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-2.0-Migration-Guide) for an overview of the architectural and API changes.**
+
+### What's New
+
+- Refactored Architecture
+- Support for NSURLSession
+- Serialization Modules
+- Expanded UIKit Extensions
+- Real-time functionality with [Rocket](http://rocket.github.io)
+
 ## Requirements
 
-| AFNetworking Version | Minimum iOS Target  | Minimum OS X Target  | watchOS Target  |                                   Notes                                   |
-|:--------------------:|:---------------------------:|:----------------------------:|:----------------------------:|:-------------------------------------------------------------------------:|
-|          2.6+         |            iOS 7            |           OS X 10.9          | watchOS 2.0  |  |
-|          2.0.0 -> 2.5.4        |            iOS 6            |           OS X 10.8          | N/A | Xcode 5 is required. `NSURLSession` subspec requires iOS 7 or OS X 10.9. |
-|          [1.x](https://github.com/AFNetworking/AFNetworking/tree/1.x)         |            iOS 5            |         Mac OS X 10.7        | N/A |                                                                           |
-|        [0.10.x](https://github.com/AFNetworking/AFNetworking/tree/0.10.x)        |            iOS 4            |         Mac OS X 10.6        | N/A |                                                                           |
+AFNetworking 2.0 and higher requires Xcode 5, targeting either iOS 6.0 and above, or Mac OS 10.8 Mountain Lion ([64-bit with modern Cocoa runtime](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtVersionsPlatforms.html)) and above.
 
-(OS X projects must support [64-bit with modern Cocoa runtime](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtVersionsPlatforms.html)).
+For compatibility with iOS 5 or Mac OS X 10.7, use the [latest 1.x release](https://github.com/AFNetworking/AFNetworking/tree/1.x).
 
-> Programming in Swift? Try [Alamofire](https://github.com/Alamofire/Alamofire) for a more conventional set of APIs.
+For compatibility with iOS 4.3 or Mac OS X 10.6, use the [latest 0.10.x release](https://github.com/AFNetworking/AFNetworking/tree/0.10.x).
 
 ## Architecture
 
@@ -142,8 +141,8 @@ NSURL *URL = [NSURL URLWithString:@"http://example.com/download.zip"];
 NSURLRequest *request = [NSURLRequest requestWithURL:URL];
 
 NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+    NSURL *documentsDirectoryPath = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]];
+    return [documentsDirectoryPath URLByAppendingPathComponent:[targetPath lastPathComponent]];
 } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
     NSLog(@"File downloaded to: %@", filePath);
 }];
@@ -170,27 +169,6 @@ NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request from
 [uploadTask resume];
 ```
 
-#### Creating an Upload Task for a Multi-Part Request, with Progress
-
-```objective-c
-NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:@"http://example.com/upload" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileURL:[NSURL fileURLWithPath:@"file://path/to/image.jpg"] name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg" error:nil];
-    } error:nil];
-
-AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-NSProgress *progress = nil;
-
-NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-    if (error) {
-        NSLog(@"Error: %@", error);
-    } else {
-        NSLog(@"%@ %@", response, responseObject);
-    }
-}];
-
-[uploadTask resume];
-```
-
 #### Creating a Data Task
 
 ```objective-c
@@ -214,7 +192,7 @@ NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completion
 
 ### Request Serialization
 
-Request serializers create requests from URL strings, encoding parameters as either a query string or HTTP body.
+Request serializers create requests from URL strings, encoding parameters as either a query string or HTTP body. 
 
 ```objective-c
 NSString *URLString = @"http://example.com";
@@ -224,7 +202,7 @@ NSDictionary *parameters = @{@"foo": @"bar", @"baz": @[@1, @2, @3]};
 #### Query String Parameter Encoding
 
 ```objective-c
-[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:URLString parameters:parameters error:nil];
+[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:URLString parameters:parameters];
 ```
 
     GET http://example.com?foo=bar&baz[]=1&baz[]=2&baz[]=3
@@ -257,26 +235,17 @@ NSDictionary *parameters = @{@"foo": @"bar", @"baz": @[@1, @2, @3]};
 
 `AFNetworkReachabilityManager` monitors the reachability of domains, and addresses for both WWAN and WiFi network interfaces.
 
-* Do not use Reachability to determine if the original request should be sent.
-	* You should try to send it.
-* You can use Reachability to determine when a request should be automatically retried.
-	* Although it may still fail, a Reachability notification that the connectivity is available is a good time to retry something.
-* Network reachability is a useful tool for determining why a request might have failed.
-	* After a network request has failed, telling the user they're offline is better than giving them a more technical but accurate error, such as "request timed out."
-
-See also [WWDC 2012 session 706, "Networking Best Practices."](https://developer.apple.com/videos/play/wwdc2012-706/).
-
 #### Shared Network Reachability
 
 ```objective-c
 [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
     NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
 }];
-
-[[AFNetworkReachabilityManager sharedManager] startMonitoring];
 ```
 
-#### HTTP Manager Reachability
+#### HTTP Manager with Base URL
+
+When a `baseURL` is provided, network reachability is scoped to the host of that base URL.
 
 ```objective-c
 NSURL *baseURL = [NSURL URLWithString:@"http://example.com/"];
@@ -295,8 +264,6 @@ NSOperationQueue *operationQueue = manager.operationQueue;
             break;
     }
 }];
-
-[manager.reachabilityManager startMonitoring];
 ```
 
 ---
@@ -304,7 +271,7 @@ NSOperationQueue *operationQueue = manager.operationQueue;
 ### Security Policy
 
 `AFSecurityPolicy` evaluates server trust against pinned X.509 certificates and public keys over secure connections.
-
+ 
 Adding pinned SSL certificates to your app helps prevent man-in-the-middle attacks and other vulnerabilities. Applications dealing with sensitive customer data or financial information are strongly encouraged to route all communication over an HTTPS connection with SSL pinning configured and enabled.
 
 #### Allowing Invalid SSL Certificates
@@ -361,27 +328,42 @@ NSArray *operations = [AFURLConnectionOperation batchOfRequestOperations:@[...] 
 
 ## Unit Tests
 
-AFNetworking includes a suite of unit tests within the Tests subdirectory. In order to run the unit tests, you must install the testing dependencies via [CocoaPods](https://cocoapods.org/):
+AFNetworking includes a suite of unit tests within the Tests subdirectory. In order to run the unit tests, you must install the testing dependencies via CocoaPods:
 
     $ cd Tests
     $ pod install
 
 Once testing dependencies are installed, you can execute the test suite via the 'iOS Tests' and 'OS X Tests' schemes within Xcode.
 
+### Using xctool
+
+Tests can also be run from the command line or within a continuous integration environment with [`xctool`](https://github.com/facebook/xctool), which can be installed with [Homebrew](http://brew.sh):
+
+    $ brew update
+    $ brew install xctool --HEAD
+
+Once `xctool` is installed, you can execute the suite via `rake test`.
+
 ## Credits
 
-AFNetworking is owned and maintained by the [Alamofire Software Foundation](http://alamofire.org).
-
-AFNetworking was originally created by [Scott Raymond](https://github.com/sco/) and [Mattt Thompson](https://github.com/mattt/) in the development of [Gowalla for iPhone](https://en.wikipedia.org/wiki/Gowalla).
+AFNetworking was originally created by [Scott Raymond](https://github.com/sco/) and [Mattt Thompson](https://github.com/mattt/) in the development of [Gowalla for iPhone](http://en.wikipedia.org/wiki/Gowalla).
 
 AFNetworking's logo was designed by [Alan Defibaugh](http://www.alandefibaugh.com/).
 
-And most of all, thanks to AFNetworking's [growing list of contributors](https://github.com/AFNetworking/AFNetworking/graphs/contributors).
+And most of all, thanks to AFNetworking's [growing list of contributors](https://github.com/AFNetworking/AFNetworking/contributors).
 
-### Security Disclosure
+## Contact
 
-If you believe you have identified a security vulnerability with AFNetworking, you should report it as soon as possible via email to security@alamofire.org. Please do not post it to a public issue tracker.
+Follow AFNetworking on Twitter ([@AFNetworking](https://twitter.com/AFNetworking))
+
+### Maintainers
+
+- [Mattt Thompson](http://github.com/mattt) ([@mattt](https://twitter.com/mattt))
+
+## One More Thing...
+
+**AFNetworking: the Definitive Guide** written by Mattt Thompson and published by [O'Reilly](http://oreilly.com), will be available late 2013 / early 2014. [Sign up here to be notified about updates](http://eepurl.com/Flnvn).
 
 ## License
 
-AFNetworking is released under the MIT license. See LICENSE for details.
+AFNetworking is available under the MIT license. See the LICENSE file for more info.

@@ -9,6 +9,9 @@
 
 @implementation DatabaseUtilities
 
+NSMutableArray *objectList;
+
+
 +(void) testClassFunction {
     NSLog(@"TESTING CLASS FUNCTION");
 }
@@ -44,13 +47,13 @@
     [self savePFObject:habit];
 }
 
-+(void)createBullet:(PFUser*)user withType:(NSString*)type withRelevancy:(NSNumber*)relevant withCompletion:(NSNumber*)completion withDescription:(NSString*)description withDate:(NSString*)dateString{
++(void)createBullet:(PFUser*)user withType:(NSString*)type withRelevancy:(NSNumber*)relevant withCompletion:(NSNumber*)completion withDescription:(NSString*)desc withDate:(NSString*)dateString{
     PFObject *bullet = [PFObject objectWithClassName:@"Bullet"];
     bullet[@"User"] = PFUser.currentUser;
     bullet[@"Type"] = type;
     bullet[@"Relevant"] = relevant;
     bullet[@"Completed"] = completion;
-    bullet[@"Description"] = description;
+    bullet[@"Description"] = desc;
     bullet[@"Date"] = dateString;
     
     [self savePFObject:bullet];
@@ -65,24 +68,51 @@
     [self savePFObject:review];
 }
 
-+(NSArray*) fetchPFObjectList:(NSString*)className {
-    NSMutableArray *objectList = [[NSMutableArray alloc] init];
++(NSMutableArray*) fetchPFObjectList:(NSString*)className {
+    
+    NSLog(@"Fetching PFObject List");
+    
+    
+    objectList = [[NSMutableArray alloc] init];
     PFQuery *query = [PFQuery queryWithClassName:className];
-    //query.limit = 20;
+    query.limit = 20;
     [query orderByDescending:@"createdAt"];
+    
+    // a semaphore is used to prevent execution until the asynchronous task is completed
+//    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+//    NSLog(@"<<< sema created >>>");
+//    NSLog(@"THsi:%@",[query findObjectsInBackground]);
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if (objects != nil) {
             unsigned long i, cnt = [objects count];
             for(i = 0; i < cnt; i++)
             {
-                [objectList addObject:[objects objectAtIndex:i]];
+                [objectList addObject:[objects objectAtIndex:i][@"Name"]];
             }
+            NSLog(@"objectList:%@", objectList);
         }
         else {
             NSLog(@"%@", error.localizedDescription);
         }
+        
+        // send a signal that indicates that this asynchronous task is completed
+//        dispatch_semaphore_signal(sema);
+//        NSLog(@"<<< signal dispatched >>>");
     }];
+    
+    // execution is halted, until a signal is received from another thread ...
+//    NSLog(@"<<< wait for signal >>>");
+//    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+//    dispatch_release(sema);
+//    NSLog(@"<<< signal received >>>");
+    
+//    while ([objectList count] == 0){
+//        //NSLog(@"Count:%@", [objectList count]);
+//    }
+    NSLog(@"FinalobjectList:%@", objectList);
     return objectList;
+    
+    
 }
 
 @end

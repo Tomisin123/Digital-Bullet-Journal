@@ -12,6 +12,8 @@
 #import "LoginViewController.h"
 //#import "APIManager.h"
 
+#import "Parse/Parse.h"
+
 @interface HomeViewController ()
 
 @end
@@ -25,11 +27,16 @@
 
 //TODO: test log out method
 - (IBAction)didLogOut:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [PFUser logOut];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    appDelegate.window.rootViewController = loginViewController;
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
+    [self presentViewController:loginViewController animated:YES completion:nil];
+//    appDelegate.window.rootViewController = loginViewController;
     
     //[[APIManager shared] logout];
 }

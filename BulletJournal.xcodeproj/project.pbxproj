@@ -18,7 +18,8 @@
 		9483221F26BBC065004D0186 /* Habit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483221E26BBC065004D0186 /* Habit.m */; };
 		9483222226BBCE4B004D0186 /* HabitCheckerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222126BBCE4B004D0186 /* HabitCheckerCell.m */; };
 		9483222526BE583A004D0186 /* TimeSensitiveCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222426BE583A004D0186 /* TimeSensitiveCache.m */; };
-		9483222C26BE7CDC004D0186 /* DatabaseUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */; };
+		9483222C26BE7CDC004D0186 /* DatabaseUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9483223326C0D8D7004D0186 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483223226C0D8D7004D0186 /* SplashViewController.m */; };
 		94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35964269DE7EB00BE6A09 /* AppDelegate.m */; };
 		94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35967269DE7EB00BE6A09 /* SceneDelegate.m */; };
 		94E3596E269DE7EB00BE6A09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E3596C269DE7EB00BE6A09 /* Main.storyboard */; };
@@ -84,6 +85,8 @@
 		9483222426BE583A004D0186 /* TimeSensitiveCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeSensitiveCache.m; sourceTree = "<group>"; };
 		9483222A26BE7CDC004D0186 /* DatabaseUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseUtilities.h; sourceTree = "<group>"; };
 		9483222B26BE7CDC004D0186 /* DatabaseUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseUtilities.m; sourceTree = "<group>"; };
+		9483223126C0D8D7004D0186 /* SplashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		9483223226C0D8D7004D0186 /* SplashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		94E35960269DE7EB00BE6A09 /* BulletJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BulletJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E35963269DE7EB00BE6A09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94E35964269DE7EB00BE6A09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -219,6 +222,15 @@
 			path = "Habit Tracker Controllers";
 			sourceTree = "<group>";
 		};
+		9483222D26C0D602004D0186 /* Launch Screen Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9483223126C0D8D7004D0186 /* SplashViewController.h */,
+				9483223226C0D8D7004D0186 /* SplashViewController.m */,
+			);
+			path = "Launch Screen Controller";
+			sourceTree = "<group>";
+		};
 		94E35957269DE7EB00BE6A09 = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +293,7 @@
 		94E35998269F553300BE6A09 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9483222D26C0D602004D0186 /* Launch Screen Controller */,
 				9483222926BE6899004D0186 /* Habit Tracker Controllers */,
 				9483222826BE687E004D0186 /* Calendar Controllers */,
 				9483222626BE6832004D0186 /* Daily Log Controllers */,
@@ -409,6 +422,7 @@
 				TargetAttributes = {
 					94E3595F269DE7EB00BE6A09 = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1250;
 					};
 					94E3597A269DE7EC00BE6A09 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -597,6 +611,7 @@
 				94E359CA26B85B5C00BE6A09 /* NSDate+Utilities.m in Sources */,
 				9483221F26BBC065004D0186 /* Habit.m in Sources */,
 				94E359B726A0F59800BE6A09 /* User.m in Sources */,
+				9483223326C0D8D7004D0186 /* SplashViewController.m in Sources */,
 				94E3599E269F5F9400BE6A09 /* LoginViewController.m in Sources */,
 				9483221626BBB7EE004D0186 /* HabitViewController.m in Sources */,
 				94E359A4269F5FEC00BE6A09 /* DailyReviewViewController.m in Sources */,
@@ -772,6 +787,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BR38JM45T5;
 				INFOPLIST_FILE = BulletJournal/Info.plist;
@@ -781,6 +797,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.og.tomisin.BulletJournal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BulletJournal/Utilities/BulletJournal-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -791,6 +810,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BR38JM45T5;
 				INFOPLIST_FILE = BulletJournal/Info.plist;
@@ -800,6 +820,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.og.tomisin.BulletJournal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BulletJournal/Utilities/BulletJournal-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

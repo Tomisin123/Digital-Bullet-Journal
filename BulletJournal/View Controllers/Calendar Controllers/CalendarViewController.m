@@ -17,15 +17,17 @@
 #import "DailyReviewViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "TimeSensitiveCache.h"
+#import "DatabaseUtilities.h"
 
-@interface CalendarViewController () <FSCalendarDelegate, CLLocationManagerDelegate, NSCacheDelegate>
+@interface CalendarViewController () <FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance, CLLocationManagerDelegate, NSCacheDelegate>
 
 @property (weak, nonatomic) IBOutlet FSCalendar *calendar;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherImage;
 @property (weak, nonatomic) IBOutlet UILabel *weatherHigh;
 @property (weak, nonatomic) IBOutlet UILabel *weatherLow;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dayPreview;
+//@property (weak, nonatomic) IBOutlet UILabel *dayPreview;
+@property (weak, nonatomic) IBOutlet UITextView *dayPreview;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSString *latitude;
 @property (strong, nonatomic) NSString *longitude;
@@ -43,32 +45,63 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //Initializing Calendar information
     self.calendar.delegate = self;
+    self.calendar.dataSource = self;
+    [self styleCalendar];
+    self.dateSelected = [[NSDate date] dateAtStartOfDay];
+    [self.calendar selectDate:self.dateSelected];
     
     //Initializing Location for Weather Information
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization]; //non-blocking call
-    self.currentUserLocation = [[CLLocation alloc] initWithLatitude:32.7767 longitude:-96.7970]; //TODO: This sets coordinates for Dallas, TX
+    self.currentUserLocation = self.locationManager.location;
     self.weatherRadar = [[WeatherRadar alloc] init];
     
-    
-    //Initializing Calendar information
-    self.dateSelected = [[NSDate date] dateAtStartOfDay];
-    [self.calendar selectDate:self.dateSelected];
     
     //Initializing Cache
     self.cache = [[TimeSensitiveCache alloc] init];
     self.cacheTimeInterval = 3600; //Storing
+    
+    self.dayPreview.editable = NO;
+}
+
+-(void)styleCalendar{
+    
+    self.calendar.scope = FSCalendarScopeMonth;
+    self.calendar.appearance.titleFont = [UIFont systemFontOfSize:15];
+    self.calendar.appearance.headerTitleFont = [UIFont boldSystemFontOfSize:20];
+    self.calendar.appearance.weekdayFont = [UIFont boldSystemFontOfSize:15];
+    
+    self.calendar.appearance.todayColor = [UIColor systemGreenColor];
+    self.calendar.appearance.titleTodayColor = [UIColor whiteColor];
+    self.calendar.appearance.titleDefaultColor = [UIColor systemBlueColor];
+    self.calendar.appearance.headerTitleColor = [UIColor systemPinkColor];
+    self.calendar.appearance.weekdayTextColor = [UIColor systemRedColor];
+}
+
+- (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleDefaultColorForDate:(NSDate *)date{
+    if ([date isTypicallyWorkday]){
+        return [UIColor greenColor];
+    }
+    return nil;
+}
+
+- (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date{
+    if ([date isToday]){
+        return 1;
+    }
+    return 0;
+}
+
+- (NSDate *)minimumDateForCalendar:(FSCalendar *)calendar {
+    return PFUser.currentUser.createdAt;
 }
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition{
     
-    //TODO: potentially repetitive code
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"dd/MM/yyyy";
-    NSString *dateString = [formatter stringFromDate:date];
-    NSLog(@"%@", dateString);
+    NSString *dateString = [DatabaseUtilities getDateString:date];
     self.dateLabel.text = dateString;
     self.dateSelected = date;
     
@@ -77,7 +110,7 @@
     [self updateWeather];
         
     //Query to load the bottom half of the days
-    //TODO: potentially repetitive code
+    //TODO: potentially repetitive code (fetchBullets)
     self.dayPreview.text = @"";
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
     query.limit = 20;
@@ -108,18 +141,15 @@
 - (void) updateWeather {
     
     //Getting Latitude and Longitude
+    self.currentUserLocation = self.locationManager.location;
     CLLocationCoordinate2D coordinate = [self.currentUserLocation coordinate];
     self.latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
     self.longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
     float latFloat = [self.latitude floatValue];
     float longFloat = [self.longitude floatValue];
-    
+        
     //Formatting Weather
-    //TODO: potentially repetitive code
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    //formatter.dateFormat = @"EEEE MM/dd";
-    formatter.dateFormat = @"dd/MM/yyyy";
-    NSString *dateString = [formatter stringFromDate:self.dateSelected];
+    NSString *dateString = [DatabaseUtilities getDateString:self.dateSelected];
     
     //Obtaining Weather Predictions Based on Date chosen from calendar
     //If date selected is today, just use current weather predictor for today

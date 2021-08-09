@@ -9,7 +9,9 @@ target 'BulletJournal' do
   pod "Parse"
   pod 'FSCalendar'
   pod "AFNetworking", "~> 2.0"
+  pod 'BDBOAuth1Manager'
   pod 'EGOCache', '~> 2.2.0'
+  pod 'pop', '~> 1.0'
 
   target 'BulletJournalTests' do
     inherit! :search_paths

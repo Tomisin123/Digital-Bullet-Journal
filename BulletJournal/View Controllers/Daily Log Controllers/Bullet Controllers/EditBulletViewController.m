@@ -8,6 +8,7 @@
 #import "EditBulletViewController.h"
 
 #import "Parse/Parse.h"
+#import "DatabaseUtilities.h"
 
 @interface EditBulletViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UIPickerView *typePicker;
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *desc;
 @property (weak, nonatomic) IBOutlet UISwitch *completed;
 @property (weak, nonatomic) IBOutlet UISwitch *unnecessary;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 
 
@@ -46,15 +48,22 @@
         NSLog(@"Invalid Bullet Type");
     }
     
-    [self.unnecessary setOn:NO];
-    [self.completed setOn:NO];
-    
+    [self.unnecessary setOn:!self.bullet[@"Relevant"]];
+    [self.completed setOn:self.bullet[@"Completed"]];
     self.desc.text = self.bullet[@"Description"];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    
+}
+
+-(void)dismissKeyboard
+{
+    [self.desc resignFirstResponder];
 }
 
 - (IBAction)didEditBullet:(id)sender {
-    
-    PFObject *bullet = [PFObject objectWithClassName:@"Bullet"];
+    [self.activityIndicator startAnimating];
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
     
     //Delete bullet that already exists in backend
@@ -71,29 +80,18 @@
         else{
             NSLog(@"%@", error.localizedDescription);
         }
+        [self.activityIndicator stopAnimating];
     }];
     
     //Create new bullet with updated information
-    //TODO: potentially repetitive code
-    bullet[@"User"] = PFUser.currentUser;
-    NSInteger row = [self.typePicker selectedRowInComponent:0];
-    bullet[@"Type"] = [self.bulletTypePickerArray objectAtIndex:row];;
-    bullet[@"Relevant"] = [NSNumber numberWithBool:!self.unnecessary.isOn];
-    bullet[@"Completed"] = [NSNumber numberWithBool:self.completed.isOn];
-    bullet[@"Description"] = self.desc.text;
     NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString = [dateFormat stringFromDate:today];
-    bullet[@"Date"] = dateString;
+    NSString *dateString = [DatabaseUtilities getDateString:today]; //TODO: double check that you only want to use today and not self.date
+    NSInteger row = [self.typePicker selectedRowInComponent:0];
+    NSString *type = [self.bulletTypePickerArray objectAtIndex:row];
+    [DatabaseUtilities createBullet:PFUser.user withType:type withRelevancy:[NSNumber numberWithBool:!self.unnecessary.isOn] withCompletion:[NSNumber numberWithBool:self.completed.isOn] withDescription:self.desc.text withDate:dateString];
     
-    [bullet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Object saved!");
-        } else {
-            NSLog(@"Error: %@", error.description);
-        }
-    }];
+    
+    
     
 }
 

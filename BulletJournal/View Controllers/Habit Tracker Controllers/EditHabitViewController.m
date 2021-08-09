@@ -7,10 +7,16 @@
 
 #import "EditHabitViewController.h"
 
-@interface EditHabitViewController ()
+#import "DatabaseUtilities.h"
+#import "FSCalendar.h"
+#import "NSDate+Utilities.h"
+
+@interface EditHabitViewController () <FSCalendarDelegate, FSCalendarDelegateAppearance, FSCalendarDataSource>
+
 @property (weak, nonatomic) IBOutlet UITextField *habitName;
 @property (weak, nonatomic) IBOutlet UITextView *reason;
 @property (strong, nonatomic) NSArray *datesCompleted;
+@property (weak, nonatomic) IBOutlet FSCalendar *calendar;
 
 @end
 
@@ -20,37 +26,48 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //Initializing Calendar information
+    self.calendar.delegate = self;
+    self.calendar.dataSource = self;
+    self.calendar.appearance.todayColor = [UIColor whiteColor];
+    
     self.habitName.text = self.habit[@"Name"];
     self.reason.text = self.habit[@"Reason"];
     self.datesCompleted = self.habit[@"DatesCompleted"];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    
+}
+
+-(void)dismissKeyboard
+{
+    [self.habitName resignFirstResponder];
+    [self.reason resignFirstResponder];
+}
+
+
+- (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleDefaultColorForDate:(NSDate *)date{
+    
+    if ([self.datesCompleted containsObject:date]){
+        return [UIColor greenColor];
+    }
+    return [UIColor systemPinkColor];
 }
 
 - (IBAction)didEditHabit:(id)sender {
-    PFObject *habitObj = [PFObject objectWithClassName:@"Habit"];
     
     [self didDeleteHabit:nil];
     
-    //TODO: potentially repetitive code
-    habitObj[@"User"] = PFUser.currentUser;
-    habitObj[@"Name"] = self.habitName.text;
-    habitObj[@"Reason"] = self.reason.text;
-    habitObj[@"DatesCompleted"] = self.datesCompleted;
-    
-    [habitObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Object saved!");
-        } else {
-            NSLog(@"Error: %@", error.description);
-        }
-    }];
+    [DatabaseUtilities createHabit:PFUser.currentUser withName:self.habitName.text withReason:self.reason.text withDatesCompleted:self.datesCompleted];
+
     
 }
 
 - (IBAction)didDeleteHabit:(id)sender {
     
     PFQuery *query = [PFQuery queryWithClassName:@"Habit"];
-    
+
     //Delete habit that already exists in backend
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable habits, NSError * _Nullable error) {
         if (habits != nil) {
@@ -67,6 +84,7 @@
         }
     }];
 }
+
 
 
 @end

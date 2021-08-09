@@ -1,5 +1,6 @@
 // UIProgressView+AFNetworking.h
-// Copyright (c) 2011–2015 Alamofire Software Foundation (http://alamofire.org/)
+//
+// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +28,6 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class AFURLConnectionOperation;
 
 /**
@@ -42,11 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Binds the progress to the upload progress of the specified session task.
-
+ 
  @param task The session task.
  @param animated `YES` if the change should be animated, `NO` if the change should happen immediately.
  */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
 - (void)setProgressWithUploadProgressOfTask:(NSURLSessionUploadTask *)task
                                    animated:(BOOL)animated;
 #endif
@@ -57,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param task The session task.
  @param animated `YES` if the change should be animated, `NO` if the change should happen immediately.
  */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
 - (void)setProgressWithDownloadProgressOfTask:(NSURLSessionDownloadTask *)task
                                      animated:(BOOL)animated;
 #endif
@@ -85,7 +84,5 @@ NS_ASSUME_NONNULL_BEGIN
                                           animated:(BOOL)animated;
 
 @end
-
-NS_ASSUME_NONNULL_END
 
 #endif

@@ -1,25 +1,25 @@
 PODS:
-  - AFNetworking (2.7.0):
-    - AFNetworking/NSURLConnection (= 2.7.0)
-    - AFNetworking/NSURLSession (= 2.7.0)
-    - AFNetworking/Reachability (= 2.7.0)
-    - AFNetworking/Security (= 2.7.0)
-    - AFNetworking/Serialization (= 2.7.0)
-    - AFNetworking/UIKit (= 2.7.0)
-  - AFNetworking/NSURLConnection (2.7.0):
+  - AFNetworking (2.0.3):
+    - AFNetworking/NSURLConnection (= 2.0.3)
+    - AFNetworking/NSURLSession (= 2.0.3)
+    - AFNetworking/Reachability (= 2.0.3)
+    - AFNetworking/Security (= 2.0.3)
+    - AFNetworking/Serialization (= 2.0.3)
+    - AFNetworking/UIKit (= 2.0.3)
+  - AFNetworking/NSURLConnection (2.0.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.7.0):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.7.0)
-  - AFNetworking/Security (2.7.0)
-  - AFNetworking/Serialization (2.7.0)
-  - AFNetworking/UIKit (2.7.0):
+  - AFNetworking/NSURLSession (2.0.3):
     - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
+  - AFNetworking/Reachability (2.0.3)
+  - AFNetworking/Security (2.0.3)
+  - AFNetworking/Serialization (2.0.3)
+  - AFNetworking/UIKit (2.0.3):
+    - AFNetworking/NSURLConnection
+  - BDBOAuth1Manager (1.0.2):
+    - AFNetworking/NSURLConnection (~> 2.0.0)
+    - AFNetworking/NSURLSession (~> 2.0.0)
   - Bolts/Tasks (1.9.1)
   - EGOCache (2.2.0)
   - FSCalendar (2.8.2)
@@ -27,28 +27,35 @@ PODS:
     - Parse/Core (= 1.19.2)
   - Parse/Core (1.19.2):
     - Bolts/Tasks (= 1.9.1)
+  - pop (1.0.12)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - BDBOAuth1Manager
   - EGOCache (~> 2.2.0)
   - FSCalendar
   - Parse
+  - pop (~> 1.0)
 
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - BDBOAuth1Manager
     - Bolts
     - EGOCache
     - FSCalendar
     - Parse
+    - pop
 
 SPEC CHECKSUMS:
-  AFNetworking: 8dd5f9b9691e09186393069a12cc3b5ed7c8b511
+  AFNetworking: 6b0f579b7cfe3ede501df0248c7ee1976e926aec
+  BDBOAuth1Manager: 47ac543c9af97aa05da7e993e4f5a8982ce0048c
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   EGOCache: 191fd213da6804d487b49b1a91772ba904f3e324
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
 
-PODFILE CHECKSUM: c5d3c68e9a54f9516bcb5c34fcc5c6fe072b2e60
+PODFILE CHECKSUM: ed12d32fbbe0a9e7379709ab25deeb464458613a
 
 COCOAPODS: 1.10.1

@@ -12,11 +12,13 @@
 #import "EditBulletViewController.h"
 #import "DailyTabBarController.h"
 #import "NSDate+Utilities.h"
+#import "DatabaseUtilities.h"
 
 @interface DailyTodoViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *bullets;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -26,10 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
-    self.bullets = [[NSMutableArray alloc] init];
+    [self.activityIndicator startAnimating];
     
     //Setting Date for Bullet Recall
     if (self.date == nil){
@@ -40,17 +39,18 @@
         NSLog(@"Date given: %@", self.date);
     }
     
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    self.bullets = [[NSMutableArray alloc] init];
+    
     [self fetchBullets];
-    
-    
     
 }
 
 - (void) fetchBullets {
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"dd/MM/yyyy";
-    NSString *dateString = [formatter stringFromDate:self.date];
+    NSString *dateString = [DatabaseUtilities getDateString:self.date];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
     query.limit = 20;
@@ -71,6 +71,8 @@
         else {
             NSLog(@"%@", error.localizedDescription);
         }
+        
+        [self.activityIndicator stopAnimating];
     }];
     
 }
@@ -79,11 +81,54 @@
     BulletCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BulletCell"];
     cell.bullet = self.bullets[indexPath.row];
     cell.desc.text = cell.bullet[@"Description"];
+    
+    if([cell.bullet[@"Completed"]  isEqual: @YES]){
+        cell.desc.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    }
+    if([cell.bullet[@"Relevant"]  isEqual: @NO]){
+        
+    }
+    
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  {
     return self.bullets.count;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        PFObject *bullet = [self.bullets objectAtIndex:indexPath.row];
+        [self deleteBullet:bullet];
+        [self.bullets removeObjectAtIndex:indexPath.row];
+        [tableView reloadData];
+    }
+}
+
+- (void)deleteBullet:(PFObject*)bullet {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Bullet"];
+
+    //Delete habit that already exists in backend
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable bullets, NSError * _Nullable error) {
+        if (bullets != nil) {
+            for (PFObject *bulletObj in bullets) {
+                PFUser *habitUser = bullet[@"User"];
+                if([bulletObj[@"Description"] isEqualToString:bullet[@"Description"]] && [[PFUser.currentUser objectId] isEqual:[habitUser objectId]]){
+                    [bulletObj deleteInBackground];
+                    
+                }
+            }
+        }
+        else{
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
 }
 
 

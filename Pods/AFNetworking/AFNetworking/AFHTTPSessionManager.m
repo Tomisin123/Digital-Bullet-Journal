@@ -1,5 +1,6 @@
 // AFHTTPSessionManager.m
-// Copyright (c) 2011–2015 Alamofire Software Foundation (http://alamofire.org/)
+//
+// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,10 +22,9 @@
 
 #import "AFHTTPSessionManager.h"
 
-#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090) || TARGET_WATCH_OS
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
 
-#import "AFURLRequestSerialization.h"
-#import "AFURLResponseSerialization.h"
+#import "AFHTTPRequestOperation.h"
 
 #import <Availability.h>
 #import <Security/Security.h>
@@ -37,18 +37,16 @@
 #import <netdb.h>
 #endif
 
-#if TARGET_OS_IOS
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 #import <UIKit/UIKit.h>
-#elif TARGET_OS_WATCH
-#import <WatchKit/WatchKit.h>
 #endif
 
 @interface AFHTTPSessionManager ()
 @property (readwrite, nonatomic, strong) NSURL *baseURL;
+@property (readwrite, nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
 @end
 
 @implementation AFHTTPSessionManager
-@dynamic responseSerializer;
 
 + (instancetype)manager {
     return [[[self class] alloc] initWithBaseURL:nil];
@@ -84,7 +82,17 @@
     self.requestSerializer = [AFHTTPRequestSerializer serializer];
     self.responseSerializer = [AFJSONResponseSerializer serializer];
 
+    if (self.baseURL.host) {
+        self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain:self.baseURL.host];
+    } else {
+        self.reachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    }
+
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p, baseURL: %@, session: %@, operationQueue: %@>", NSStringFromClass([self class]), self, [self.baseURL absoluteString], self.session, self.operationQueue];
 }
 
 #pragma mark -
@@ -107,67 +115,86 @@
 #pragma mark -
 
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
-                   parameters:(id)parameters
-                      success:(void (^)(NSURLSessionDataTask *task, id __nullable responseObject))success
+                   parameters:(NSDictionary *)parameters
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
-    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters];
 
-    [dataTask resume];
+    __block NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+        if (error) {
+            if (failure) {
+                failure(task, error);
+            }
+        } else {
+            if (success) {
+                success(task, responseObject);
+            }
+        }
+    }];
 
-    return dataTask;
+    [task resume];
+
+    return task;
 }
 
 - (NSURLSessionDataTask *)HEAD:(NSString *)URLString
-                    parameters:(id)parameters
+                    parameters:(NSDictionary *)parameters
                        success:(void (^)(NSURLSessionDataTask *task))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
-    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"HEAD" URLString:URLString parameters:parameters success:^(NSURLSessionDataTask *task, __unused id responseObject) {
-        if (success) {
-            success(task);
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"HEAD" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters];
+
+    __block NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id __unused responseObject, NSError *error) {
+        if (error) {
+            if (failure) {
+                failure(task, error);
+            }
+        } else {
+            if (success) {
+                success(task);
+            }
         }
-    } failure:failure];
+    }];
 
-    [dataTask resume];
+    [task resume];
 
-    return dataTask;
+    return task;
 }
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(id)parameters
-                       success:(void (^)(NSURLSessionDataTask *task, id __nullable responseObject))success
+                    parameters:(NSDictionary *)parameters
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
-    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"POST" URLString:URLString parameters:parameters success:success failure:failure];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters];
 
-    [dataTask resume];
+    __block NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+        if (error) {
+            if (failure) {
+                failure(task, error);
+            }
+        } else {
+            if (success) {
+                success(task, responseObject);
+            }
+        }
+    }];
 
-    return dataTask;
+    [task resume];
+
+    return task;
 }
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(id)parameters
+                    parameters:(NSDictionary *)parameters
      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
-                       success:(void (^)(NSURLSessionDataTask *task, id __nullable responseObject))success
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
-    NSError *serializationError = nil;
-    NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:&serializationError];
-    if (serializationError) {
-        if (failure) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
-                failure(nil, serializationError);
-            });
-#pragma clang diagnostic pop
-        }
+    NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block];
 
-        return nil;
-    }
-
-    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:nil completionHandler:^(NSURLResponse * __unused response, id __nullable responseObject, NSError *error) {
+    __block NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
         if (error) {
             if (failure) {
                 failure(task, error);
@@ -185,115 +212,90 @@
 }
 
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
-                   parameters:(id)parameters
-                      success:(void (^)(NSURLSessionDataTask *task, id __nullable responseObject))success
+                   parameters:(NSDictionary *)parameters
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
-    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"PUT" URLString:URLString parameters:parameters success:success failure:failure];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"PUT" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters];
 
-    [dataTask resume];
-
-    return dataTask;
-}
-
-- (NSURLSessionDataTask *)PATCH:(NSString *)URLString
-                     parameters:(id)parameters
-                        success:(void (^)(NSURLSessionDataTask *task, id __nullable responseObject))success
-                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
-{
-    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"PATCH" URLString:URLString parameters:parameters success:success failure:failure];
-
-    [dataTask resume];
-
-    return dataTask;
-}
-
-- (NSURLSessionDataTask *)DELETE:(NSString *)URLString
-                      parameters:(id)parameters
-                         success:(void (^)(NSURLSessionDataTask *task, id __nullable responseObject))success
-                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
-{
-    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"DELETE" URLString:URLString parameters:parameters success:success failure:failure];
-
-    [dataTask resume];
-
-    return dataTask;
-}
-
-- (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
-                                       URLString:(NSString *)URLString
-                                      parameters:(id)parameters
-                                         success:(void (^)(NSURLSessionDataTask *, id))success
-                                         failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
-{
-    NSError *serializationError = nil;
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
-    if (serializationError) {
-        if (failure) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu"
-            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
-                failure(nil, serializationError);
-            });
-#pragma clang diagnostic pop
-        }
-
-        return nil;
-    }
-
-    __block NSURLSessionDataTask *dataTask = nil;
-    dataTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id __nullable responseObject, NSError *error) {
+    __block NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
         if (error) {
             if (failure) {
-                failure(dataTask, error);
+                failure(task, error);
             }
         } else {
             if (success) {
-                success(dataTask, responseObject);
+                success(task, responseObject);
             }
         }
     }];
 
-    return dataTask;
+    [task resume];
+
+    return task;
 }
 
-#pragma mark - NSObject
+- (NSURLSessionDataTask *)PATCH:(NSString *)URLString
+                     parameters:(NSDictionary *)parameters
+                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+{
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"PATCH" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters];
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p, baseURL: %@, session: %@, operationQueue: %@>", NSStringFromClass([self class]), self, [self.baseURL absoluteString], self.session, self.operationQueue];
+    __block NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+        if (error) {
+            if (failure) {
+                failure(task, error);
+            }
+        } else {
+            if (success) {
+                success(task, responseObject);
+            }
+        }
+    }];
+    
+    [task resume];
+
+    return task;
 }
 
-#pragma mark - NSSecureCoding
+- (NSURLSessionDataTask *)DELETE:(NSString *)URLString
+                      parameters:(NSDictionary *)parameters
+                         success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+{
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"DELETE" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters];
 
-+ (BOOL)supportsSecureCoding {
-    return YES;
+    __block NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+        if (error) {
+            if (failure) {
+                failure(task, error);
+            }
+        } else {
+            if (success) {
+                success(task, responseObject);
+            }
+        }
+    }];
+
+    [task resume];
+
+    return task;
 }
+
+#pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)decoder {
-    NSURL *baseURL = [decoder decodeObjectOfClass:[NSURL class] forKey:NSStringFromSelector(@selector(baseURL))];
-    NSURLSessionConfiguration *configuration = [decoder decodeObjectOfClass:[NSURLSessionConfiguration class] forKey:@"sessionConfiguration"];
-    if (!configuration) {
-        NSString *configurationIdentifier = [decoder decodeObjectOfClass:[NSString class] forKey:@"identifier"];
-        if (configurationIdentifier) {
-#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000) || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 1100)
-            configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:configurationIdentifier];
-#else
-            configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:configurationIdentifier];
-#endif
-        }
-    }
+    NSURL *baseURL = [decoder decodeObjectForKey:NSStringFromSelector(@selector(baseURL))];
+    NSURLSessionConfiguration *configuration = [decoder decodeObjectForKey:@"sessionConfiguration"];
 
     self = [self initWithBaseURL:baseURL sessionConfiguration:configuration];
     if (!self) {
         return nil;
     }
 
-    self.requestSerializer = [decoder decodeObjectOfClass:[AFHTTPRequestSerializer class] forKey:NSStringFromSelector(@selector(requestSerializer))];
-    self.responseSerializer = [decoder decodeObjectOfClass:[AFHTTPResponseSerializer class] forKey:NSStringFromSelector(@selector(responseSerializer))];
-    AFSecurityPolicy *decodedPolicy = [decoder decodeObjectOfClass:[AFSecurityPolicy class] forKey:NSStringFromSelector(@selector(securityPolicy))];
-    if (decodedPolicy) {
-        self.securityPolicy = decodedPolicy;
-    }
+    self.requestSerializer = [decoder decodeObjectForKey:NSStringFromSelector(@selector(requestSerializer))];
+    self.responseSerializer = [decoder decodeObjectForKey:NSStringFromSelector(@selector(responseSerializer))];
 
     return self;
 }
@@ -302,14 +304,9 @@
     [super encodeWithCoder:coder];
 
     [coder encodeObject:self.baseURL forKey:NSStringFromSelector(@selector(baseURL))];
-    if ([self.session.configuration conformsToProtocol:@protocol(NSCoding)]) {
-        [coder encodeObject:self.session.configuration forKey:@"sessionConfiguration"];
-    } else {
-        [coder encodeObject:self.session.configuration.identifier forKey:@"identifier"];
-    }
+    [coder encodeObject:self.session.configuration forKey:@"sessionConfiguration"];
     [coder encodeObject:self.requestSerializer forKey:NSStringFromSelector(@selector(requestSerializer))];
     [coder encodeObject:self.responseSerializer forKey:NSStringFromSelector(@selector(responseSerializer))];
-    [coder encodeObject:self.securityPolicy forKey:NSStringFromSelector(@selector(securityPolicy))];
 }
 
 #pragma mark - NSCopying
@@ -319,7 +316,7 @@
 
     HTTPClient.requestSerializer = [self.requestSerializer copyWithZone:zone];
     HTTPClient.responseSerializer = [self.responseSerializer copyWithZone:zone];
-    HTTPClient.securityPolicy = [self.securityPolicy copyWithZone:zone];
+    
     return HTTPClient;
 }
 

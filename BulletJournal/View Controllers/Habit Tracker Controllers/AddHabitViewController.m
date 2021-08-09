@@ -8,6 +8,7 @@
 #import "AddHabitViewController.h"
 
 #import "Parse/Parse.h"
+#import "DatabaseUtilities.h"
 
 @interface AddHabitViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *habitName;
@@ -20,25 +21,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    
 }
 
+-(void)dismissKeyboard
+{
+    [self.habitName resignFirstResponder];
+    [self.reason resignFirstResponder];
+}
+
+
 - (IBAction)didCreateHabit:(id)sender {
+        
+    [DatabaseUtilities createHabit:PFUser.currentUser withName:self.habitName.text withReason:self.reason.text withDatesCompleted: [[NSArray alloc] init]];
     
-    //TODO: potentially repetitive code
-    PFObject *habit = [PFObject objectWithClassName:@"Habit"];
-    habit[@"User"] = PFUser.currentUser;
-    habit[@"Name"] = self.habitName.text;
-    habit[@"Reason"] = self.reason.text;
-    habit[@"DatesCompleted"] = [[NSArray alloc] init];
-    
-    [habit saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Object saved!");
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            NSLog(@"Error: %@", error.description);
-        }
-    }];
 }
 
 @end

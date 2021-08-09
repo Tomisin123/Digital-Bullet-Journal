@@ -8,12 +8,15 @@
 #import "AddBulletViewController.h"
 
 #import "Parse/Parse.h"
+#import "DatabaseUtilities.h"
+#import "DailyTodoViewController.h"
 
 @interface AddBulletViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UIPickerView *typePicker;
 @property (strong, nonatomic) NSArray *bulletTypePickerArray;
 @property (weak, nonatomic) IBOutlet UITextField *desc;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -29,22 +32,34 @@
     //TODO: make some type of enum out of this
     self.bulletTypePickerArray = [NSArray arrayWithObjects:@"Task", @"Event", @"Note", nil];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    
+}
+
+-(void)dismissKeyboard
+{
+    [self.desc resignFirstResponder];
 }
 
 - (IBAction)didCreateBullet:(id)sender {
     
-    //TODO: potentially repetitive code, have to change if creating enum, also need to change last pickerView method
+    //TODO: have to change createBullet if creating enum, also need to change last pickerView method
+    
+    NSInteger row = [self.typePicker selectedRowInComponent:0];
+    NSString *type = [self.bulletTypePickerArray objectAtIndex:row];
+    
+    NSDate *dateSelected = [self.datePicker date];
+    NSString *dateString = [DatabaseUtilities getDateString:dateSelected];
+    
+//    [DatabaseUtilities createBullet:PFUser.currentUser withType:type withRelevancy:@YES withCompletion:@NO withDescription:self.desc.text withDate:dateString];
+    
     PFObject *bullet = [PFObject objectWithClassName:@"Bullet"];
     bullet[@"User"] = PFUser.currentUser;
-    NSInteger row = [self.typePicker selectedRowInComponent:0];
-    bullet[@"Type"] = [self.bulletTypePickerArray objectAtIndex:row];
+    bullet[@"Type"] = type;
     bullet[@"Relevant"] = @YES;
     bullet[@"Completed"] = @NO;
     bullet[@"Description"] = self.desc.text;
-    NSDate *dateSelected = [self.datePicker date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString = [dateFormat stringFromDate:dateSelected];
     bullet[@"Date"] = dateString;
     
     [bullet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -53,8 +68,23 @@
         } else {
             NSLog(@"Error: %@", error.description);
         }
+        [self dismissViewControllerAnimated:TRUE completion:nil];
     }];
     
+    
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    NSLog(@"View Will Disappear");
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DailyTodoViewController *dailyTodoVC = [storyboard instantiateViewControllerWithIdentifier:@"DailyTodoViewController"];
+    [dailyTodoVC.tableView reloadData];
+
+
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {

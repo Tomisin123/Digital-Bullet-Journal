@@ -11,11 +11,13 @@
 #import "HabitCell.h"
 #import "EditHabitViewController.h"
 #import "AddHabitViewController.h"
+#import "DatabaseUtilities.h"
 
 @interface HabitViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *habits;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -43,7 +45,18 @@
 
 
 - (void) fetchHabits {
-    //TODO: potentially repetitive code
+    [self.activityIndicator startAnimating];
+//    self.habits = [DatabaseUtilities fetchPFObjectList:@"Habit"];
+//    NSLog(@"Habit List:%@", self.habits);
+//    for (Habit *habit in self.habits){
+//        NSLog(@"Habit:%@", habit);
+//        if (![DatabaseUtilities checkUserIsCurrrentUser:habit[@"User"]]){
+//            [self.habits removeObject:habit];
+//        }
+//    }
+//    [self.tableView reloadData];
+    
+//    //TODO: potentially repetitive code
     PFQuery *query = [PFQuery queryWithClassName:@"Habit"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];
@@ -62,6 +75,7 @@
         else {
             NSLog(@"%@", error.localizedDescription);
         }
+        [self.activityIndicator stopAnimating];
     }];
 }
 
