@@ -13,6 +13,7 @@ target 'BulletJournal' do
   pod 'EGOCache', '~> 2.2.0'
   pod 'pop', '~> 1.0'
   pod 'CCTextFieldEffects'
+  pod 'Charts'
 
   target 'BulletJournalTests' do
     inherit! :search_paths

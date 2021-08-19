@@ -87,8 +87,9 @@
     cell.desc.text = cell.bullet[@"Description"];
     NSString *type = cell.bullet[@"Type"];
 
-
     [cell.img setTintColor:[UIColor blackColor]];
+
+    
     if ([type isEqualToString:@"Task"]){
         cell.img.image = [UIImage systemImageNamed:@"hammer"];
     }
@@ -102,9 +103,12 @@
     cell.backgroundColor = notebookPaper;
     
     if([cell.bullet[@"Completed"]  isEqual: @YES]){
-        cell.desc.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-        cell.desc.textColor = [UIColor lightGrayColor];
+        //cell.desc.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+        cell.desc.font = [UIFont boldSystemFontOfSize:17.0];
+        cell.img.image = [UIImage systemImageNamed: @"checkmark"];
+        cell.desc.textColor = [UIColor systemGreenColor];
         cell.desc.alpha = .5;
+        [cell.img setBackgroundColor:[UIColor systemGreenColor]];
     }
     if([cell.bullet[@"Relevant"]  isEqual: @NO]){
         //Add Strikethrough for text
@@ -142,27 +146,10 @@
         handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         
         PFObject *bullet = [self.bullets objectAtIndex:indexPath.row];
-        PFUser *user = bullet[@"User"];
-        NSString *type = bullet[@"Type"];
-        NSNumber *relevancy = bullet[@"Relevant"];
-        NSNumber *completion = bullet[@"Completed"];
-        NSString *desc = bullet[@"Description"];
+        
         NSString *dateString = [DatabaseUtilities getDateString:[self.date dateByAddingDays:1]];
-        [self deleteBullet:bullet];
-        PFObject *newBullet = [PFObject objectWithClassName:@"Bullet"];
-        newBullet[@"User"] = user;
-        newBullet[@"Type"] = type;
-        newBullet[@"Relevant"] = relevancy;
-        newBullet[@"Completed"] = completion;
-        newBullet[@"Description"] = desc;
-        newBullet[@"Date"] = dateString;
-        [newBullet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                NSLog(@"Object saved!");
-            } else {
-                NSLog(@"Error: %@", error.description);
-            }
-        }];
+        
+        [DatabaseUtilities editBullet:bullet withClassName:@"Bullet" withUser:bullet[@"User"] withType:bullet[@"Type"] withRelevancy:bullet[@"Relevant"] withCompletion:bullet[@"Completed"] withDescription:bullet[@"Description"] withDate:dateString];
         
         
         [self.bullets removeObjectAtIndex:indexPath.row];

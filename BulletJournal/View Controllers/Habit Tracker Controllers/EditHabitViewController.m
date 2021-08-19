@@ -61,17 +61,17 @@
     if ([date isLaterThanDate:[NSDate date]]){
         return [UIColor lightGrayColor];
     }
-    else if ([self.datesCompleted containsObject:date]){
-        return [UIColor greenColor];
+    else if ([self.datesCompleted containsObject:[DatabaseUtilities getDateString:date]]){
+        return [UIColor systemGreenColor];
     }
     return [UIColor systemPinkColor];
 }
 
 - (IBAction)didEditHabit:(id)sender {
     
-    [self didDeleteHabit:nil];
+    NSLog(@"%@", self.habitName.text);
     
-    [DatabaseUtilities createHabit:PFUser.currentUser withName:self.habitName.text withReason:self.reason.text withDatesCompleted:self.datesCompleted];
+    [DatabaseUtilities editHabit:self.habit withClassName:@"Habit" withUser:PFUser.currentUser withName:self.habitName.text withReason:self.reason.text withDatesCompleted:self.datesCompleted];
 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
@@ -87,8 +87,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable habits, NSError * _Nullable error) {
         if (habits != nil) {
             for (PFObject *habit in habits) {
-                PFUser *habitUser = habit[@"User"];
-                if([habit[@"Reason"] isEqualToString:self.habit[@"Reason"]] && [[PFUser.currentUser objectId] isEqual:[habitUser objectId]]){
+                if([habit.objectId isEqualToString:self.habit.objectId]){
                     [habit deleteInBackground];
                     NSLog(@"Deleting Habit: %@", habit);
                 }

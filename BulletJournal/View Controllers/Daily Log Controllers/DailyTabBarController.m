@@ -29,6 +29,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    //TODO: wonky type of segue
     NSLog(@"Segueing date from daily tab bar: %@", self.date);
     
     DailyTodoViewController *dailyTodoVC = [segue destinationViewController];

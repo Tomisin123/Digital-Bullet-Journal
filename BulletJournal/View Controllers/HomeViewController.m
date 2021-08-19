@@ -13,6 +13,7 @@
 #import "StyleMethods.h"
 
 #import "Parse/Parse.h"
+#import "NSDate+Utilities.h"
 
 @interface HomeViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *dailyLogButton;

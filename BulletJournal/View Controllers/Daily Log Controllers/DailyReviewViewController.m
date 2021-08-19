@@ -105,21 +105,30 @@
 
 - (IBAction)didSaveReview:(id)sender {
     
-    [self deleteReview];
+    //[self deleteReview];
+    
     
     NSString *dateString = [DatabaseUtilities getDateString:self.date];
-    [DatabaseUtilities createReview:PFUser.currentUser withText:self.reviewText.text withDate:dateString withWeather:[self getWeatherDictionary:self.weather]];
+    [DatabaseUtilities editReview:self.review withClassName:@"Review" withUser:PFUser.currentUser withText:self.reviewText.text withDate:dateString withWeather:[self getWeatherDictionary:self.weather]];
+    
+    
+    //[DatabaseUtilities createReview:PFUser.currentUser withText:self.reviewText.text withDate:dateString withWeather:[self getWeatherDictionary:self.weather]];
     
    
     //For each habit that was completed
     for (HabitCheckerCell *checkerCell in [self.habitsTableView visibleCells]){
         Habit *habit = checkerCell.habit;
+                
         if ([checkerCell.completed isOn]){
-            [self editHabitCompletionDate:habit withDate:self.date adding:YES];
+            if (![habit[@"DatesCompleted"] containsObject:self.date]){
+                NSLog(@"Adding Date");
+                [self editHabitCompletionDate:checkerCell.habit withDate:self.date adding:YES];
+            }
         }
         else{
             if ([habit[@"DatesCompleted"] containsObject:self.date]){
-                [self editHabitCompletionDate:habit withDate:self.date adding:NO];
+                NSLog(@"Removing Date");
+                [self editHabitCompletionDate:checkerCell.habit withDate:self.date adding:NO];
             }
         }
     }
@@ -208,25 +217,20 @@
 }
 
 
-- (void) editHabitCompletionDate:(Habit*)habit withDate:(NSDate*)dateOfCompletion adding:(BOOL)adding {
+- (void) editHabitCompletionDate:(PFObject*)habit withDate:(NSDate*)dateOfCompletion adding:(BOOL)adding {
     
-    NSString *name = habit[@"Name"];
-    NSString *reason = habit[@"Reason"];
     NSMutableArray *datesCompleted = [[NSMutableArray alloc] init];
-    for (NSDate *date in habit[@"DatesCompleted"]){
+    for (NSString *date in habit[@"DatesCompleted"]){
         [datesCompleted addObject:date];
     }
     if (adding){
-        [datesCompleted addObject:dateOfCompletion];
+        [datesCompleted addObject:[DatabaseUtilities getDateString:dateOfCompletion]];
     }
     else {
-        [datesCompleted removeObject:dateOfCompletion];
+        [datesCompleted removeObject:[DatabaseUtilities getDateString:dateOfCompletion]];
     }
     
-    
-    [self deleteHabit:habit];
-    
-    [DatabaseUtilities createHabit:PFUser.currentUser withName:name withReason:reason withDatesCompleted:datesCompleted];
+    [DatabaseUtilities editHabit:habit withClassName:@"Habit" withUser:PFUser.currentUser withName:habit[@"Name"] withReason:habit[@"Reason"] withDatesCompleted:datesCompleted];
     
 }
 
@@ -238,7 +242,7 @@
         if (habits != nil) {
             for (PFObject *habitObj in habits) {
                 PFUser *habitUser = habitObj[@"User"];
-                if([habitObj[@"Name"] isEqualToString:habit[@"Name"]] && [habitObj[@"Reason"] isEqualToString:habit[@"Reason"]] && [[PFUser.currentUser objectId] isEqual:[habitUser objectId]]){
+                if([habitObj[@"Name"] isEqualToString:habit[@"Name"]] && [habitObj[@"Reason"] isEqualToString:habit[@"Reason"]] && [DatabaseUtilities checkUserIsCurrrentUser:habitUser]){
                     [habitObj deleteInBackground];
                 }
             }

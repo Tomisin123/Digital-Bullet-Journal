@@ -22,6 +22,7 @@
 		9483223326C0D8D7004D0186 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483223226C0D8D7004D0186 /* SplashViewController.m */; };
 		9483223B26C1021D004D0186 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483223A26C1021D004D0186 /* Review.m */; };
 		9483224126C1331A004D0186 /* StyleMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483224026C1331A004D0186 /* StyleMethods.m */; };
+		9483224326CEAEAF004D0186 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9483224226CEAEAF004D0186 /* MapKit.framework */; };
 		94E35965269DE7EB00BE6A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35964269DE7EB00BE6A09 /* AppDelegate.m */; };
 		94E35968269DE7EB00BE6A09 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E35967269DE7EB00BE6A09 /* SceneDelegate.m */; };
 		94E3596E269DE7EB00BE6A09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E3596C269DE7EB00BE6A09 /* Main.storyboard */; };
@@ -93,6 +94,7 @@
 		9483223A26C1021D004D0186 /* Review.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		9483223F26C1331A004D0186 /* StyleMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StyleMethods.h; sourceTree = "<group>"; };
 		9483224026C1331A004D0186 /* StyleMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StyleMethods.m; sourceTree = "<group>"; };
+		9483224226CEAEAF004D0186 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		94E35960269DE7EB00BE6A09 /* BulletJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BulletJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E35963269DE7EB00BE6A09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94E35964269DE7EB00BE6A09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9483224326CEAEAF004D0186 /* MapKit.framework in Frameworks */,
 				42DADB8B4F414A9F88394B87 /* Pods_BulletJournal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +357,7 @@
 		C7D0AC2380388CFC3570C905 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9483224226CEAEAF004D0186 /* MapKit.framework */,
 				33F15194C48C1C31F0C664CB /* Pods_BulletJournal.framework */,
 				1D17FDA2B4C906CA86613658 /* Pods_BulletJournal_BulletJournalUITests.framework */,
 				966C6BFF9ABE8CCCEB6CB2B1 /* Pods_BulletJournalTests.framework */,
